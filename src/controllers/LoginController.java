@@ -15,6 +15,12 @@ public class LoginController extends BaseController{
     }
 
 
+    /**
+     * Check 1 tài khoản người dùng khi đăng nhập
+     * @param account
+     * @return 0 là admin hợp lệ, 1 là renter hợp lệ, 2 là tài khoản không hợp lệ
+     * @author HieuNV
+     */
     public int checkAccount(Account account){
         for(int i=0; i<this.accounts.size(); i++){
             var acc = this.accounts.get(i);

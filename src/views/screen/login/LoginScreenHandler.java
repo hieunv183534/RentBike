@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 public class LoginScreenHandler extends BaseScreenHandler implements Initializable {
     @FXML
     private Button btnLogin;
@@ -43,6 +44,11 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
         return(LoginController) super.getBController();
     }
 
+    /**
+     * @param url
+     * @param resourceBundle
+     * @author HieuNV
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
