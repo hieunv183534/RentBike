@@ -7,6 +7,14 @@ public class Account {
     private String password;
     private int role;
 
+    private static Account accountInstance;
+
+    public static Account getAccount(){
+        if (accountInstance == null) accountInstance = new Account();
+        return accountInstance;
+    }
+
+    public Account(){}
     public Account(String userName, String password, int role) {
         this.userName = userName;
         this.password = password;

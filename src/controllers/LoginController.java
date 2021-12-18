@@ -23,7 +23,7 @@ public class LoginController extends BaseController{
      */
     public int checkAccount(Account account){
         for(int i=0; i<this.accounts.size(); i++){
-            var acc = this.accounts.get(i);
+            Account acc = this.accounts.get(i);
             if(acc.equals(account))
                 return account.getRole();
         }

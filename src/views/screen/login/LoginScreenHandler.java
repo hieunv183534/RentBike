@@ -56,8 +56,8 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
         rbAdmin.setUserData(0);
 
         btnLogin.setOnAction(e->{
-            var userName = inputUserName.getText();
-            var password = inputPassword.getText();
+            String userName = inputUserName.getText();
+            String password = inputPassword.getText();
             if(roleLogin.getSelectedToggle() == null){
                 Alert alert = new Alert(Alert.AlertType.NONE);
                 alert.setTitle("Thông báo!");
@@ -73,6 +73,8 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
                         try {
                             AdminHomeScreenHandler adminHomeScreen = new AdminHomeScreenHandler(this.stage, Configs.ADMIN_SCREEN_PATH);
                             adminHomeScreen.setScreenTitle("Admin home");
+                            adminHomeScreen.setBController(new LoginController());
+                            adminHomeScreen.setUsername(userName);
                             adminHomeScreen.show();
                             this.hide();
                         } catch (IOException ex) {
