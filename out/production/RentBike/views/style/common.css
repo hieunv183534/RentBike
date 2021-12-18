@@ -1,0 +1,79 @@
+.button{
+    -fx-pref-width: USE_COMPUTED_SIZE;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
+    -fx-cursor: HAND;
+}
+
+.primary-button{
+-fx-pref-height: 30;
+    -fx-background-color: #32a852;
+    -fx-text-fill: #fff;
+}
+
+.primary-button:hover{
+    -fx-background-color: #FA6000;
+}
+
+
+.secondary-button{
+    -fx-pref-height: 31;
+    -fx-background-color: #fff;
+    -fx-text-fill: #111111;
+    -fx-border-color: #e0e0e0;
+}
+
+.secondary-button:hover{
+    -fx-background-color: #EFF1F6;
+}
+
+.text-field{
+    -fx-pref-height: 30;
+    -fx-background-color: #fff;
+    -fx-text-fill: #111111;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-insets: 1;
+}
+
+.text-field:hover {
+    -fx-border-color: #EC5504;
+}
+
+.text-field:focused{
+    -fx-border-color: #EC5504;
+}
+
+.progress-bar{
+    -fx-pref-height: 15;
+}
+
+
+.menu-item{
+    -fx-pref-height: 40;
+    -fx-pref-width: 160;
+    -fx-background-color: #1D3857;
+    -fx-text-fill: #fff;
+}
+
+.menu-item:hover{
+    -fx-background-color: #214283;
+}
+
+.menu-item > .image-view{
+    -fx-pref-height: 30;
+    -fx-pref-width: 30;
+    -fx-padding: 0 0 0 10;
+}
+
+.menu-item > .label{
+    -fx-pref-height: 40;
+    -fx-pref-width: USE_COMPUTED_SIZE;
+    -fx-text-fill: #fff;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 10;
+}
