@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="415.0" prefWidth="805.0" stylesheets="@../../style/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="layout.renter.RentbikeContent1">
+<AnchorPane prefHeight="415.0" prefWidth="805.0" stylesheets="@../../../style/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane layoutX="445.0" layoutY="15.0" prefHeight="385.0" prefWidth="319.0" style="-fx-border-color: green;">
             <children>

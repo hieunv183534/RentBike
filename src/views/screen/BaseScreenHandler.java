@@ -1,6 +1,7 @@
 package views.screen;
 
 import controllers.BaseController;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -9,7 +10,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class BaseScreenHandler {
-
     protected FXMLLoader loader;
     protected AnchorPane content;
     private Scene scene;
@@ -55,5 +55,15 @@ public class BaseScreenHandler {
 
     public BaseController getBController(){
         return this.bController;
+    }
+
+    public void loadMainContentPane(AnchorPane mainContentPane, String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        AnchorPane newPane = loader.load();
+        mainContentPane.getChildren().setAll(newPane);
+        AnchorPane.setBottomAnchor(newPane, 0.0);
+        AnchorPane.setLeftAnchor(newPane, 0.0);
+        AnchorPane.setRightAnchor(newPane, 0.0);
+        AnchorPane.setTopAnchor(newPane, 0.0);
     }
 }

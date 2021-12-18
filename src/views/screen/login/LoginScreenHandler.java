@@ -81,7 +81,7 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
                         break;
                     case 1:
                         try {
-                            RenterHomeScreenHandler renterHomeScreen = new RenterHomeScreenHandler(this.stage, Configs.RENTER_HOME_SCREEN_PATH);
+                            RenterHomeScreenHandler renterHomeScreen = new RenterHomeScreenHandler(this.stage, Configs.RENTER_HOME_SCREEN_PATH, userName);
                             renterHomeScreen.setScreenTitle("Renter Home");
                             renterHomeScreen.show();
                             this.hide();
