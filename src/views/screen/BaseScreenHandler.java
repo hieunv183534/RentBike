@@ -57,10 +57,15 @@ public class BaseScreenHandler {
         return this.bController;
     }
 
-    public void loadMainContentPane(AnchorPane mainContentPane, String fxmlPath) throws IOException {
+    public AnchorPane loadContentPane(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         AnchorPane newPane = loader.load();
-        mainContentPane.getChildren().setAll(newPane);
+        return newPane;
+    }
+
+    public void insertContent(AnchorPane paneMainContent, AnchorPane newPane){
+        paneMainContent.getChildren().setAll(newPane);
+        // Reset the anchors
         AnchorPane.setBottomAnchor(newPane, 0.0);
         AnchorPane.setLeftAnchor(newPane, 0.0);
         AnchorPane.setRightAnchor(newPane, 0.0);
