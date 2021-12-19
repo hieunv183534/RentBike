@@ -11,6 +11,8 @@ public class Bike {
     private String producer;
     private float cost;
     private int status;
+    private String bikeCode;
+    private Date startTime;
 
     public int getStatus() {
         return status;
@@ -74,5 +76,21 @@ public class Bike {
 
     public void setCost(float cost) {
         this.cost = cost;
+    }
+
+    public String getBikeCode() {
+        return bikeCode;
+    }
+
+    public void setBikeCode(String bikeCode) {
+        this.bikeCode = bikeCode;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 }

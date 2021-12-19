@@ -62,7 +62,7 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
                 Alert alert = new Alert(Alert.AlertType.NONE);
                 alert.setTitle("Thông báo!");
                 alert.setContentText("Bạn chưa chọn vai trò đăng nhập");
-                ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+                ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
                 alert.getButtonTypes().setAll(buttonTypeCancel);
                 alert.show();
             }else{
@@ -95,7 +95,7 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
                         Alert alert = new Alert(Alert.AlertType.NONE);
                         alert.setTitle("Thông báo!");
                         alert.setContentText("UserName hoặc Password không hợp lệ");
-                        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+                        ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
                         alert.getButtonTypes().setAll(buttonTypeCancel);
                         alert.show();
                         break;

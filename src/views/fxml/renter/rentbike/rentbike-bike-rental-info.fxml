@@ -29,8 +29,8 @@
                   <Label text="4. Thuê xe thành công" />
                </children>
             </VBox>
-            <Button layoutX="41.0" layoutY="322.0" mnemonicParsing="false" styleClass="primary-button" text="Hướng dẫn" />
-            <Button layoutX="208.0" layoutY="321.0" mnemonicParsing="false" prefWidth="80.0" styleClass="secondary-button" text="Hủy bỏ" />
+            <Button fx:id="btnGuide" layoutX="41.0" layoutY="322.0" mnemonicParsing="false" styleClass="primary-button" text="Hướng dẫn" />
+            <Button fx:id="btnCancel" layoutX="208.0" layoutY="321.0" mnemonicParsing="false" prefWidth="80.0" styleClass="secondary-button" text="Hủy bỏ" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="385.0" prefWidth="396.0" style="-fx-border-color: green;">
@@ -40,7 +40,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button layoutX="35.0" layoutY="327.0" mnemonicParsing="false" styleClass="primary-button" text="Xác nhận và thanh toán" />
+            <Button fx:id="btnConfirmPayment" layoutX="35.0" layoutY="327.0" mnemonicParsing="false" styleClass="primary-button" text="Xác nhận và thanh toán" />
             <VBox layoutX="38.0" layoutY="75.0" prefHeight="235.0" prefWidth="319.0" spacing="25.0">
                <children>
                   <Label text="Mã xe:  123236456436543mnhfenmmmn" />
@@ -49,7 +49,7 @@
                   <Label prefHeight="94.0" prefWidth="319.0" text="Tiền thuê xe: nếu khách hàng dùng xe hơn 10 phút, phí thuê xe được tính lũy tiếntheo thời gian thuê như sau: Giá khởi điểm cho 30 phút đầu là 10.000 đồng. Cứ mỗi 15 phúttiếp theo, khách sẽ phải trả thêm 3.000 đồng. Ví dụ, khách thuê 1 tiếng 10 phút cần trả 10.000+ 3x3.000 = 19.000 đồng" wrapText="true" />
                </children>
             </VBox>
-            <Button layoutX="270.0" layoutY="326.0" mnemonicParsing="false" styleClass="secondary-button" text="Thuê xe khác" />
+            <Button fx:id="btnRentOther" layoutX="270.0" layoutY="326.0" mnemonicParsing="false" styleClass="secondary-button" text="Thuê xe khác" />
          </children>
       </AnchorPane>
    </children>

@@ -1,5 +1,6 @@
 package views.screen.renter;
 
+import controllers.RentBikeController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -56,6 +57,7 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
             try {
                 RentBikeScreenHandler rentBikeScreen = new RentBikeScreenHandler(this.stage, Configs.RENTBIKE_LAYOUT_SCREEN_PATH);
                 rentBikeScreen.setScreenTitle("Rent Bike Screen");
+                rentBikeScreen.setBController(new RentBikeController());
                 rentBikeScreen.show();
                 this.hide();
             } catch (IOException ex) {
