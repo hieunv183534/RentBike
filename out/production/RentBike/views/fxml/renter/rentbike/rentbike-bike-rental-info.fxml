@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -15,9 +16,9 @@
    <children>
       <AnchorPane layoutX="445.0" layoutY="15.0" prefHeight="385.0" prefWidth="319.0" style="-fx-border-color: green;">
          <children>
-            <Label layoutX="122.0" layoutY="22.0" text="Tiến trình thuê xe">
+            <Label layoutX="110.0" layoutY="21.0" text="Tiến trình thuê xe">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
             <ProgressBar layoutX="169.0" layoutY="155.0" prefWidth="174.0" progress="0.38" style="-fx-rotate: 90;" />
@@ -31,13 +32,18 @@
             </VBox>
             <Button fx:id="btnGuide" layoutX="41.0" layoutY="322.0" mnemonicParsing="false" styleClass="primary-button" text="Hướng dẫn" />
             <Button fx:id="btnCancel" layoutX="208.0" layoutY="321.0" mnemonicParsing="false" prefWidth="80.0" styleClass="secondary-button" text="Hủy bỏ" />
+            <ImageView fitHeight="21.0" fitWidth="23.0" layoutX="246.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../assets/icon/tick.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="385.0" prefWidth="396.0" style="-fx-border-color: green;">
          <children>
-            <Label layoutX="85.0" layoutY="26.0" text="Bước 2. Chi tiết thuê xe và xác nhận thuê">
+            <Label layoutX="53.0" layoutY="26.0" text="Bước 2. Chi tiết thuê xe và xác nhận thuê">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
             <Button fx:id="btnConfirmPayment" layoutX="35.0" layoutY="327.0" mnemonicParsing="false" styleClass="primary-button" text="Xác nhận và thanh toán" />

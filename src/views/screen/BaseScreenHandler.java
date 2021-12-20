@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import views.screen.renter.RenterHomeScreenHandler;
 
 import java.io.IOException;
 
@@ -16,9 +17,11 @@ public class BaseScreenHandler {
     private BaseScreenHandler prev;
     protected final Stage stage;
     private BaseController bController;
+    private BaseScreenHandler homeScreen;
 
     public BaseScreenHandler(Stage stage, String screenPath) throws IOException {
-        this.stage = new Stage();
+        this.stage = stage;
+        this.stage.setResizable(false);
         this.loader = new FXMLLoader(getClass().getResource(screenPath));
         // Set this class as the controller
         this.loader.setController(this);
@@ -39,10 +42,6 @@ public class BaseScreenHandler {
         }
         this.stage.setScene(this.scene);
         this.stage.show();
-    }
-
-    public void hide(){
-        this.stage.hide();
     }
 
     public void setScreenTitle(String string) {
@@ -70,5 +69,13 @@ public class BaseScreenHandler {
         AnchorPane.setLeftAnchor(newPane, 0.0);
         AnchorPane.setRightAnchor(newPane, 0.0);
         AnchorPane.setTopAnchor(newPane, 0.0);
+    }
+
+    public BaseScreenHandler getHomeScreen() {
+        return homeScreen;
+    }
+
+    public void setHomeScreen(BaseScreenHandler homeScreen) {
+        this.homeScreen = homeScreen;
     }
 }

@@ -19,9 +19,9 @@
     <children>
         <AnchorPane layoutX="445.0" layoutY="15.0" prefHeight="385.0" prefWidth="319.0" style="-fx-border-color: green;">
             <children>
-                <Label layoutX="122.0" layoutY="22.0" text="Tiến trình thuê xe">
+                <Label layoutX="110.0" layoutY="23.0" text="Tiến trình thuê xe">
                     <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
                 <ProgressBar layoutX="169.0" layoutY="155.0" prefWidth="174.0" progress="1.0" style="-fx-rotate: 90;" />
@@ -44,9 +44,9 @@
         </AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="385.0" prefWidth="396.0" style="-fx-border-color: green;">
             <children>
-                <Label layoutX="85.0" layoutY="26.0" text="Bước 4. Trong thời gian thuê ">
+                <Label layoutX="93.0" layoutY="27.0" text="Bước 4. Trong thời gian thuê ">
                     <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
                 <Button fx:id="btnReturnBike" layoutX="158.0" layoutY="328.0" mnemonicParsing="false" prefWidth="80.0" styleClass="primary-button" text="Trả xe" />

@@ -76,7 +76,6 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
                             adminHomeScreen.setBController(new LoginController());
                             adminHomeScreen.setUsername(userName);
                             adminHomeScreen.show();
-                            this.hide();
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
@@ -86,7 +85,6 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
                             RenterHomeScreenHandler renterHomeScreen = new RenterHomeScreenHandler(this.stage, Configs.RENTER_HOME_SCREEN_PATH, userName);
                             renterHomeScreen.setScreenTitle("Renter Home");
                             renterHomeScreen.show();
-                            this.hide();
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
