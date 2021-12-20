@@ -30,6 +30,9 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
     private Button menuItemReturnBike;
 
     @FXML
+    private Button btnRent;
+
+    @FXML
     private Text labelUserName;
 
     private String userName;
@@ -54,15 +57,23 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
         menuItemReturnBike.setTooltip(new Tooltip("Trả xe"));
 
         menuItemRentBike.setOnAction(e->{
-            try {
-                RentBikeScreenHandler rentBikeScreen = new RentBikeScreenHandler(this.stage, Configs.RENTBIKE_LAYOUT_SCREEN_PATH);
-                rentBikeScreen.setScreenTitle("Rent Bike Screen");
-                rentBikeScreen.setBController(new RentBikeController());
-                rentBikeScreen.show();
-                this.hide();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            goToRentBike();
         });
+
+        btnRent.setOnAction(e->{
+            goToRentBike();
+        });
+    }
+
+    public void goToRentBike(){
+        try {
+            RentBikeScreenHandler rentBikeScreen = new RentBikeScreenHandler(this.stage, Configs.RENTBIKE_LAYOUT_SCREEN_PATH);
+            rentBikeScreen.setScreenTitle("Rent Bike Screen");
+            rentBikeScreen.setBController(new RentBikeController());
+            rentBikeScreen.setHomeScreen(this);
+            rentBikeScreen.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

@@ -60,29 +60,7 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
     public void initEventForContents(){
         // init event cho màn hình nhập code
         this.inputBikeCodeContent.lookup("#btnConfirmBikeCode").setOnMouseClicked(e->{
-            TextField inputBikeCode = (TextField) this.inputBikeCodeContent.lookup("#inputBikeCode");
-            String bikeCode = inputBikeCode.getText();
-            switch (getBController().checkBikeCode(bikeCode)){
-                case 0:
-                    Alert alert = new Alert(Alert.AlertType.NONE);
-                    alert.setTitle("Thông báo!");
-                    alert.setContentText("Mã xe không tồn tại!");
-                    ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-                    alert.getButtonTypes().setAll(buttonTypeCancel);
-                    alert.show();
-                    break;
-                case 1:
-                    this.insertContent(this.mainContentPane, this.bikeRentalInfoContent);
-                    break;
-                case 2:
-                    Alert alert1 = new Alert(Alert.AlertType.NONE);
-                    alert1.setTitle("Thông báo!");
-                    alert1.setContentText("Xe đang trong quá trình được thuê!");
-                    ButtonType buttonTypeCancel1 = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-                    alert1.getButtonTypes().setAll(buttonTypeCancel1);
-                    alert1.show();
-                    break;
-            }
+            btnConfirmBikeCodeOnClick();
         });
     }
 
@@ -92,9 +70,39 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
         menuItemViewBikes.setTooltip(new Tooltip("Xem bãi xe"));
         menuItemRentBike.setTooltip(new Tooltip("Thuê xe"));
         menuItemReturnBike.setTooltip(new Tooltip("Trả xe"));
+
+        menuItemHome.setOnAction(e->{
+            getHomeScreen().show();
+        });
     }
 
     public RentBikeController getBController(){
         return(RentBikeController) super.getBController();
+    }
+
+    public void btnConfirmBikeCodeOnClick(){
+        TextField inputBikeCode = (TextField) this.inputBikeCodeContent.lookup("#inputBikeCode");
+        String bikeCode = inputBikeCode.getText();
+        switch (getBController().checkBikeCode(bikeCode)){
+            case 0:
+                Alert alert = new Alert(Alert.AlertType.NONE);
+                alert.setTitle("Thông báo!");
+                alert.setContentText("Mã xe không tồn tại!");
+                ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(buttonTypeCancel);
+                alert.show();
+                break;
+            case 1:
+                this.insertContent(this.mainContentPane, this.bikeRentalInfoContent);
+                break;
+            case 2:
+                Alert alert1 = new Alert(Alert.AlertType.NONE);
+                alert1.setTitle("Thông báo!");
+                alert1.setContentText("Xe đang trong quá trình được thuê!");
+                ButtonType buttonTypeCancel1 = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert1.getButtonTypes().setAll(buttonTypeCancel1);
+                alert1.show();
+                break;
+        }
     }
 }

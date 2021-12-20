@@ -1,5 +1,4 @@
 .button{
-    -fx-pref-width: USE_COMPUTED_SIZE;
     -fx-font-weight: bold;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
