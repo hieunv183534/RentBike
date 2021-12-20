@@ -46,7 +46,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Button fx:id="btnConfirmPayment" layoutX="35.0" layoutY="327.0" mnemonicParsing="false" styleClass="primary-button" text="Xác nhận và thanh toán" />
+            <Button fx:id="btnConfirmDeposit" layoutX="35.0" layoutY="327.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" styleClass="primary-button" text="Đặt cọc" />
             <VBox layoutX="38.0" layoutY="75.0" prefHeight="235.0" prefWidth="319.0" spacing="25.0">
                <children>
                   <Label text="Mã xe:  123236456436543mnhfenmmmn" />

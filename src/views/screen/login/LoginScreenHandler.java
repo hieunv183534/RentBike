@@ -13,7 +13,10 @@ import views.screen.renter.RenterHomeScreenHandler;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class LoginScreenHandler extends BaseScreenHandler implements Initializable {
@@ -51,6 +54,14 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+//        new Timer().scheduleAtFixedRate(new TimerTask(){
+//            @Override
+//            public void run(){
+//                System.out.println("aa "+ new Date());
+//            }
+//        },0,1000);
+
 
         rbRenter.setUserData(1);
         rbAdmin.setUserData(0);
