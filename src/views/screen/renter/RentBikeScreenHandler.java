@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * @author HieuNV
+ */
 public class RentBikeScreenHandler extends BaseScreenHandler implements Initializable {
     @FXML
     private AnchorPane mainContentPane;

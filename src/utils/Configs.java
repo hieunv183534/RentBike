@@ -1,6 +1,9 @@
 package utils;
 
 public class Configs {
+
+    public static final String PROCESS_TRANSACTION_URL = "https://ecopark-system-api.herokuapp.com/api/card/processTransaction";
+
     // static resource
     public static final String LOGIN_SCREEN_PATH= "/views/fxml/login.fxml";
     public static final String RENTER_HOME_SCREEN_PATH= "/views/fxml/renter/renter-home.fxml";
