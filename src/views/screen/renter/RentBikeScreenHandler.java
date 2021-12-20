@@ -12,7 +12,7 @@ import views.screen.BaseScreenHandler;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RentBikeScreenHandler extends BaseScreenHandler implements Initializable {
     @FXML
@@ -62,6 +62,40 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
         this.inputBikeCodeContent.lookup("#btnConfirmBikeCode").setOnMouseClicked(e->{
             btnConfirmBikeCodeOnClick();
         });
+        this.inputBikeCodeContent.lookup("#btnCancel").setOnMouseClicked(e->{
+            btnCancelOnClick();
+        });
+        this.inputBikeCodeContent.lookup("#btnGuide").setOnMouseClicked(e->{
+            btnGuideOnClick();
+        });
+
+        // init event cho màn hình thông tin thuê xe
+        this.bikeRentalInfoContent.lookup("#btnConfirmDeposit").setOnMouseClicked(e->{
+            btnConfirmDepositOnClick();
+        });
+        this.bikeRentalInfoContent.lookup("#btnRentOther").setOnMouseClicked(e->{
+            btnRentOtherOnClick();
+        });
+        this.bikeRentalInfoContent.lookup("#btnCancel").setOnMouseClicked(e->{
+            btnCancelOnClick();
+        });
+        this.bikeRentalInfoContent.lookup("#btnGuide").setOnMouseClicked(e->{
+            btnGuideOnClick();
+        });
+
+        // init event cho màn hình thanh toán
+        this.depositContent.lookup("#btnPay").setOnMouseClicked(e->{
+            btnPayOnClick();
+        });
+        this.depositContent.lookup("#btnRentOther").setOnMouseClicked(e->{
+            btnRentOtherOnClick();
+        });
+        this.depositContent.lookup("#btnCancel").setOnMouseClicked(e->{
+            btnCancelOnClick();
+        });
+        this.depositContent.lookup("#btnGuide").setOnMouseClicked(e->{
+            btnGuideOnClick();
+        });
     }
 
     @Override
@@ -81,8 +115,7 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
     }
 
     public void btnConfirmBikeCodeOnClick(){
-        TextField inputBikeCode = (TextField) this.inputBikeCodeContent.lookup("#inputBikeCode");
-        String bikeCode = inputBikeCode.getText();
+        String bikeCode = ((TextField) this.inputBikeCodeContent.lookup("#inputBikeCode")).getText();
         switch (getBController().checkBikeCode(bikeCode)){
             case 0:
                 Alert alert = new Alert(Alert.AlertType.NONE);
@@ -104,5 +137,46 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
                 alert1.show();
                 break;
         }
+    }
+
+    public void btnCancelOnClick(){
+        Alert alert= new Alert(Alert.AlertType.NONE);
+        alert.setContentText("Hủy bỏ?");
+        alert.setContentText("Bạn có muốn hủy bỏ việc thuê xe và trở về trang chủ?");
+        ButtonType buttonTypeCancel = new ButtonType("Hủy", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonTypeYes = new ButtonType("Đồng ý", ButtonBar.ButtonData.YES);
+        alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeCancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get()== buttonTypeYes){
+            getHomeScreen().show();
+        }
+    }
+
+    public void btnGuideOnClick(){
+        System.out.println("Hướng dẫn sử dụng");
+    }
+
+    public void btnConfirmDepositOnClick(){
+        this.insertContent(this.mainContentPane, this.depositContent);
+    }
+
+    public void btnRentOtherOnClick(){
+        Alert alert= new Alert(Alert.AlertType.NONE);
+        alert.setContentText("Thuê xe khác?");
+        alert.setContentText("Bạn có muốn thuê xe khác?");
+        ButtonType buttonTypeCancel = new ButtonType("Hủy", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonTypeYes = new ButtonType("Đồng ý", ButtonBar.ButtonData.YES);
+        alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeCancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get()== buttonTypeYes){
+            this.insertContent(this.mainContentPane, this.inputBikeCodeContent);
+        }
+    }
+
+    public void btnPayOnClick(){
+        String cardCode = ((TextField)this.depositContent.lookup("#inputCardCode")).getText();
+        String owner = ((TextField)this.depositContent.lookup("#inputOwner")).getText();
+        String cvvCode = ((TextField)this.depositContent.lookup("#inputCvvCode")).getText();
+        System.out.println(cardCode+ "  " + owner + "  " + cvvCode);
     }
 }
