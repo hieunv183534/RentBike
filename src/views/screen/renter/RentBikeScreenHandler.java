@@ -1,7 +1,8 @@
 package views.screen.renter;
 
-import controllers.LoginController;
+import controllers.PaymentController;
 import controllers.RentBikeController;
+import entities.Bike;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -129,12 +130,17 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
                 alert.show();
                 break;
             case 1:
+                Bike bike = getBController().getMyBike();
+                ((Label)this.bikeRentalInfoContent.lookup("#labelBikeCode")).setText("Mã xe: "+ bike.getBikeCode());
+                ((Label)this.bikeRentalInfoContent.lookup("#labelBikeName")).setText("Loại xe: "+ bike.getName());
+                ((Label)this.bikeRentalInfoContent.lookup("#labelBikeDepositAmount")).setText("Tiền đặt cọc: " + getBController().getDepositAmount()+"đ");
+                ((Label)this.bikeRentalInfoContent.lookup("#labelBikeRentalInfo")).setText(getBController().getBikeRentalInfo());
                 this.insertContent(this.mainContentPane, this.bikeRentalInfoContent);
                 break;
             case 2:
                 Alert alert1 = new Alert(Alert.AlertType.NONE);
                 alert1.setTitle("Thông báo!");
-                alert1.setContentText("Xe đang trong quá trình được thuê!");
+                alert1.setContentText("Xe này đã được thuê. Vui lòng chọn xe khác!");
                 ButtonType buttonTypeCancel1 = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
                 alert1.getButtonTypes().setAll(buttonTypeCancel1);
                 alert1.show();
@@ -160,6 +166,7 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
     }
 
     public void btnConfirmDepositOnClick(){
+        ((Label)this.depositContent.lookup("#labelAmount")).setText(getBController().getDepositAmount()+ "đ");
         this.insertContent(this.mainContentPane, this.depositContent);
     }
 
@@ -180,6 +187,22 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
         String cardCode = ((TextField)this.depositContent.lookup("#inputCardCode")).getText();
         String owner = ((TextField)this.depositContent.lookup("#inputOwner")).getText();
         String cvvCode = ((TextField)this.depositContent.lookup("#inputCvvCode")).getText();
-        System.out.println(cardCode+ "  " + owner + "  " + cvvCode);
+        String dateExpired = ((TextField)this.depositContent.lookup("#inputDateExpired")).getText();
+        PaymentController paymentController = new PaymentController();
+        Map<String, String> response = paymentController.pay(getBController().getDepositAmount(),
+                getBController().getDepositTransactionContent(),
+                cardCode, owner,dateExpired, cvvCode);
+        System.out.println(response);
+        if(response.get("RESULT").equals("PAYMENT SUCCESSFUL!")){
+            getBController().rent();
+            this.insertContent(mainContentPane, this.useBikeProgressContent);
+            ((Label)this.useBikeProgressContent.lookup("#labelBikeCode")).setText(getBController().getMyBike().getBikeCode());
+            ((Label)this.useBikeProgressContent.lookup("#labelBikeName")).setText(getBController().getMyBike().getName());
+            ((Label)this.useBikeProgressContent.lookup("#labelRentedTime")).textProperty().bind(getBController().totalTimeProperty().asString());
+            ((Label)this.useBikeProgressContent.lookup("#labelTotalRent")).textProperty().bind(getBController().totalRentProperty().asString());
+        }
+        System.out.println(paymentController.getSuccessPayment());
     }
+
+
 }

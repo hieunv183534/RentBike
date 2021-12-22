@@ -4,14 +4,39 @@ import java.util.Date;
 
 public class Bike {
     private String name;
+    private String bikeCode;
     private int type;
+
+    @Override
+    public String toString() {
+        return "Bike{" +
+                "name='" + name + '\'' +
+                ", bikeCode='" + bikeCode + '\'' +
+                ", type=" + type +
+                ", weight=" + weight +
+                ", licensePlate='" + licensePlate + '\'' +
+                ", manuafacturingDate=" + manuafacturingDate +
+                ", producer='" + producer + '\'' +
+                ", cost=" + cost +
+                ", status=" + status +
+                ", startTime=" + startTime +
+                '}';
+    }
+
     private float weight;
+
+    public Bike(String name, String bikeCode, int type, int status) {
+        this.name = name;
+        this.bikeCode = bikeCode;
+        this.type = type;
+        this.status = status;
+    }
+
     private String licensePlate;
     private Date manuafacturingDate;
     private String producer;
     private float cost;
     private int status;
-    private String bikeCode;
     private Date startTime;
 
     public int getStatus() {

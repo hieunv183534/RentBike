@@ -54,15 +54,6 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-//        new Timer().scheduleAtFixedRate(new TimerTask(){
-//            @Override
-//            public void run(){
-//                System.out.println("aa "+ new Date());
-//            }
-//        },0,1000);
-
-
         rbRenter.setUserData(1);
         rbAdmin.setUserData(0);
 
