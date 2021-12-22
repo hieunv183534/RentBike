@@ -12,6 +12,7 @@ public class LoginController extends BaseController{
         accounts = new ArrayList<>();
         accounts.add(new Account("admin","123", 0));
         accounts.add(new Account("hieunv", "123", 1));
+        accounts.add(new Account("renter", "123", 1));
     }
 
 

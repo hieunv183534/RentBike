@@ -28,14 +28,8 @@ public class InterbankSubsystem implements InterbankInterface {
 		this.ctrl = new InterbankSubsystemController();
 	}
 
-	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
-		PaymentTransaction transaction = ctrl.payOrder(card, amount, contents);
-		return transaction;
-	}
-
-
-	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
-		PaymentTransaction transaction = ctrl.refund(card, amount, contents);
+	public PaymentTransaction pay(CreditCard card, int amount, String contents) {
+		PaymentTransaction transaction = ctrl.pay(card, amount, contents);
 		return transaction;
 	}
 }

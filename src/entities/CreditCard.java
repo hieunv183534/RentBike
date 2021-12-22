@@ -6,6 +6,16 @@ public class CreditCard {
 	private int cvvCode;
 	private String dateExpired;
 
+	@Override
+	public String toString() {
+		return "CreditCard{" +
+				"cardCode='" + cardCode + '\'' +
+				", owner='" + owner + '\'' +
+				", cvvCode=" + cvvCode +
+				", dateExpired='" + dateExpired + '\'' +
+				'}';
+	}
+
 	public CreditCard(String cardCode, String owner, int cvvCode, String dateExpired) {
 		super();
 		this.cardCode = cardCode;

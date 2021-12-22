@@ -18,7 +18,19 @@ public class PaymentTransaction {
 		this.amount = amount;
 		this.createdAt = createdAt;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "PaymentTransaction{" +
+				"errorCode='" + errorCode + '\'' +
+				", card=" + card.toString() +
+				", transactionId='" + transactionId + '\'' +
+				", transactionContent='" + transactionContent + '\'' +
+				", amount=" + amount +
+				", createdAt='" + createdAt + '\'' +
+				'}';
+	}
+
 	public String getErrorCode() {
 		return errorCode;
 	}
