@@ -4,6 +4,9 @@ import entities.Bike;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
@@ -18,14 +21,22 @@ public class RentBikeController  extends BaseController{
     private int DepositAmount;
     private String DepositTransactionContent;
 
-    private IntegerProperty totalTime;
-    private IntegerProperty totalRent;
+    public List<Bike> getBikes() {
+        return bikes;
+    }
 
-    public IntegerProperty totalTimeProperty() {
+    public void setBikes(List<Bike> bikes) {
+        this.bikes = bikes;
+    }
+
+    private StringProperty totalTime;
+    private StringProperty totalRent;
+
+    public StringProperty totalTimeProperty() {
         return totalTime;
     }
 
-    public IntegerProperty totalRentProperty() {
+    public StringProperty totalRentProperty() {
         return totalRent;
     }
 
@@ -48,9 +59,9 @@ public class RentBikeController  extends BaseController{
         bikes.add(new Bike("Xe đạp điện","d2eb2832-bb85-4d37-88b1-48898242fb6a", 2, 0));
         bikes.add(new Bike("Xe đạp điện","44c3e3f4-227a-45c3-a940-9065b184dfa5", 2, 1));
         bikes.add(new Bike("Xe đạp điện","17ce92c0-d60f-42e3-ad0e-4922ac24efa7", 2, 0));
-
-        this.totalTime = new SimpleIntegerProperty();
-        this.totalRent = new SimpleIntegerProperty();
+        //   kscq2_group1_2021
+        this.totalTime = new SimpleStringProperty();
+        this.totalRent = new SimpleStringProperty();
     }
 
     /**
@@ -65,7 +76,7 @@ public class RentBikeController  extends BaseController{
             if(bike.getBikeCode().equals(bikeCode)){
                 if(bike.getStatus() == 0){
                     this.myBike = bike;
-                    this.DepositTransactionContent = "rentbike " + this.myBike.getBikeCode();
+                    this.DepositTransactionContent = "rentbike " + this.myBike.getBikeCode()+ " " + new Date().getTime();
                     switch(this.myBike.getType()){
                         case 1:
                             this.DepositAmount = 400000;
@@ -107,26 +118,26 @@ public class RentBikeController  extends BaseController{
         this.myBike.setStatus(1);
         this.myBike.setStartTime(new Date());
         if(this.myBike.getType()==1){
-            this.totalRent.setValue(10000);
-            this.totalTime.setValue(0);
+            this.totalRent.setValue("10000 đồng");
+            this.totalTime.setValue("0 phút");
         }else{
-            this.totalRent.setValue(15000);
-            this.totalTime.setValue(0);
+            this.totalRent.setValue("15000 đồng");
+            this.totalTime.setValue("0 phút");
         }
         Timer mTimer = new Timer();
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        Instant end = Instant.now();
-                        Instant start = Instant.ofEpochMilli(myBike.getStartTime().getTime());
-                        Duration timeElapsed = Duration.between(start, end);
-                        totalTime.setValue(timeElapsed.toMinutes());
-                        totalRent.setValue(calculateMoney((int) timeElapsed.toMinutes()));
-                    }
-                });
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Instant end = Instant.now();
+                    Instant start = Instant.ofEpochMilli(myBike.getStartTime().getTime());
+                    Duration timeElapsed = Duration.between(start, end);
+                    totalTime.setValue(timeElapsed.getSeconds()+ " phút");
+                    totalRent.setValue(calculateMoney((int) timeElapsed.getSeconds())+ " đồng");
+                }
+            });
             }
         }, 0, 1000);
     }

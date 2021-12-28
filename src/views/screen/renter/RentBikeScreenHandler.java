@@ -2,6 +2,7 @@ package views.screen.renter;
 
 import controllers.PaymentController;
 import controllers.RentBikeController;
+import controllers.RenterHomeController;
 import entities.Bike;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -118,7 +119,7 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
         return(RentBikeController) super.getBController();
     }
 
-    public void btnConfirmBikeCodeOnClick(){
+    public void btnConfirmBikeCodeOnClick() {
         String bikeCode = ((TextField) this.inputBikeCodeContent.lookup("#inputBikeCode")).getText();
         switch (getBController().checkBikeCode(bikeCode)){
             case 0:
@@ -193,15 +194,28 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
                 getBController().getDepositTransactionContent(),
                 cardCode, owner,dateExpired, cvvCode);
         System.out.println(response);
+
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setTitle(response.get("RESULT"));
+        alert.setContentText(response.get("MESSAGE"));
+        ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypeCancel);
+        alert.show();
+
         if(response.get("RESULT").equals("PAYMENT SUCCESSFUL!")){
             getBController().rent();
             this.insertContent(mainContentPane, this.useBikeProgressContent);
             ((Label)this.useBikeProgressContent.lookup("#labelBikeCode")).setText(getBController().getMyBike().getBikeCode());
             ((Label)this.useBikeProgressContent.lookup("#labelBikeName")).setText(getBController().getMyBike().getName());
-            ((Label)this.useBikeProgressContent.lookup("#labelRentedTime")).textProperty().bind(getBController().totalTimeProperty().asString());
-            ((Label)this.useBikeProgressContent.lookup("#labelTotalRent")).textProperty().bind(getBController().totalRentProperty().asString());
+            ((Label)this.useBikeProgressContent.lookup("#labelRentedTime")).textProperty().bind(getBController().totalTimeProperty());
+            ((Label)this.useBikeProgressContent.lookup("#labelTotalRent")).textProperty().bind(getBController().totalRentProperty());
         }
         System.out.println(paymentController.getSuccessPayment());
+
+        ((RenterHomeController)getHomeScreen().getBController()).setBikes(getBController().getBikes());
+
+//        // muốn lấy ds bike từ home
+//        ((RenterHomeController)getHomeScreen().getBController()).getBikes()
     }
 
 

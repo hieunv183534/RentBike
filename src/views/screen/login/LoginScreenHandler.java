@@ -1,6 +1,7 @@
 package views.screen.login;
 
 import controllers.LoginController;
+import controllers.RenterHomeController;
 import entities.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -86,6 +87,7 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
                         try {
                             RenterHomeScreenHandler renterHomeScreen = new RenterHomeScreenHandler(this.stage, Configs.RENTER_HOME_SCREEN_PATH, userName);
                             renterHomeScreen.setScreenTitle("Renter Home");
+                            renterHomeScreen.setBController(new RenterHomeController());
                             renterHomeScreen.show();
                         } catch (IOException ex) {
                             ex.printStackTrace();

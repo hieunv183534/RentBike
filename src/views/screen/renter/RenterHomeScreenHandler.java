@@ -1,6 +1,7 @@
 package views.screen.renter;
 
 import controllers.RentBikeController;
+import controllers.RenterHomeController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -47,6 +48,11 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
         this.userName = userName;
         this.labelUserName.setText(this.userName.toUpperCase(Locale.ROOT));
     }
+
+    public RenterHomeController getBController(){
+        return(RenterHomeController) super.getBController();
+    }
+
 
 
     @Override
