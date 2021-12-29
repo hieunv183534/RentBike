@@ -1,0 +1,19 @@
+[
+  {
+    "name":"Bike Park 1",
+    "address":"Ngõ 84 Đại Cồ Việt",
+    "numOfBikes":2,
+    "numOfEBikes":3,
+    "numOfTwinBikes":4,
+    "numOfEmptyDocks":2,
+    "bikes":[]
+  },{
+  "name":"Bike Park 2",
+  "address":"Ngõ 84 Lê Thanh Nghị",
+  "numOfBikes":2,
+  "numOfEBikes":3,
+  "numOfTwinBikes":4,
+  "numOfEmptyDocks":0,
+  "bikes":[]
+}
+]
