@@ -28,14 +28,14 @@
   "name":"Xe đạp thường",
   "bikeCode": "XDT-05",
   "type": 1,
-  "status": 0,
+  "status": 1,
   "parkCode": null,
   "startTime": "28/09/2013 09:57:19"
 },{
   "name":"Xe đạp thường",
   "bikeCode": "XDT-06",
   "type": 1,
-  "status": 0,
+  "status": 1,
   "parkCode": "BX-02"
 },{
   "name":"Xe đạp điện",

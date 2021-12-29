@@ -112,6 +112,16 @@ public class Bike {
         this.startTime = startTime;
     }
 
+    public void rentBike(){
+        this.status = 1;
+        this.startTime = new Date();
+    }
+
+    public void returnBike(){
+        this.status = 0;
+        this.startTime = null;
+    }
+
 
     @Override
     public String toString() {
