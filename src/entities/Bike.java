@@ -1,29 +1,28 @@
 package entities;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.List;
 
 public class Bike {
     private String name;
     private String bikeCode;
     private int type;
-
-    @Override
-    public String toString() {
-        return "Bike{" +
-                "name='" + name + '\'' +
-                ", bikeCode='" + bikeCode + '\'' +
-                ", type=" + type +
-                ", weight=" + weight +
-                ", licensePlate='" + licensePlate + '\'' +
-                ", manuafacturingDate=" + manuafacturingDate +
-                ", producer='" + producer + '\'' +
-                ", cost=" + cost +
-                ", status=" + status +
-                ", startTime=" + startTime +
-                '}';
-    }
-
     private float weight;
+    private String licensePlate;
+    private Date manuafacturingDate;
+    private String producer;
+    private float cost;
+    private int status;
+    private Date startTime;
+    private String parkCode;
+
 
     public Bike(String name, String bikeCode, int type, int status) {
         this.name = name;
@@ -32,12 +31,6 @@ public class Bike {
         this.status = status;
     }
 
-    private String licensePlate;
-    private Date manuafacturingDate;
-    private String producer;
-    private float cost;
-    private int status;
-    private Date startTime;
 
     public int getStatus() {
         return status;
@@ -117,5 +110,45 @@ public class Bike {
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Bike{" +
+                "name='" + name + '\'' +
+                ", bikeCode='" + bikeCode + '\'' +
+                ", type=" + type +
+                ", weight=" + weight +
+                ", licensePlate='" + licensePlate + '\'' +
+                ", manuafacturingDate=" + manuafacturingDate +
+                ", producer='" + producer + '\'' +
+                ", cost=" + cost +
+                ", status=" + status +
+                ", startTime=" + startTime +
+                '}';
+    }
+
+
+    public List<Bike> getAllBikes(){
+        Type type = new TypeToken<List<Bike>>() {
+        }.getType();
+        Gson gson = new Gson();
+        try {
+            List<Bike> bikes = gson.fromJson(new FileReader("src/entities/data/bikes.json"), type);
+            return bikes;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void save(List<Bike> bikes){
+        Gson gson = new Gson();
+        try {
+            gson.toJson(bikes, new FileWriter("src/entities/data/bikes.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

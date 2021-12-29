@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.Bike;
+import entities.BikePark;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -24,6 +25,8 @@ public class RentBikeController  extends BaseController{
     private StringProperty totalTime;
     private StringProperty totalRent;
 
+    private List<BikePark> bikeParks;
+
     public StringProperty totalTimeProperty() {
         return totalTime;
     }
@@ -44,6 +47,8 @@ public class RentBikeController  extends BaseController{
 
 
     public RentBikeController(RenterHomeController renterHomeController) {
+        bikeParks = new BikePark().getAllBikeParks();
+
         this.homeController = renterHomeController;
         //   kscq2_group1_2021
         this.totalTime = new SimpleStringProperty();
@@ -103,6 +108,10 @@ public class RentBikeController  extends BaseController{
     public void rent(){
         this.myBike.setStatus(1);
         this.myBike.setStartTime(new Date());
+
+        homeController.setMyBike(this.myBike);
+
+        new BikePark().save(this.bikeParks);
         if(this.myBike.getType()==1){
             this.totalRent.setValue("10000 đồng");
             this.totalTime.setValue("0 phút");

@@ -1,6 +1,8 @@
 package entities;
 
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,7 @@ public class BikePark {
     private int numOfTwinBikes;
     private int numOfEmptyDocks;
     private String imageURL;
+    private String code;
 
     public BikePark() {
     }
@@ -75,21 +78,22 @@ public class BikePark {
         this.numOfEBikes = numOfEBikes;
     }
 
-    public void rentBike(String bikeCode){
-        for(int i=0; i<this.bikes.size(); i++){
-            Bike bike = this.bikes.get(i);
-            if(bike.getBikeCode().equals(bikeCode)){
-                this.bikes.remove(i);
-                bike.setStatus(1);
-                bike.setStartTime(new Date());
-            }
+    public void rentBike(int bikeType){
+        if(bikeType==1){
+            this.numOfBikes --;
+        }else{
+            this.numOfEBikes --;
         }
+        this.numOfEmptyDocks++;
     }
 
-    public void returnBike(Bike bike){
-        bike.setStatus(0);
-        bike.setStartTime(null);
-        this.bikes.add(bike);
+    public void returnBike(int bikeType){
+        if(bikeType==1){
+            this.numOfBikes ++;
+        }else{
+            this.numOfEBikes ++;
+        }
+        this.numOfEmptyDocks--;
     }
 
     public int getNumOfEmptyDocks() {
@@ -118,6 +122,15 @@ public class BikePark {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void save(List<BikePark> bikeParks){
+        Gson gson = new Gson();
+        try {
+            gson.toJson(bikeParks, new FileWriter("src/entities/data/bikeparks.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

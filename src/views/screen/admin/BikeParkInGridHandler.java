@@ -45,7 +45,6 @@ public class BikeParkInGridHandler extends FXMLScreenHandler {
                 BikeParkInfoScreenHandler bikeParkInfoScreenHandler = new BikeParkInfoScreenHandler(this.bikeParkManageScreenHandler.getStage(), Configs.BIKE_PARK_INFO,
                         bikePark, null, "info");
                 bikeParkInfoScreenHandler.show();
-
             } catch (Exception exception){
                 exception.printStackTrace();
             }
