@@ -2,7 +2,7 @@ package controllers;
 
 import entities.Account;
 import entities.Bike;
-import entities.BikePart;
+import entities.BikePark;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 public class RenterHomeController extends BaseController{
     private List<Bike> bikes;
     private Bike thisBike;
-    private List<BikePart> bikeParts;
+    private List<BikePark> bikeParts;
 
     public RenterHomeController() {
         bikes = new ArrayList<>();
@@ -33,11 +33,11 @@ public class RenterHomeController extends BaseController{
         bikes.addAll(bikeList2);
 
         bikeParts = new ArrayList<>();
-        BikePart bikePart1 = new BikePart("Bãi xe 1", "Hà Nội");
+        BikePark bikePart1 = new BikePark("Bãi xe 1", "Hà Nội");
         bikePart1.setBikes(bikeList1);
 
         bikeParts = new ArrayList<>();
-        BikePart bikePart2 = new BikePart("Bãi xe 2", "TP HCM");
+        BikePark bikePart2 = new BikePark("Bãi xe 2", "TP HCM");
         bikePart2.setBikes(bikeList2);
 
     }
@@ -58,11 +58,11 @@ public class RenterHomeController extends BaseController{
         this.thisBike = thisBike;
     }
 
-    public List<BikePart> getBikeParts() {
+    public List<BikePark> getBikeParts() {
         return bikeParts;
     }
 
-    public void setBikeParts(List<BikePart> bikeParts) {
+    public void setBikeParts(List<BikePark> bikeParts) {
         this.bikeParts = bikeParts;
     }
 }

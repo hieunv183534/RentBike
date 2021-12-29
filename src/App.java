@@ -2,7 +2,6 @@ import controllers.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import utils.Configs;
-import views.screen.admin.AdminHomeScreenHandler;
 import views.screen.login.LoginScreenHandler;
 
 public class App extends Application {

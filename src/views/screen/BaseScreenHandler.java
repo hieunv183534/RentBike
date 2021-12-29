@@ -10,7 +10,7 @@ import views.screen.renter.RenterHomeScreenHandler;
 
 import java.io.IOException;
 
-public class BaseScreenHandler {
+public class BaseScreenHandler extends FXMLScreenHandler{
     protected FXMLLoader loader;
     protected AnchorPane content;
     private Scene scene;
@@ -19,7 +19,13 @@ public class BaseScreenHandler {
     private BaseController bController;
     private BaseScreenHandler homeScreen;
 
+    private BaseScreenHandler(String screenPath) throws IOException {
+        super(screenPath);
+        this.stage = new Stage();
+    }
+
     public BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+        super(screenPath);
         this.stage = stage;
         this.stage.setResizable(false);
         this.loader = new FXMLLoader(getClass().getResource(screenPath));

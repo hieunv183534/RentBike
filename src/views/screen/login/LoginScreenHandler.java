@@ -1,23 +1,22 @@
 package views.screen.login;
 
+import controllers.AdminHomeController;
 import controllers.LoginController;
 import controllers.RenterHomeController;
 import entities.Account;
+import entities.BikePark;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
-import views.screen.admin.AdminHomeScreenHandler;
+import views.screen.admin.BikeParkManageScreenHandler;
 import views.screen.renter.RenterHomeScreenHandler;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class LoginScreenHandler extends BaseScreenHandler implements Initializable {
@@ -74,11 +73,9 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
                 switch (check){
                     case 0:
                         try {
-                            AdminHomeScreenHandler adminHomeScreen = new AdminHomeScreenHandler(this.stage, Configs.ADMIN_SCREEN_PATH);
-                            adminHomeScreen.setScreenTitle("Admin home");
-                            adminHomeScreen.setBController(new LoginController());
-                            adminHomeScreen.setUsername(userName);
-                            adminHomeScreen.show();
+                            BikeParkManageScreenHandler bikeParkManageScreenHandler = new BikeParkManageScreenHandler(this.stage, Configs.ADMIN_SCREEN_PATH);
+                            bikeParkManageScreenHandler.setScreenTitle("Admin home");
+                            bikeParkManageScreenHandler.show();
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }

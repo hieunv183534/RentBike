@@ -57,26 +57,26 @@ public class RentBikeController  extends BaseController{
      * @author HieuNV
      */
     public int checkBikeCode(String bikeCode){
-        for(int i=0; i< this.bikes.size(); i++){
-            Bike bike = this.bikes.get(i);
-            if(bike.getBikeCode().equals(bikeCode)){
-                if(bike.getStatus() == 0){
-                    this.myBike = bike;
-                    this.DepositTransactionContent = "rentbike " + this.myBike.getBikeCode()+ " " + new Date().getTime();
-                    switch(this.myBike.getType()){
-                        case 1:
-                            this.DepositAmount = 400000;
-                            break;
-                        case 2:
-                            this.DepositAmount = 700000;
-                            break;
-                    }
-                    return 1;
-                }else{
-                    return 2;
-                }
-            }
-        }
+//        for(int i=0; i< this.bikes.size(); i++){
+//            Bike bike = this.bikes.get(i);
+//            if(bike.getBikeCode().equals(bikeCode)){
+//                if(bike.getStatus() == 0){
+//                    this.myBike = bike;
+//                    this.DepositTransactionContent = "rentbike " + this.myBike.getBikeCode()+ " " + new Date().getTime();
+//                    switch(this.myBike.getType()){
+//                        case 1:
+//                            this.DepositAmount = 400000;
+//                            break;
+//                        case 2:
+//                            this.DepositAmount = 700000;
+//                            break;
+//                    }
+//                    return 1;
+//                }else{
+//                    return 2;
+//                }
+//            }
+//        }
         return 0;
     }
 

@@ -14,4 +14,6 @@ public class Configs {
     public static final String RENTBIKE_USE_BIKE_PROGRESS_CONTENT_PATH= "/views/fxml/renter/rentbike/rentbike-use-bike-progress.fxml";
     public static final String RETURNBIKE_LAYOUT_SCREEN_PATH= "/views/fxml/renter/returnbike/return-rented-bike-layout.fxml";
     public static final String ADMIN_SCREEN_PATH = "/views/fxml/admin/bike-park-manage.fxml";
+    public static final String BIKE_PARK_IN_GRID = "/views/fxml/admin/bike-park.fxml";
+    public static final String BIKE_PARK_INFO = "/views/fxml/admin/bike-park-info.fxml";
 }
