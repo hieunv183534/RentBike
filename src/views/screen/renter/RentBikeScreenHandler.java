@@ -212,8 +212,8 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
         }
         System.out.println(paymentController.getSuccessPayment());
 
-        ((RenterHomeController)getHomeScreen().getBController()).setBikes(getBController().getBikes());
-
+//        ((RenterHomeController)getHomeScreen().getBController()).setBikes(getBController().getBikes());
+//        ((RenterHomeController)getHomeScreen().getBController()).setThisBike(getBController().getMyBike());
 //        // muốn lấy ds bike từ home
 //        ((RenterHomeController)getHomeScreen().getBController()).getBikes()
     }

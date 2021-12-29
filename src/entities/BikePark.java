@@ -2,6 +2,7 @@ package entities;
 
 import java.io.FileReader;
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.List;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +16,16 @@ public class BikePark {
     private int numOfTwinBikes;
     private int numOfEmptyDocks;
     private String imageURL;
+
+    public BikePark() {
+    }
+
+    public BikePark(String name, String address) {
+        this.name = name;
+        this.address = address;
+        this.numOfBikes = 0;
+        this.numOfEBikes =0;
+    }
 
     public String getName() {
         return name;
@@ -37,7 +48,15 @@ public class BikePark {
     }
 
     public void setBikes(List<Bike> bikes) {
+        this.numOfBikes = 0;
+        this.numOfEBikes =0;
         this.bikes = bikes;
+        for (Bike bike: bikes) {
+            if(bike.getType()==1)
+                this.numOfBikes ++;
+            else
+                this.numOfEBikes++;
+        }
     }
 
     public int getNumOfBikes() {
@@ -56,12 +75,21 @@ public class BikePark {
         this.numOfEBikes = numOfEBikes;
     }
 
-    public int getNumOfTwinBikes() {
-        return numOfTwinBikes;
+    public void rentBike(String bikeCode){
+        for(int i=0; i<this.bikes.size(); i++){
+            Bike bike = this.bikes.get(i);
+            if(bike.getBikeCode().equals(bikeCode)){
+                this.bikes.remove(i);
+                bike.setStatus(1);
+                bike.setStartTime(new Date());
+            }
+        }
     }
 
-    public void setNumOfTwinBikes(int numOfTwinBikes) {
-        this.numOfTwinBikes = numOfTwinBikes;
+    public void returnBike(Bike bike){
+        bike.setStatus(0);
+        bike.setStartTime(null);
+        this.bikes.add(bike);
     }
 
     public int getNumOfEmptyDocks() {
@@ -91,5 +119,13 @@ public class BikePark {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public int getNumOfTwinBikes() {
+        return numOfTwinBikes;
+    }
+
+    public void setNumOfTwinBikes(int numOfTwinBikes) {
+        this.numOfTwinBikes = numOfTwinBikes;
     }
 }

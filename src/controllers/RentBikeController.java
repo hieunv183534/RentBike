@@ -16,18 +16,10 @@ import java.util.*;
  */
 public class RentBikeController  extends BaseController{
 
-    private List<Bike> bikes;
     private Bike myBike;
     private int DepositAmount;
     private String DepositTransactionContent;
-
-    public List<Bike> getBikes() {
-        return bikes;
-    }
-
-    public void setBikes(List<Bike> bikes) {
-        this.bikes = bikes;
-    }
+    private RenterHomeController homeController;
 
     private StringProperty totalTime;
     private StringProperty totalRent;
@@ -51,14 +43,8 @@ public class RentBikeController  extends BaseController{
     }
 
 
-    public RentBikeController() {
-        bikes = new ArrayList<>();
-        bikes.add(new Bike("Xe đạp thường","1de5b34e-b240-41c1-b8a0-991c9b98849c", 1, 0));
-        bikes.add(new Bike("Xe đạp thường","b1201a9b-e23b-44c8-88b2-a00a5145461f", 1, 1));
-        bikes.add(new Bike("Xe đạp thường","40edf4cd-4225-4cad-908f-3c48b110d467", 1, 1));
-        bikes.add(new Bike("Xe đạp điện","d2eb2832-bb85-4d37-88b1-48898242fb6a", 2, 0));
-        bikes.add(new Bike("Xe đạp điện","44c3e3f4-227a-45c3-a940-9065b184dfa5", 2, 1));
-        bikes.add(new Bike("Xe đạp điện","17ce92c0-d60f-42e3-ad0e-4922ac24efa7", 2, 0));
+    public RentBikeController(RenterHomeController renterHomeController) {
+        this.homeController = renterHomeController;
         //   kscq2_group1_2021
         this.totalTime = new SimpleStringProperty();
         this.totalRent = new SimpleStringProperty();
@@ -71,26 +57,26 @@ public class RentBikeController  extends BaseController{
      * @author HieuNV
      */
     public int checkBikeCode(String bikeCode){
-        for(int i=0; i< this.bikes.size(); i++){
-            Bike bike = this.bikes.get(i);
-            if(bike.getBikeCode().equals(bikeCode)){
-                if(bike.getStatus() == 0){
-                    this.myBike = bike;
-                    this.DepositTransactionContent = "rentbike " + this.myBike.getBikeCode()+ " " + new Date().getTime();
-                    switch(this.myBike.getType()){
-                        case 1:
-                            this.DepositAmount = 400000;
-                            break;
-                        case 2:
-                            this.DepositAmount = 700000;
-                            break;
-                    }
-                    return 1;
-                }else{
-                    return 2;
-                }
-            }
-        }
+//        for(int i=0; i< this.bikes.size(); i++){
+//            Bike bike = this.bikes.get(i);
+//            if(bike.getBikeCode().equals(bikeCode)){
+//                if(bike.getStatus() == 0){
+//                    this.myBike = bike;
+//                    this.DepositTransactionContent = "rentbike " + this.myBike.getBikeCode()+ " " + new Date().getTime();
+//                    switch(this.myBike.getType()){
+//                        case 1:
+//                            this.DepositAmount = 400000;
+//                            break;
+//                        case 2:
+//                            this.DepositAmount = 700000;
+//                            break;
+//                    }
+//                    return 1;
+//                }else{
+//                    return 2;
+//                }
+//            }
+//        }
         return 0;
     }
 
