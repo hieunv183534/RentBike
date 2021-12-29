@@ -16,19 +16,10 @@ import java.util.*;
  */
 public class RentBikeController  extends BaseController{
 
-    private List<Bike> bikes;
     private Bike myBike;
     private int DepositAmount;
     private String DepositTransactionContent;
     private RenterHomeController homeController;
-
-    public List<Bike> getBikes() {
-        return bikes;
-    }
-
-    public void setBikes(List<Bike> bikes) {
-        this.bikes = bikes;
-    }
 
     private StringProperty totalTime;
     private StringProperty totalRent;
