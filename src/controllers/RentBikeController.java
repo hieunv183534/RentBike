@@ -18,6 +18,7 @@ import java.util.*;
 public class RentBikeController  extends BaseController{
 
     private Bike myBike;
+    private BikePark park;
     private int DepositAmount;
     private String DepositTransactionContent;
     private RenterHomeController homeController;
@@ -26,6 +27,7 @@ public class RentBikeController  extends BaseController{
     private StringProperty totalRent;
 
     private List<BikePark> bikeParks;
+    private List<Bike> bikes;
 
     public StringProperty totalTimeProperty() {
         return totalTime;
@@ -48,6 +50,10 @@ public class RentBikeController  extends BaseController{
 
     public RentBikeController(RenterHomeController renterHomeController) {
         bikeParks = new BikePark().getAllBikeParks();
+        bikes = new Bike().getAllBikes();
+
+        System.out.println(bikeParks.toString());
+        System.out.println(bikes.toString());
 
         this.homeController = renterHomeController;
         //   kscq2_group1_2021
@@ -82,6 +88,8 @@ public class RentBikeController  extends BaseController{
 //                }
 //            }
 //        }
+        this.myBike = this.bikes.get(5);
+        this.park = this.bikeParks.get(2);
         return 0;
     }
 
@@ -106,8 +114,10 @@ public class RentBikeController  extends BaseController{
      * @author HieuNV
      */
     public void rent(){
-        this.myBike.setStatus(1);
-        this.myBike.setStartTime(new Date());
+        this.myBike.rentBike();
+        this.park.rentBike(this.myBike.getType());
+        new Bike().save(this.bikes);
+        new BikePark().save(this.bikeParks);
 
         homeController.setMyBike(this.myBike);
 

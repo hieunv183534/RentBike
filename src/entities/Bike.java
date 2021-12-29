@@ -23,6 +23,8 @@ public class Bike {
     private Date startTime;
     private String parkCode;
 
+    public Bike() {
+    }
 
     public Bike(String name, String bikeCode, int type, int status) {
         this.name = name;
@@ -117,9 +119,10 @@ public class Bike {
         this.startTime = new Date();
     }
 
-    public void returnBike(){
+    public void returnBike(String parkCode){
         this.status = 0;
         this.startTime = null;
+        this.parkCode = parkCode;
     }
 
 
@@ -146,6 +149,7 @@ public class Bike {
         Gson gson = new Gson();
         try {
             List<Bike> bikes = gson.fromJson(new FileReader("src/entities/data/bikes.json"), type);
+            System.out.println(bikes);
             return bikes;
         } catch (Exception e) {
             e.printStackTrace();

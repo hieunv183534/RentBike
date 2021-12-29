@@ -12,7 +12,6 @@ import com.google.gson.reflect.TypeToken;
 public class BikePark {
     private String name;
     private String address;
-    private List<Bike> bikes;
     private int numOfBikes;
     private int numOfEBikes;
     private int numOfTwinBikes;
@@ -44,22 +43,6 @@ public class BikePark {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public List<Bike> getBikes() {
-        return bikes;
-    }
-
-    public void setBikes(List<Bike> bikes) {
-        this.numOfBikes = 0;
-        this.numOfEBikes =0;
-        this.bikes = bikes;
-        for (Bike bike: bikes) {
-            if(bike.getType()==1)
-                this.numOfBikes ++;
-            else
-                this.numOfEBikes++;
-        }
     }
 
     public int getNumOfBikes() {
@@ -140,5 +123,19 @@ public class BikePark {
 
     public void setNumOfTwinBikes(int numOfTwinBikes) {
         this.numOfTwinBikes = numOfTwinBikes;
+    }
+
+    @Override
+    public String toString() {
+        return "BikePark{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", numOfBikes=" + numOfBikes +
+                ", numOfEBikes=" + numOfEBikes +
+                ", numOfTwinBikes=" + numOfTwinBikes +
+                ", numOfEmptyDocks=" + numOfEmptyDocks +
+                ", imageURL='" + imageURL + '\'' +
+                ", code='" + code + '\'' +
+                '}';
     }
 }
