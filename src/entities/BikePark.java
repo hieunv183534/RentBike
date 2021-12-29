@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ public class BikePark {
     private int numOfTwinBikes;
     private int numOfEmptyDocks;
     private String imageURL;
-
+    private String code;
     public BikePark() {
     }
 
@@ -113,11 +114,22 @@ public class BikePark {
         }.getType();
         Gson gson = new Gson();
         try {
-            List<BikePark> bikeParks = gson.fromJson(new FileReader("src/entities/data/bikeparks.json"), type);
+            FileReader fileReader = new FileReader("src/entities/data/bikeparks.json");
+            List<BikePark> bikeParks = gson.fromJson(fileReader, type);
+            fileReader.close();
             return bikeParks;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void save(List<BikePark> bikeParks){
+        Gson gson = new Gson();
+        try {
+            gson.toJson(bikeParks, new FileWriter("src/entities/data/bikeparks.json"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -127,5 +139,14 @@ public class BikePark {
 
     public void setNumOfTwinBikes(int numOfTwinBikes) {
         this.numOfTwinBikes = numOfTwinBikes;
+    }
+
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

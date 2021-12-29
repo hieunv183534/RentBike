@@ -29,9 +29,6 @@ public class BikeParkInGridHandler extends FXMLScreenHandler {
     @FXML
     private Button editBikePark;
 
-    @FXML
-    private Button deleteBikePark;
-
     private BikePark bikePark;
 
     private BikeParkManageScreenHandler bikeParkManageScreenHandler;
@@ -43,7 +40,7 @@ public class BikeParkInGridHandler extends FXMLScreenHandler {
         infoBikePark.setOnMouseClicked(e -> {
             try{
                 BikeParkInfoScreenHandler bikeParkInfoScreenHandler = new BikeParkInfoScreenHandler(this.bikeParkManageScreenHandler.getStage(), Configs.BIKE_PARK_INFO,
-                        bikePark, null, "info");
+                        bikePark, bikeParkManageScreenHandler.getBikeParkObjects(), "info");
                 bikeParkInfoScreenHandler.show();
 
             } catch (Exception exception){
@@ -51,11 +48,16 @@ public class BikeParkInGridHandler extends FXMLScreenHandler {
             }
         });
         editBikePark.setOnMouseClicked(e -> {
-        });
-        deleteBikePark.setOnMouseClicked(e -> {
+            try{
+                BikeParkInfoScreenHandler bikeParkInfoScreenHandler = new BikeParkInfoScreenHandler(this.bikeParkManageScreenHandler.getStage(), Configs.BIKE_PARK_INFO,
+                        bikePark, bikeParkManageScreenHandler.getBikeParkObjects(), "edit");
+                bikeParkInfoScreenHandler.show();
+
+            } catch (Exception exception){
+                exception.printStackTrace();
+            }
         });
         setInfo();
-
     }
 
     private void setInfo(){
