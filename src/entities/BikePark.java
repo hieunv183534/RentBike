@@ -14,7 +14,6 @@ public class BikePark {
     private List<Bike> bikes;
     private int numOfBikes;
     private int numOfEBikes;
-    private int numOfTwinBikes;
     private int numOfEmptyDocks;
     private String imageURL;
     private String code;
@@ -131,14 +130,6 @@ public class BikePark {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public int getNumOfTwinBikes() {
-        return numOfTwinBikes;
-    }
-
-    public void setNumOfTwinBikes(int numOfTwinBikes) {
-        this.numOfTwinBikes = numOfTwinBikes;
     }
 
 

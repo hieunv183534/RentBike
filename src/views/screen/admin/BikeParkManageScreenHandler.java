@@ -54,7 +54,6 @@ public class BikeParkManageScreenHandler extends BaseScreenHandler implements In
             this.bikeParks = new ArrayList();
 
             for (BikePark item : bikeParks) {
-                BikePark bikePark = item;
                 BikeParkInGridHandler bikeParkInGridHandler = new BikeParkInGridHandler(Configs.BIKE_PARK_IN_GRID, item, this);
                 this.bikeParks.add(bikeParkInGridHandler);
             }
