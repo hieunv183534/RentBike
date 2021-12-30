@@ -1,7 +1,6 @@
 [
   {
     "name":"Xe đạp thường",
-<<<<<<< HEAD
     "bikeCode": "XDT-01",
     "type": 1,
     "status": 0,
@@ -52,45 +51,3 @@
   "parkCode": "BX-02"
 }
 ]
-=======
-    "bikeCode": "XDT-A1",
-    "type": 1,
-    "status": 0
-  },{
-    "name":"Xe đạp thường",
-    "bikeCode": "XDT-c1",
-    "type": 1,
-    "status": 1
-  },{
-    "name":"Xe đạp điện",
-    "bikeCode": "XDD-N2",
-    "type": 2,
-    "status": 0
-  },{
-    "name":"Xe đạp điện",
-    "bikeCode": "XDD-T6",
-    "type": 2,
-    "status": 1
-  },{
-    "name":"Xe đạp thường",
-    "bikeCode": "XDT-M8",
-    "type": 1,
-    "status": 0
-  },{
-    "name":"Xe đạp thường",
-    "bikeCode": "XDT-B6",
-    "type": 1,
-    "status": 0
-  },{
-    "name":"Xe đạp điện",
-    "bikeCode": "XDD-V4",
-    "type": 1,
-    "status": 0
-  },{
-    "name":"Xe đạp điện",
-    "bikeCode": "XDD-X3",
-    "type": 1,
-    "status": 0
-  }
-]
->>>>>>> e7aed2bc45babf3ae872d3757b63e690c187819f

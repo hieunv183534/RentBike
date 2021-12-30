@@ -2,6 +2,7 @@ package views.screen.renter;
 
 import controllers.RentBikeController;
 import controllers.RenterHomeController;
+import controllers.ReturnBikeController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -69,6 +70,10 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
         btnRent.setOnAction(e->{
             goToRentBike();
         });
+        
+        menuItemReturnBike.setOnAction(e -> {
+        	goToReturnBike();
+        });
     }
 
     public void goToRentBike(){
@@ -81,5 +86,17 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public void goToReturnBike() {
+    	try {
+    		ReturnBikeScreenHandler returnBikeScreen = new ReturnBikeScreenHandler(this.stage, Configs.RETURNBIKE_LAYOUT_SCREEN_PATH);
+    		returnBikeScreen.setScreenTitle("Return Bike Screen");
+    		returnBikeScreen.setBController(new ReturnBikeController());
+    		returnBikeScreen.setHomeScreen(this);
+    		returnBikeScreen.show();
+    	} catch (IOException ex) {
+    		ex.printStackTrace();
+    	}
     }
 }

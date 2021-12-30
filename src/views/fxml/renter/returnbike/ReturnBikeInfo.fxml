@@ -4,22 +4,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="415.0" prefWidth="805.0" stylesheets="@../../style/common.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="layout.renter.RentbikeContent1">
+<AnchorPane prefHeight="415.0" prefWidth="805.0" stylesheets="@../../style/common.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane layoutX="445.0" layoutY="15.0" prefHeight="385.0" prefWidth="319.0" style="-fx-border-color: green;">
             <children>
-                <Label layoutX="122.0" layoutY="22.0" text="Tiến trình thuê xe">
+                <Label layoutX="122.0" layoutY="22.0" text="Tiến trình trả xe">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <ProgressBar layoutX="169.0" layoutY="155.0" prefWidth="174.0" progress="0.0" style="-fx-rotate: 90;" />
-                <VBox layoutX="41.0" layoutY="69.0" prefHeight="209.0" prefWidth="193.0" spacing="40.0">
+                <ProgressBar layoutX="171.0" layoutY="146.0" prefWidth="174.0" progress="0.5" style="-fx-rotate: 90;" />
+                <VBox layoutX="41.0" layoutY="69.0" prefHeight="209.0" prefWidth="193.0" spacing="20.0">
                     <children>
-                        <Label text="1. Nhập mã xe cần trả" />
-                        <Label text="2. Thông tin hóa đơn " />
-                        <Label text="3. Thanh toán" />
-                        <Label text="4. Thông tin giao dịch" />
+                        <Label text="1. Chọn bãi xe" />
+                        <Label text="2. Nhập mã xe " />
+                        <Label text="3. Thông tin hóa đơn" />
+                        <Label text="4. Thanh toán" />
+                        <Label text="5. Thông tin giao dịch" />
                     </children>
                 </VBox>
                 <Button layoutX="41.0" layoutY="322.0" mnemonicParsing="false" styleClass="primary-button" text="Hướng dẫn" />
@@ -33,7 +34,7 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <Button layoutX="125.0" layoutY="328.0" mnemonicParsing="false" prefWidth="110.0" styleClass="primary-button" text="Thanh toán" />
+                <Button fx:id="btnConfirmPayment" layoutX="125.0" layoutY="328.0" mnemonicParsing="false" prefWidth="110.0" styleClass="primary-button" text="Thanh toán" />
             <GridPane layoutX="35.0" layoutY="90.0" prefHeight="209.0" prefWidth="324.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.66668701171875" minWidth="10.0" prefWidth="123.66665649414062" />
