@@ -1,4 +1,3 @@
-/App.class
 /assets/
 /controllers/
 /entities/
@@ -6,3 +5,4 @@
 /subsystem/
 /utils/
 /views/
+/App.class

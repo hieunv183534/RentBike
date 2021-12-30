@@ -46,12 +46,11 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 	 private AnchorPane returnBikeInfoScreenHandler;
 	 private AnchorPane paymentScreenHandler;
 	 private AnchorPane paymentSucessScreenHandler;
-	 private ChoiceBox choiceBoxBikePark = new ChoiceBox(FXCollections.observableArrayList("P01", "P02", "P03"));
+	
+	 private ReturnBikeController returnBikeController = new ReturnBikeController();
 	 
-	 public ReturnBikeController getBController(){
-		 return (ReturnBikeController) super.getBController();
-	 }
-
+	 private ChoiceBox choiceBoxBikePark = new ChoiceBox(FXCollections.observableArrayList(this.returnBikeController.getListNameBikeParks()));
+	 
 	public ReturnBikeScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
 		this.returnBikeInputBikeParkScreenHandler = this.loadContentPane(Configs.RETURNBIKE_INPUT_BIKEPARK_PATH);
@@ -124,7 +123,7 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 	}
 	
 	public void btnConfirmBikeParkOnclick(String value) {
-		if (this.getBController().checkBikePark(value)) {
+		if (this.returnBikeController.checkBikePark(value)) {
 			this.insertContent(this.mainContentPane, this.returnBikeInputBikeCodeScreenHandler);
 		} else {
 			this.showErrorAlert("Lỗi", "Bãi xe đã đầy!");
@@ -135,8 +134,7 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 	
 	public void btnConfirmBikeCodeOnClick() {
 		String bikeCode = ((TextField) this.returnBikeInputBikeCodeScreenHandler.lookup("#inputBikeCode")).getText();
-		
-		if (this.getBController().checkBikeCode(bikeCode)) {
+		if (this.returnBikeController.checkBikeCode(bikeCode)) {
 			this.insertContent(this.mainContentPane, this.returnBikeInfoScreenHandler);
 		} else {
 			this.showErrorAlert("Lỗi", "Xe không được sử dụng hoặc không tồn tại !");

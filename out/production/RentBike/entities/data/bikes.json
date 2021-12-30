@@ -22,15 +22,13 @@
   "bikeCode": "XDD-04",
   "type": 2,
   "status": 1,
-  "parkCode": null,
-  "startTime": "28/09/2013 09:57:19"
+  "parkCode": null
 },{
   "name":"Xe đạp thường",
   "bikeCode": "XDT-05",
   "type": 1,
   "status": 1,
-  "parkCode": null,
-  "startTime": "28/09/2013 09:57:19"
+  "parkCode": null
 },{
   "name":"Xe đạp thường",
   "bikeCode": "XDT-06",

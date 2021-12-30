@@ -142,6 +142,17 @@ public class Bike {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public String toString() {
+        return "Bike{" +
+                " name='" + name + '\'' +
+                ", bikeCode='" + bikeCode + '\'' +
+                ", type=" + type +
+                ", status=" + status +
+                ", parkCode='" + parkCode + '\'' +
+                '}';
+    }
 
 	public void rentBike() {
 		// TODO Auto-generated method stub
