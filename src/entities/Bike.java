@@ -117,6 +117,7 @@ public class Bike {
     public void rentBike(){
         this.status = 1;
         this.startTime = new Date();
+        this.parkCode = null;
     }
 
     public void returnBike(String parkCode){
@@ -157,12 +158,22 @@ public class Bike {
         }
     }
 
-    public void save(List<Bike> bikes){
+    public void saveBikes(List<Bike> bikes){
         Gson gson = new Gson();
         try {
-            gson.toJson(bikes, new FileWriter("src/entities/data/bikes.json"));
-        } catch (IOException e) {
+            FileWriter fileWriter = new FileWriter("src/entities/data/bikes.json");
+            gson.toJson(bikes, fileWriter);
+            fileWriter.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getParkCode() {
+        return parkCode;
+    }
+
+    public void setParkCode(String parkCode) {
+        this.parkCode = parkCode;
     }
 }

@@ -96,7 +96,7 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <Label layoutX="48.0" layoutY="52.0" prefHeight="27.0" prefWidth="663.0" text="Chào mừng HieuNV đến với ứng dụng thuê xe đạp, xe đạp điện EcoPark RentBike">
+                  <Label layoutX="48.0" layoutY="52.0" prefHeight="27.0" prefWidth="663.0" text="Chào mừng bạn đến với ứng dụng thuê xe đạp, xe đạp điện EcoPark RentBike">
                      <font>
                         <Font size="18.0" />
                      </font>

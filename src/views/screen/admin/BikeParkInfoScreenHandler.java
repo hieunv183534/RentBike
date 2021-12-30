@@ -75,7 +75,6 @@ public class BikeParkInfoScreenHandler extends BaseScreenHandler {
         textName.setText(bikePark.getName());
         textBikes.setText(String.valueOf(bikePark.getNumOfBikes()));
         textEbikes.setText(String.valueOf(bikePark.getNumOfEBikes()));
-        textTwinBikes.setText(String.valueOf(bikePark.getNumOfTwinBikes()));
         textEmptyDocks.setText(String.valueOf(bikePark.getNumOfEmptyDocks()));
     }
 }

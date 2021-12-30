@@ -70,7 +70,7 @@
                   <Label text="Mã thẻ:" GridPane.rowIndex="1" />
                   <Label text="DateExpired:" GridPane.rowIndex="4" />
                   <Label fx:id="labelAmount" text="700.000đ" GridPane.columnIndex="1" />
-                  <TextField fx:id="inputCardCode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="inputCardCode" text="kscq2_group1_2021" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Chủ thẻ:" GridPane.rowIndex="2" />
                   <Label text="Mã CVV:" GridPane.rowIndex="3" />
                   <TextField fx:id="inputOwner" GridPane.columnIndex="1" GridPane.rowIndex="2" />

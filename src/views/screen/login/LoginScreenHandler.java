@@ -61,12 +61,8 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
             String userName = inputUserName.getText();
             String password = inputPassword.getText();
             if(roleLogin.getSelectedToggle() == null){
-                Alert alert = new Alert(Alert.AlertType.NONE);
-                alert.setTitle("Thông báo!");
-                alert.setContentText("Bạn chưa chọn vai trò đăng nhập");
                 ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-                alert.getButtonTypes().setAll(buttonTypeCancel);
-                alert.show();
+                showAlert(Alert.AlertType.NONE, "Thông báo!","Bạn chưa chọn vai trò đăng nhập", buttonTypeCancel);
             }else{
                 int role = (int)roleLogin.getSelectedToggle().getUserData();
                 int check = this.getBController().checkAccount(new Account(userName,password,role));
@@ -91,12 +87,8 @@ public class LoginScreenHandler extends BaseScreenHandler implements Initializab
                         }
                         break;
                     case 2:
-                        Alert alert = new Alert(Alert.AlertType.NONE);
-                        alert.setTitle("Thông báo!");
-                        alert.setContentText("UserName hoặc Password không hợp lệ");
                         ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-                        alert.getButtonTypes().setAll(buttonTypeCancel);
-                        alert.show();
+                        showAlert(Alert.AlertType.NONE, "Thông báo!", "UserName hoặc Password không hợp lệ",buttonTypeCancel);
                         break;
                 }
             }

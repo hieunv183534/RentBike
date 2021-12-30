@@ -38,6 +38,8 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
 
     private String userName;
 
+    private RentBikeScreenHandler rentBikeScreen;
+
 
     public RenterHomeScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
@@ -73,11 +75,16 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
 
     public void goToRentBike(){
         try {
-            RentBikeScreenHandler rentBikeScreen = new RentBikeScreenHandler(this.stage, Configs.RENTBIKE_LAYOUT_SCREEN_PATH);
-            rentBikeScreen.setScreenTitle("Rent Bike Screen");
-            rentBikeScreen.setBController(new RentBikeController(this.getBController()));
-            rentBikeScreen.setHomeScreen(this);
-            rentBikeScreen.show();
+            if(this.rentBikeScreen == null){
+                RentBikeScreenHandler rentBikeScreen = new RentBikeScreenHandler(this.stage, Configs.RENTBIKE_LAYOUT_SCREEN_PATH);
+                rentBikeScreen.setScreenTitle("Rent Bike Screen");
+                rentBikeScreen.setBController(new RentBikeController(this.getBController()));
+                rentBikeScreen.setHomeScreen(this);
+                this.rentBikeScreen = rentBikeScreen;
+                rentBikeScreen.show();
+            }else{
+                this.rentBikeScreen.show();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }

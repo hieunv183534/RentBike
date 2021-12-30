@@ -14,7 +14,6 @@ public class BikePark {
     private String address;
     private int numOfBikes;
     private int numOfEBikes;
-    private int numOfTwinBikes;
     private int numOfEmptyDocks;
     private String imageURL;
     private String code;
@@ -95,12 +94,22 @@ public class BikePark {
         this.numOfEmptyDocks = numOfEmptyDocks;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public List<BikePark> getAllBikeParks(){
         Type type = new TypeToken<List<BikePark>>() {
         }.getType();
         Gson gson = new Gson();
         try {
-            List<BikePark> bikeParks = gson.fromJson(new FileReader("src/entities/data/bikeparks.json"), type);
+            FileReader fileReader = new FileReader("src/entities/data/bikeparks.json");
+            List<BikePark> bikeParks = gson.fromJson(fileReader, type);
+            fileReader.close();
             return bikeParks;
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,21 +117,15 @@ public class BikePark {
         }
     }
 
-    public void save(List<BikePark> bikeParks){
+    public void saveBikeParks(List<BikePark> bikeParks){
         Gson gson = new Gson();
         try {
-            gson.toJson(bikeParks, new FileWriter("src/entities/data/bikeparks.json"));
-        } catch (IOException e) {
+            FileWriter fileWriter = new FileWriter("src/entities/data/bikeparks.json");
+            gson.toJson(bikeParks, fileWriter);
+            fileWriter.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public int getNumOfTwinBikes() {
-        return numOfTwinBikes;
-    }
-
-    public void setNumOfTwinBikes(int numOfTwinBikes) {
-        this.numOfTwinBikes = numOfTwinBikes;
     }
 
     @Override
@@ -132,7 +135,6 @@ public class BikePark {
                 ", address='" + address + '\'' +
                 ", numOfBikes=" + numOfBikes +
                 ", numOfEBikes=" + numOfEBikes +
-                ", numOfTwinBikes=" + numOfTwinBikes +
                 ", numOfEmptyDocks=" + numOfEmptyDocks +
                 ", imageURL='" + imageURL + '\'' +
                 ", code='" + code + '\'' +
