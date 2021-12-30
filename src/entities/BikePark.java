@@ -17,7 +17,6 @@ public class BikePark {
     private int numOfEmptyDocks;
     private String imageURL;
     private String code;
-
     public BikePark() {
     }
 

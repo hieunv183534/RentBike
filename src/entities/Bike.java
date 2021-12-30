@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
@@ -14,14 +13,14 @@ public class Bike {
     private String name;
     private String bikeCode;
     private int type;
-    private float weight;
-    private String licensePlate;
-    private Date manuafacturingDate;
-    private String producer;
-    private float cost;
-    private int status;
-    private Date startTime;
     private String parkCode;
+	private int status;
+	private float weight;
+	private String licensePlate;
+	private Date manuafacturingDate;
+	private String producer;
+	private float cost;
+	private Date startTime;
 
     public Bike() {
     }
@@ -114,66 +113,43 @@ public class Bike {
         this.startTime = startTime;
     }
 
-    public void rentBike(){
+    public void rentBike() {
         this.status = 1;
         this.startTime = new Date();
         this.parkCode = null;
     }
 
-    public void returnBike(String parkCode){
-        this.status = 0;
-        this.startTime = null;
-        this.parkCode = parkCode;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Bike{" +
-                "name='" + name + '\'' +
-                ", bikeCode='" + bikeCode + '\'' +
-                ", type=" + type +
-                ", weight=" + weight +
-                ", licensePlate='" + licensePlate + '\'' +
-                ", manuafacturingDate=" + manuafacturingDate +
-                ", producer='" + producer + '\'' +
-                ", cost=" + cost +
-                ", status=" + status +
-                ", startTime=" + startTime +
-                '}';
-    }
-
-
-    public List<Bike> getAllBikes(){
-        Type type = new TypeToken<List<Bike>>() {
-        }.getType();
-        Gson gson = new Gson();
-        try {
-            List<Bike> bikes = gson.fromJson(new FileReader("src/entities/data/bikes.json"), type);
-            System.out.println(bikes);
-            return bikes;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        public String getParkCode () {
+            return parkCode;
         }
-    }
 
-    public void saveBikes(List<Bike> bikes){
-        Gson gson = new Gson();
-        try {
-            FileWriter fileWriter = new FileWriter("src/entities/data/bikes.json");
-            gson.toJson(bikes, fileWriter);
-            fileWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        public void setParkCode (String parkCode){
+            this.parkCode = parkCode;
         }
+
+        public List<Bike> getAllBikes () {
+            Type type = new TypeToken<List<Bike>>() {
+            }.getType();
+            Gson gson = new Gson();
+            try {
+                List<Bike> bikes = gson.fromJson(new FileReader("src/entities/data/bikes.json"), type);
+                return bikes;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        public void saveBikes (List<Bike> bikes) {
+            Gson gson = new Gson();
+            try {
+                FileWriter fileWriter = new FileWriter("src/entities/data/bikes.json");
+                gson.toJson(bikes, fileWriter);
+                fileWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
-    public String getParkCode() {
-        return parkCode;
-    }
-
-    public void setParkCode(String parkCode) {
-        this.parkCode = parkCode;
-    }
-}

@@ -7,15 +7,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="211.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="211.0" prefWidth="374.0" style="-fx-border-color: #03ab52;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="lbName" alignment="CENTER" layoutX="33.0" layoutY="36.0" prefHeight="30.0" prefWidth="303.0" text="Name">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="infoBikePark" layoutX="22.0" layoutY="147.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="104.0" text="Xem thông tin" />
-      <Button fx:id="deleteBikePark" layoutX="243.0" layoutY="147.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="104.0" style="-fx-background-color: f70d1a;" text="Xóa" textFill="#f5eeee" />
+      <Button fx:id="infoBikePark" layoutX="48.0" layoutY="147.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="104.0" text="Xem thông tin" />
       <VBox layoutX="22.0" layoutY="66.0" prefHeight="77.0" prefWidth="325.0">
          <children>
             <Pane prefHeight="34.0" prefWidth="325.0">
@@ -48,6 +47,6 @@
             </Pane>
          </children>
       </VBox>
-      <Button fx:id="editBikePark" layoutX="133.0" layoutY="147.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="104.0" text="Chỉnh sửa" />
+      <Button fx:id="editBikePark" layoutX="216.0" layoutY="147.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="104.0" text="Chỉnh sửa" />
    </children>
 </AnchorPane>

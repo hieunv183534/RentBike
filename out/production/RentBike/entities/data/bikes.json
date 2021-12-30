@@ -5,8 +5,8 @@
     "type": 1,
     "weight": 0.0,
     "cost": 0.0,
-    "status": 0,
-    "parkCode": "BX-01"
+    "status": 1,
+    "startTime": "Dec 30, 2021, 1:39:49 PM"
   },
   {
     "name": "Xe đạp thường",
@@ -72,3 +72,4 @@
     "parkCode": "BX-02"
   }
 ]
+
