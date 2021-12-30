@@ -14,11 +14,9 @@ public class BikePark {
     private String address;
     private int numOfBikes;
     private int numOfEBikes;
-    private int numOfTwinBikes;
     private int numOfEmptyDocks;
     private String imageURL;
     private String code;
-
     public BikePark() {
     }
 
@@ -100,7 +98,9 @@ public class BikePark {
         }.getType();
         Gson gson = new Gson();
         try {
-            List<BikePark> bikeParks = gson.fromJson(new FileReader("src/entities/data/bikeparks.json"), type);
+            FileReader fileReader = new FileReader("src/entities/data/bikeparks.json");
+            List<BikePark> bikeParks = gson.fromJson(fileReader, type);
+            fileReader.close();
             return bikeParks;
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,17 +112,17 @@ public class BikePark {
         Gson gson = new Gson();
         try {
             gson.toJson(bikeParks, new FileWriter("src/entities/data/bikeparks.json"));
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public int getNumOfTwinBikes() {
-        return numOfTwinBikes;
+    public String getCode() {
+        return code;
     }
 
-    public void setNumOfTwinBikes(int numOfTwinBikes) {
-        this.numOfTwinBikes = numOfTwinBikes;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override
@@ -132,7 +132,6 @@ public class BikePark {
                 ", address='" + address + '\'' +
                 ", numOfBikes=" + numOfBikes +
                 ", numOfEBikes=" + numOfEBikes +
-                ", numOfTwinBikes=" + numOfTwinBikes +
                 ", numOfEmptyDocks=" + numOfEmptyDocks +
                 ", imageURL='" + imageURL + '\'' +
                 ", code='" + code + '\'' +

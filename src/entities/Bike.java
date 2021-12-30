@@ -5,7 +5,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+>>>>>>> e7aed2bc45babf3ae872d3757b63e690c187819f
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +17,7 @@ public class Bike {
     private String name;
     private String bikeCode;
     private int type;
+<<<<<<< HEAD
     private float weight;
     private String licensePlate;
     private Date manuafacturingDate;
@@ -21,6 +25,8 @@ public class Bike {
     private float cost;
     private int status;
     private Date startTime;
+=======
+>>>>>>> e7aed2bc45babf3ae872d3757b63e690c187819f
     private String parkCode;
 
     public Bike() {
@@ -114,6 +120,7 @@ public class Bike {
         this.startTime = startTime;
     }
 
+<<<<<<< HEAD
     public void rentBike(){
         this.status = 1;
         this.startTime = new Date();
@@ -143,13 +150,26 @@ public class Bike {
     }
 
 
+=======
+    public String getParkCode() {
+        return parkCode;
+    }
+
+    public void setParkCode(String parkCode) {
+        this.parkCode = parkCode;
+    }
+
+>>>>>>> e7aed2bc45babf3ae872d3757b63e690c187819f
     public List<Bike> getAllBikes(){
         Type type = new TypeToken<List<Bike>>() {
         }.getType();
         Gson gson = new Gson();
         try {
             List<Bike> bikes = gson.fromJson(new FileReader("src/entities/data/bikes.json"), type);
+<<<<<<< HEAD
             System.out.println(bikes);
+=======
+>>>>>>> e7aed2bc45babf3ae872d3757b63e690c187819f
             return bikes;
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,7 +181,11 @@ public class Bike {
         Gson gson = new Gson();
         try {
             gson.toJson(bikes, new FileWriter("src/entities/data/bikes.json"));
+<<<<<<< HEAD
         } catch (IOException e) {
+=======
+        } catch (Exception e) {
+>>>>>>> e7aed2bc45babf3ae872d3757b63e690c187819f
             e.printStackTrace();
         }
     }
