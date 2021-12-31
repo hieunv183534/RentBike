@@ -51,14 +51,14 @@
                   <Label text="Mã xe:" />
                   <Label text="Loại xe:" GridPane.rowIndex="1" />
                   <Label text="Thờigian đã thuê:" GridPane.rowIndex="2" />
-                  <Label text="Tổng tiền thuê:" GridPane.rowIndex="3" />
-                  <Label text="wwwwwwwwwwwwwwwwwwwwww" GridPane.columnIndex="1" />
-                  <Label text="Đạp điện đơn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="1h20p" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="50.000đ" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Tiền đặt cọc" GridPane.rowIndex="3" />
+                  <Label text="Tổng tiền thuê:" GridPane.rowIndex="4" />
+                  <Label fx:id="labelBikeCode" text="ABCXYZ" GridPane.columnIndex="1" />
+                  <Label fx:id="labelBikeName" text="Đạp điện đơn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="labelRentTime" text="1h20p" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="labelDeposit" text="700000đ" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="labelRentCost" text="50.000đ" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <StackPane prefHeight="150.0" prefWidth="200.0" />
-                  <Label text="Tiền đặt cọc" GridPane.rowIndex="4" />
-                  <Label text="700000đ" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
             </children>

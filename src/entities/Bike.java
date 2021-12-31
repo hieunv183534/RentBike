@@ -21,6 +21,7 @@ public class Bike {
 	private String producer;
 	private float cost;
 	private Date startTime;
+	private int rentType = 0;
 
     public Bike() {
     }
@@ -157,5 +158,12 @@ public class Bike {
 	public void rentBike() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setRentType(int rentType) {
+		this.rentType = rentType;
+	}
+	public int getRentType() {
+		return this.rentType;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import controllers.PaymentController;
 import controllers.ReturnBikeController;
+import entities.Bike;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
@@ -134,9 +136,13 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 	
 	public void btnConfirmBikeCodeOnClick() {
 		String bikeCode = ((TextField) this.returnBikeInputBikeCodeScreenHandler.lookup("#inputBikeCode")).getText();
-		this.returnBikeController.calculateMoney();
 		if (this.returnBikeController.checkBikeCode(bikeCode)) {
 			this.insertContent(this.mainContentPane, this.returnBikeInfoScreenHandler);
+			Bike bike = this.returnBikeController.getCurrentBike();
+	        ((Label)this.returnBikeInfoScreenHandler.lookup("#labelBikeCode")).setText(bike.getBikeCode());
+	        ((Label)this.returnBikeInfoScreenHandler.lookup("#labelBikeName")).setText(bike.getName());
+	        ((Label)this.returnBikeInfoScreenHandler.lookup("#labelRentTime")).setText(String.valueOf(this.returnBikeController.getRentTime()) + "phút");
+	        ((Label)this.returnBikeInfoScreenHandler.lookup("#labelRentCost")).setText(String.valueOf(this.returnBikeController.getRentCost()) + "đ");
 		} else {
 			this.showErrorAlert("Lỗi", "Xe không được sử dụng hoặc không tồn tại !");
 		}
