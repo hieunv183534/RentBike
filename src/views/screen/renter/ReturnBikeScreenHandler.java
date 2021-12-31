@@ -134,6 +134,7 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 	
 	public void btnConfirmBikeCodeOnClick() {
 		String bikeCode = ((TextField) this.returnBikeInputBikeCodeScreenHandler.lookup("#inputBikeCode")).getText();
+		this.returnBikeController.calculateMoney();
 		if (this.returnBikeController.checkBikeCode(bikeCode)) {
 			this.insertContent(this.mainContentPane, this.returnBikeInfoScreenHandler);
 		} else {

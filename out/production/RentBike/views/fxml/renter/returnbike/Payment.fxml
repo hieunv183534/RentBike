@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="415.0" prefWidth="805.0" stylesheets="@../../style/common.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane layoutX="445.0" layoutY="15.0" prefHeight="385.0" prefWidth="319.0" style="-fx-border-color: green;">
+            <children>
+                <Label layoutX="122.0" layoutY="22.0" text="Tiến trình trả xe">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <ProgressBar layoutX="171.0" layoutY="146.0" prefWidth="174.0" progress="0.75" style="-fx-rotate: 90;" />
+                <VBox layoutX="41.0" layoutY="69.0" prefHeight="209.0" prefWidth="193.0" spacing="20.0">
+                    <children>
+                        <Label text="1. Chọn bãi xe" />
+                        <Label text="2. Nhập mã xe " />
+                        <Label text="3. Thông tin hóa đơn" />
+                        <Label text="4. Thanh toán" />
+                        <Label text="5. Thông tin giao dịch" />
+                    </children>
+                </VBox>
+                <Button layoutX="41.0" layoutY="322.0" mnemonicParsing="false" styleClass="primary-button" text="Hướng dẫn" />
+                <Button layoutX="208.0" layoutY="321.0" mnemonicParsing="false" prefWidth="80.0" styleClass="secondary-button" text="Hủy bỏ" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="385.0" prefWidth="396.0" style="-fx-border-color: green;">
+            <children>
+                <Label layoutX="125.0" layoutY="26.0" text="Thanh toán">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnPay" layoutX="132.0" layoutY="331.0" mnemonicParsing="false" prefWidth="132.0" styleClass="primary-button" text="Thanh toán" />
+            <GridPane layoutX="46.0" layoutY="82.0" prefHeight="220.0" prefWidth="308.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.33331298828125" minWidth="10.0" prefWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.33334350585938" minWidth="10.0" prefWidth="223.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="53.333343505859375" minHeight="10.0" prefHeight="51.333343505859375" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="80.66665649414062" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="53.0" minHeight="1.0" prefHeight="45.0" />
+                  <RowConstraints maxHeight="48.0" minHeight="0.0" prefHeight="37.0" />
+              </rowConstraints>
+               <children>
+                  <Label text="Số tiền:" />
+                  <Label text="Mã thẻ:" GridPane.rowIndex="1" />
+                  <Label text="DateExpired:" GridPane.rowIndex="4" />
+                  <Label fx:id="labelAmount" prefHeight="15.0" prefWidth="195.0" text="700.000đ" GridPane.columnIndex="1" />
+                  <TextField fx:id="inputCardCode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Chủ thẻ:" GridPane.rowIndex="2" />
+                  <Label text="Mã CVV:" GridPane.rowIndex="3" />
+                  <TextField fx:id="inputOwner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="inputCvvCode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="inputDateExpired" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
