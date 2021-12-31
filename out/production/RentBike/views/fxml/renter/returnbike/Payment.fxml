@@ -49,16 +49,14 @@
                   <RowConstraints maxHeight="48.0" minHeight="0.0" prefHeight="37.0" />
               </rowConstraints>
                <children>
-                  <Label text="Số tiền:" />
-                  <Label text="Mã thẻ:" GridPane.rowIndex="1" />
-                  <Label text="DateExpired:" GridPane.rowIndex="4" />
-                  <Label fx:id="labelAmount" prefHeight="15.0" prefWidth="195.0" text="700.000đ" GridPane.columnIndex="1" />
-                  <TextField fx:id="inputCardCode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Chủ thẻ:" GridPane.rowIndex="2" />
-                  <Label text="Mã CVV:" GridPane.rowIndex="3" />
-                  <TextField fx:id="inputOwner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="inputCvvCode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="inputDateExpired" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Mã thẻ:" GridPane.rowIndex="0" />
+                  <Label text="DateExpired:" GridPane.rowIndex="3" />
+                  <TextField fx:id="inputCardCode" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                  <Label text="Chủ thẻ:" GridPane.rowIndex="1" />
+                  <Label text="Mã CVV:" GridPane.rowIndex="2" />
+                  <TextField fx:id="inputOwner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="inputCvvCode" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="inputDateExpired" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             </children>
