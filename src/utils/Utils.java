@@ -8,6 +8,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 /**
@@ -35,5 +36,17 @@ public class Utils {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    Date date = new Date();
 	    return dateFormat.format(date);
+	}
+	/**
+	 * Return a {@ long Number} that different between to Date
+	 * @param {Date date1, Date date2}
+	 * @param timeUnit : seconds, milliseconds, minutes,... 
+	 * @author KhanhTV
+	 * @return the different number between two date.
+	 */
+	
+	public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+		long diffInMillies = date2.getTime() - date1.getTime();
+		return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
 	}
 }

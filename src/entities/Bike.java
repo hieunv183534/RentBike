@@ -14,14 +14,15 @@ public class Bike {
     private String bikeCode;
     private int type;
     private String parkCode;
-    private int status;
-    private float weight;
-    private String licensePlate;
-    private Date manuafacturingDate;
-    private String producer;
-    private float cost;
-    private Date startTime;
-    private int rentType = 0;
+	private int status;
+	private float weight;
+	private String licensePlate;
+	private Date manuafacturingDate;
+	private String producer;
+	private float cost;
+	private Date startTime;
+	private int rentType = 0;
+
 
     public Bike() {
     }
@@ -155,15 +156,11 @@ public class Bike {
                 '}';
     }
 
-    public void rentBike() {
-        // TODO Auto-generated method stub
-
-    }
-
-    public void setRentType(int rentType) {
-        this.rentType = rentType;
-    }
-    public int getRentType() {
-        return this.rentType;
-    }
+	public void setRentType(int rentType) {
+		this.rentType = rentType;
+	}
+	public int getRentType() {
+		return this.rentType;
+	}
 }
+
