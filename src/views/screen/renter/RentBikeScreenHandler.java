@@ -111,12 +111,20 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
         menuItemReturnBike.setTooltip(new Tooltip("Trả xe"));
 
         menuItemHome.setOnAction(e->{
-            getHomeScreen().show();
+            getHomeScreen().returnToHome();
+        });
+
+        menuItemReturnBike.setOnAction(e->{
+            getHomeScreen().goToReturnBike();
         });
     }
 
     public RentBikeController getBController(){
         return(RentBikeController) super.getBController();
+    }
+
+    public RenterHomeScreenHandler getHomeScreen(){
+        return(RenterHomeScreenHandler) super.getHomeScreen();
     }
 
     public void btnConfirmBikeCodeOnClick() {

@@ -94,6 +94,10 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
             ex.printStackTrace();
         }
     }
+
+    public void returnToHome(){
+        this.show();
+    }
     
     public void goToReturnBike() {
     	try {

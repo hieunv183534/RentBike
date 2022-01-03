@@ -1,7 +1,11 @@
 package controllers;
 
+import controllers.calculate.CalculateMoney1;
 import entities.Bike;
 import entities.BikePark;
+import entities.data.BikeDataController;
+import entities.data.BikeParkDataController;
+import exception.InvalidCalculateInputException;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -51,8 +55,8 @@ public class RentBikeController extends BaseController {
 
 
     public RentBikeController(RenterHomeController renterHomeController) {
-        bikeParks = new BikePark().getAllBikeParks();
-        bikes = new Bike().getAllBikes();
+        bikeParks = new BikeParkDataController().getAll();
+        bikes = new BikeDataController().getAll();
         this.homeController = renterHomeController;
         //   kscq2_group1_2021
         this.totalTime = new SimpleStringProperty();
@@ -124,8 +128,8 @@ public class RentBikeController extends BaseController {
     public void rent() {
         this.myBike.rentBike();
         this.park.rentBike(this.myBike.getType());
-        new Bike().saveBikes(this.bikes);
-        new BikePark().saveBikeParks(this.bikeParks);
+        new BikeDataController().save(this.bikes);
+        new BikeParkDataController().save(this.bikeParks);
 
         homeController.setMyBike(this.myBike);
 
@@ -147,7 +151,11 @@ public class RentBikeController extends BaseController {
                         Instant start = Instant.ofEpochMilli(myBike.getStartTime().getTime());
                         Duration timeElapsed = Duration.between(start, end);
                         totalTime.setValue(timeElapsed.getSeconds() + " phút");
-                        totalRent.setValue(calculateMoney((int) timeElapsed.getSeconds()) + " đồng");
+                        try {
+                            totalRent.setValue(calculateMoney( timeElapsed.getSeconds()) + " đồng");
+                        } catch (InvalidCalculateInputException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             }
@@ -161,19 +169,11 @@ public class RentBikeController extends BaseController {
      * @return
      * @author HieuNV
      */
-    public long calculateMoney(int numOfMinutes) {
-        int m, n;
+    public long calculateMoney(long numOfMinutes) throws InvalidCalculateInputException {
         if (this.myBike.getType() == 1) {
-            m = 10000;
-            n = 3000;
+            return new CalculateMoney1(10000,30,3000,15).calculateMoney(numOfMinutes);
         } else {
-            m = 15000;
-            n = 4500;
-        }
-        if (numOfMinutes <= 30) {
-            return m;
-        } else {
-            return ((numOfMinutes - 30) / 15) * n + m + n;
+            return new CalculateMoney1(15000,30,4500,15).calculateMoney(numOfMinutes);
         }
     }
 

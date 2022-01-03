@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import controllers.calculate.CalculateMoney1;
 import entities.Bike;
 import entities.BikePark;
+import entities.data.BikeDataController;
+import entities.data.BikeParkDataController;
+import exception.InvalidCalculateInputException;
 import utils.Utils;
 
 public class ReturnBikeController  extends BaseController {
@@ -40,8 +44,8 @@ public class ReturnBikeController  extends BaseController {
 	}
 	
 	public ReturnBikeController() {
-		this.listBikes = (new Bike()).getAllBikes();
-		this.listBikeParks = (new BikePark()).getAllBikeParks();
+		this.listBikes = new BikeDataController().getAll();
+		this.listBikeParks = new BikeParkDataController().getAll();
 	}
 	
 	public boolean checkBikeCode(String bikeCode) {
@@ -52,7 +56,11 @@ public class ReturnBikeController  extends BaseController {
 				   	Date date1 = new Date("Dec 31, 2021, 19:00:00");
 					Date date2 = new Date();
 					this.setRentTime(Utils.getDateDiff(date1, date2, TimeUnit.MINUTES));
-					this.calculatePostPaid(this.getRentTime(), 30000, 3000, 15);
+				   try {
+					   this.calculatePostPaid(this.getRentTime());
+				   } catch (InvalidCalculateInputException e) {
+					   e.printStackTrace();
+				   }
 				   return true;
 			   }
 			   return false;
@@ -84,13 +92,11 @@ public class ReturnBikeController  extends BaseController {
 	 * Calculate post rent cost
 	 */
 	
-	public void calculatePostPaid(long time, long baseCost, long progressiveCost, long progressiveTime) {
-		long progressive = Math.floorDiv(time, progressiveTime);
-		if (progressive <= 2) {
-			this.setRentCost(baseCost);
+	public long calculatePostPaid(long time) throws InvalidCalculateInputException {
+		if (this.currentBike.getType() == 1) {
+			return new CalculateMoney1(10000,30,3000,15).calculateMoney(time);
 		} else {
-			long _rentCost = baseCost + (progressive - 2) * progressiveCost;
-			this.setRentCost(_rentCost);
+			return new CalculateMoney1(15000,30,4500,15).calculateMoney(time);
 		}
 	}
 	/*

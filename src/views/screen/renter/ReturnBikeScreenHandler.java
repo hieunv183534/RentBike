@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 
-public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initializable { 
+public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initializable {
 	 @FXML
 	 private AnchorPane mainContentPane;
 
@@ -72,8 +72,16 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
         menuItemReturnBike.setTooltip(new Tooltip("Trả xe"));
 
         menuItemHome.setOnAction(e->{
-            getHomeScreen().show();
-        });		
+            getHomeScreen().returnToHome();
+        });
+
+		menuItemRentBike.setOnAction(e->{
+			getHomeScreen().goToRentBike();
+		});
+	}
+
+	public RenterHomeScreenHandler getHomeScreen(){
+		return(RenterHomeScreenHandler) super.getHomeScreen();
 	}
 	
 	public void showErrorAlert(String titleText, String contentText) {

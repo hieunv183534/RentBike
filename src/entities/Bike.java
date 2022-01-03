@@ -145,6 +145,12 @@ public class Bike {
         }
     }
 
+    public void rentBike() {
+        this.status = 1;
+        this.startTime = new Date();
+        this.parkCode = null;
+    }
+
     @Override
     public String toString() {
         return "Bike{" +

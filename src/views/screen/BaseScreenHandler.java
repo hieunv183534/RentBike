@@ -20,7 +20,7 @@ public class BaseScreenHandler extends FXMLScreenHandler{
     private BaseScreenHandler prev;
     protected final Stage stage;
     private BaseController bController;
-    private BaseScreenHandler homeScreen;
+    protected BaseScreenHandler homeScreen;
     private Alert alert;
 
     private BaseScreenHandler(String screenPath) throws IOException {
@@ -51,6 +51,7 @@ public class BaseScreenHandler extends FXMLScreenHandler{
             this.scene = new Scene(this.content);
         }
         this.stage.setScene(this.scene);
+        this.stage.centerOnScreen();
         this.stage.show();
     }
 

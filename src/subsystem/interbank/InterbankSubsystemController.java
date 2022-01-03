@@ -23,6 +23,7 @@ public class InterbankSubsystemController {
 		return ((MyMap) data).toJSON();
 	}
 
+
 	public PaymentTransaction pay(CreditCard card, int amount, String contents) {
 		Map<String, Object> transaction = new MyMap();
 
