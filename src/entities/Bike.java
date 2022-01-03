@@ -23,6 +23,7 @@ public class Bike {
 	private Date startTime;
 	private int rentType = 0;
 
+
     public Bike() {
     }
 
@@ -143,7 +144,7 @@ public class Bike {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public String toString() {
         return "Bike{" +
@@ -155,11 +156,6 @@ public class Bike {
                 '}';
     }
 
-	public void rentBike() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	public void setRentType(int rentType) {
 		this.rentType = rentType;
 	}
@@ -167,3 +163,4 @@ public class Bike {
 		return this.rentType;
 	}
 }
+

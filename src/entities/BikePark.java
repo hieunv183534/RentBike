@@ -93,30 +93,6 @@ public class BikePark {
         this.numOfEmptyDocks = numOfEmptyDocks;
     }
 
-    public List<BikePark> getAllBikeParks(){
-        Type type = new TypeToken<List<BikePark>>() {
-        }.getType();
-        Gson gson = new Gson();
-        try {
-            FileReader fileReader = new FileReader("src/entities/data/bikeparks.json");
-            List<BikePark> bikeParks = gson.fromJson(fileReader, type);
-            fileReader.close();
-            return bikeParks;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void save(List<BikePark> bikeParks){
-        Gson gson = new Gson();
-        try {
-            gson.toJson(bikeParks, new FileWriter("src/entities/data/bikeparks.json"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public String getCode() {
         return code;
     }

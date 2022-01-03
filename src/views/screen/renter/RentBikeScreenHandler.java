@@ -123,12 +123,8 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
         String bikeCode = ((TextField) this.inputBikeCodeContent.lookup("#inputBikeCode")).getText();
         switch (getBController().checkBikeCode(bikeCode)){
             case 0:
-                Alert alert = new Alert(Alert.AlertType.NONE);
-                alert.setTitle("Thông báo!");
-                alert.setContentText("Mã xe không tồn tại!");
                 ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-                alert.getButtonTypes().setAll(buttonTypeCancel);
-                alert.show();
+                showAlert(Alert.AlertType.NONE, "Thông báo!", "Mã xe không tồn tại!", buttonTypeCancel);
                 break;
             case 1:
                 Bike bike = getBController().getMyBike();
@@ -139,31 +135,25 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
                 this.insertContent(this.mainContentPane, this.bikeRentalInfoContent);
                 break;
             case 2:
-                Alert alert1 = new Alert(Alert.AlertType.NONE);
-                alert1.setTitle("Thông báo!");
-                alert1.setContentText("Xe này đã được thuê. Vui lòng chọn xe khác!");
-                ButtonType buttonTypeCancel1 = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-                alert1.getButtonTypes().setAll(buttonTypeCancel1);
-                alert1.show();
+                buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+                showAlert(Alert.AlertType.NONE, "Thông báo!", "Xe này đã được thuê. Vui lòng chọn xe khác!", buttonTypeCancel);
                 break;
         }
     }
 
     public void btnCancelOnClick(){
-        Alert alert= new Alert(Alert.AlertType.NONE);
-        alert.setContentText("Hủy bỏ?");
-        alert.setContentText("Bạn có muốn hủy bỏ việc thuê xe và trở về trang chủ?");
         ButtonType buttonTypeCancel = new ButtonType("Hủy", ButtonBar.ButtonData.CANCEL_CLOSE);
         ButtonType buttonTypeYes = new ButtonType("Đồng ý", ButtonBar.ButtonData.YES);
-        alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeCancel);
-        Optional<ButtonType> result = alert.showAndWait();
+        Optional<ButtonType> result = showAlert(Alert.AlertType.NONE, "Hủy bỏ?",
+                "Bạn có muốn hủy bỏ việc thuê xe và trở về trang chủ?",buttonTypeCancel,buttonTypeYes );
         if (result.get()== buttonTypeYes){
             getHomeScreen().show();
         }
     }
 
     public void btnGuideOnClick(){
-        System.out.println("Hướng dẫn sử dụng");
+        ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+        showAlert(Alert.AlertType.NONE, "Hướng dẫn", "Hãy đọc kỹ hướng dẫn trước khi dùng. OK",buttonTypeCancel );
     }
 
     public void btnConfirmDepositOnClick(){
@@ -172,13 +162,10 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
     }
 
     public void btnRentOtherOnClick(){
-        Alert alert= new Alert(Alert.AlertType.NONE);
-        alert.setContentText("Thuê xe khác?");
-        alert.setContentText("Bạn có muốn thuê xe khác?");
         ButtonType buttonTypeCancel = new ButtonType("Hủy", ButtonBar.ButtonData.CANCEL_CLOSE);
         ButtonType buttonTypeYes = new ButtonType("Đồng ý", ButtonBar.ButtonData.YES);
-        alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeCancel);
-        Optional<ButtonType> result = alert.showAndWait();
+        Optional<ButtonType> result = showAlert(Alert.AlertType.NONE,"Thuê xe khác?",
+                "Bạn có muốn thuê xe khác?",buttonTypeCancel, buttonTypeYes);
         if (result.get()== buttonTypeYes){
             this.insertContent(this.mainContentPane, this.inputBikeCodeContent);
         }
@@ -189,34 +176,29 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
         String owner = ((TextField)this.depositContent.lookup("#inputOwner")).getText();
         String cvvCode = ((TextField)this.depositContent.lookup("#inputCvvCode")).getText();
         String dateExpired = ((TextField)this.depositContent.lookup("#inputDateExpired")).getText();
-        PaymentController paymentController = new PaymentController();
-        Map<String, String> response = paymentController.pay(getBController().getDepositAmount(),
-                getBController().getDepositTransactionContent(),
-                cardCode, owner,dateExpired, cvvCode);
-        System.out.println(response);
 
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setTitle(response.get("RESULT"));
-        alert.setContentText(response.get("MESSAGE"));
-        ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(buttonTypeCancel);
-        alert.show();
+        if(cardCode.isEmpty() || owner.isEmpty() || cvvCode.isEmpty() || dateExpired .isEmpty()){
+            ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+            showAlert(Alert.AlertType.NONE, "Cảnh báo", "Hãy điền đầy đủ thông tin thanh toán trước!",buttonTypeCancel );
+        }else{
+            PaymentController paymentController = new PaymentController();
+            Map<String, String> response = paymentController.pay(getBController().getDepositAmount(),
+                    getBController().getDepositTransactionContent(),
+                    cardCode, owner,dateExpired, cvvCode);
+            System.out.println(response);
 
-        if(response.get("RESULT").equals("PAYMENT SUCCESSFUL!")){
-            getBController().rent();
-            this.insertContent(mainContentPane, this.useBikeProgressContent);
-            ((Label)this.useBikeProgressContent.lookup("#labelBikeCode")).setText(getBController().getMyBike().getBikeCode());
-            ((Label)this.useBikeProgressContent.lookup("#labelBikeName")).setText(getBController().getMyBike().getName());
-            ((Label)this.useBikeProgressContent.lookup("#labelRentedTime")).textProperty().bind(getBController().totalTimeProperty());
-            ((Label)this.useBikeProgressContent.lookup("#labelTotalRent")).textProperty().bind(getBController().totalRentProperty());
+            ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+            showAlert(Alert.AlertType.NONE, response.get("RESULT"),response.get("MESSAGE"), buttonTypeCancel );
+
+            if(response.get("RESULT").equals("PAYMENT SUCCESSFUL!")){
+                getBController().rent();
+                this.insertContent(mainContentPane, this.useBikeProgressContent);
+                ((Label)this.useBikeProgressContent.lookup("#labelBikeCode")).setText(getBController().getMyBike().getBikeCode());
+                ((Label)this.useBikeProgressContent.lookup("#labelBikeName")).setText(getBController().getMyBike().getName());
+                ((Label)this.useBikeProgressContent.lookup("#labelRentedTime")).textProperty().bind(getBController().totalTimeProperty());
+                ((Label)this.useBikeProgressContent.lookup("#labelTotalRent")).textProperty().bind(getBController().totalRentProperty());
+            }
+            System.out.println(paymentController.getSuccessPayment());
         }
-        System.out.println(paymentController.getSuccessPayment());
-
-//        ((RenterHomeController)getHomeScreen().getBController()).setBikes(getBController().getBikes());
-//        ((RenterHomeController)getHomeScreen().getBController()).setThisBike(getBController().getMyBike());
-//        // muốn lấy ds bike từ home
-//        ((RenterHomeController)getHomeScreen().getBController()).getBikes()
     }
-
-
 }

@@ -4,11 +4,14 @@ import controllers.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import views.screen.renter.RenterHomeScreenHandler;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class BaseScreenHandler extends FXMLScreenHandler{
     protected FXMLLoader loader;
@@ -18,6 +21,7 @@ public class BaseScreenHandler extends FXMLScreenHandler{
     protected final Stage stage;
     private BaseController bController;
     private BaseScreenHandler homeScreen;
+    private Alert alert;
 
     private BaseScreenHandler(String screenPath) throws IOException {
         super(screenPath);
@@ -83,5 +87,16 @@ public class BaseScreenHandler extends FXMLScreenHandler{
 
     public void setHomeScreen(BaseScreenHandler homeScreen) {
         this.homeScreen = homeScreen;
+    }
+
+    public Optional<ButtonType> showAlert(Alert.AlertType alertType, String title, String content,ButtonType... buttonTypes){
+        if(this.alert == null)
+            this.alert = new Alert(alertType);
+        else this.alert.setAlertType(alertType);
+        this.alert.setTitle(title);
+        this.alert.setContentText(content);
+        this.alert.getButtonTypes().setAll(buttonTypes);
+        Optional<ButtonType> result = this.alert.showAndWait();
+        return result;
     }
 }
