@@ -14,13 +14,14 @@ public class Bike {
     private String bikeCode;
     private int type;
     private String parkCode;
-	private int status;
-	private float weight;
-	private String licensePlate;
-	private Date manuafacturingDate;
-	private String producer;
-	private float cost;
-	private Date startTime;
+    private int status;
+    private float weight;
+    private String licensePlate;
+    private Date manuafacturingDate;
+    private String producer;
+    private float cost;
+    private Date startTime;
+    private int rentType = 0;
 
     public Bike() {
     }
@@ -113,35 +114,56 @@ public class Bike {
         this.startTime = startTime;
     }
 
-    public void rentBike() {
-        this.status = 1;
-        this.startTime = new Date();
-        this.parkCode = null;
+    public String getParkCode() {
+        return parkCode;
     }
 
-        public String getParkCode () {
-            return parkCode;
-        }
+    public void setParkCode(String parkCode) {
+        this.parkCode = parkCode;
+    }
 
-        public void setParkCode (String parkCode){
-            this.parkCode = parkCode;
+    public List<Bike> getAllBikes(){
+        Type type = new TypeToken<List<Bike>>() {
+        }.getType();
+        Gson gson = new Gson();
+        try {
+            List<Bike> bikes = gson.fromJson(new FileReader("src/entities/data/bikes.json"), type);
+            return bikes;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
+    }
+
+    public void save(List<Bike> bikes){
+        Gson gson = new Gson();
+        try {
+            gson.toJson(bikes, new FileWriter("src/entities/data/bikes.json"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public String toString() {
         return "Bike{" +
-                "name='" + name + '\'' +
+                " name='" + name + '\'' +
                 ", bikeCode='" + bikeCode + '\'' +
                 ", type=" + type +
-                ", parkCode='" + parkCode + '\'' +
                 ", status=" + status +
-                ", weight=" + weight +
-                ", licensePlate='" + licensePlate + '\'' +
-                ", manuafacturingDate=" + manuafacturingDate +
-                ", producer='" + producer + '\'' +
-                ", cost=" + cost +
-                ", startTime=" + startTime +
+                ", parkCode='" + parkCode + '\'' +
                 '}';
     }
-}
 
+    public void rentBike() {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void setRentType(int rentType) {
+        this.rentType = rentType;
+    }
+    public int getRentType() {
+        return this.rentType;
+    }
+}
