@@ -127,29 +127,21 @@ public class Bike {
             this.parkCode = parkCode;
         }
 
-        public List<Bike> getAllBikes () {
-            Type type = new TypeToken<List<Bike>>() {
-            }.getType();
-            Gson gson = new Gson();
-            try {
-                List<Bike> bikes = gson.fromJson(new FileReader("src/entities/data/bikes.json"), type);
-                return bikes;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        public void saveBikes (List<Bike> bikes) {
-            Gson gson = new Gson();
-            try {
-                FileWriter fileWriter = new FileWriter("src/entities/data/bikes.json");
-                gson.toJson(bikes, fileWriter);
-                fileWriter.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+    @Override
+    public String toString() {
+        return "Bike{" +
+                "name='" + name + '\'' +
+                ", bikeCode='" + bikeCode + '\'' +
+                ", type=" + type +
+                ", parkCode='" + parkCode + '\'' +
+                ", status=" + status +
+                ", weight=" + weight +
+                ", licensePlate='" + licensePlate + '\'' +
+                ", manuafacturingDate=" + manuafacturingDate +
+                ", producer='" + producer + '\'' +
+                ", cost=" + cost +
+                ", startTime=" + startTime +
+                '}';
     }
+}
 

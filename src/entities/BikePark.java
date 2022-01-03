@@ -101,32 +101,6 @@ public class BikePark {
         this.code = code;
     }
 
-    public List<BikePark> getAllBikeParks(){
-        Type type = new TypeToken<List<BikePark>>() {
-        }.getType();
-        Gson gson = new Gson();
-        try {
-            FileReader fileReader = new FileReader("src/entities/data/bikeparks.json");
-            List<BikePark> bikeParks = gson.fromJson(fileReader, type);
-            fileReader.close();
-            return bikeParks;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void saveBikeParks(List<BikePark> bikeParks){
-        Gson gson = new Gson();
-        try {
-            FileWriter fileWriter = new FileWriter("src/entities/data/bikeparks.json");
-            gson.toJson(bikeParks, fileWriter);
-            fileWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public String toString() {
         return "BikePark{" +
