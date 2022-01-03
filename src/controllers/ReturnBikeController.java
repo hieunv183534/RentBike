@@ -34,9 +34,10 @@ public class ReturnBikeController  extends BaseController {
 			if (bike.getBikeCode().equals(bikeCode)) {
 			   if (bike.getStatus() == 1) {
 				   this.getInvoice().setCurrentBike(bike);
-				   	Date date1 = new Date("Dec 31, 2021, 19:00:00");
+				   	Date date1 = new Date("Jan 3, 2021, 12:00:00");
 					Date date2 = new Date();
 					this.getInvoice().setRentTime(Utils.getDateDiff(date1, date2, TimeUnit.MINUTES));
+					this.setDepositOfInvoice(bike.getType());
 				   try {
 					   this.calculatePostPaid(this.getInvoice().getRentTime());
 				   } catch (InvalidCalculateInputException e) {
@@ -48,6 +49,25 @@ public class ReturnBikeController  extends BaseController {
 			}
 		}
 		return false;
+	}
+	
+	public void setDepositOfInvoice(int typeOfBike) {
+		switch (typeOfBike) {
+			case 1: {
+				this.getInvoice().setDeposit(400000);
+				break;
+			}
+			case 2: {
+				this.getInvoice().setDeposit(700000);
+				break;
+			}
+			case 3: {
+				this.getInvoice().setDeposit(550000);
+				break;
+			}
+			default: 
+				break;
+		}
 	}
 	
 	public boolean checkBikePark (String parkName) {

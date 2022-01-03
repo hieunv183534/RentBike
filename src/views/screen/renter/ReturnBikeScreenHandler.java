@@ -111,6 +111,7 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 		Invoice invoice = returnBikeController.getInvoice();
         ((Label)this.invoiceScreen.lookup("#labelBikeCode")).setText(invoice.getCurrentBike().getBikeCode());
         ((Label)this.invoiceScreen.lookup("#labelBikeName")).setText(invoice.getCurrentBike().getName());
+        ((Label)this.invoiceScreen.lookup("#labelDeposit")).setText(invoice.getDeposit() + "đ");
         ((Label)this.invoiceScreen.lookup("#labelRentTime")).setText(String.valueOf(invoice.getRentTime()) + "phút");
         ((Label)this.invoiceScreen.lookup("#labelRentCost")).setText(String.valueOf(invoice.getRentCost()) + "đ");
 	}

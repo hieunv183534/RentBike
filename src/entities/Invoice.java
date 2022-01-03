@@ -33,4 +33,11 @@ public class Invoice {
 		this.rentCost = rentCost;
 	}
 	
+	public void setDeposit(long deposit) {
+		this.deposit = deposit;
+	}
+	public long getDeposit() {
+		return this.deposit;
+	}
+	
 }
