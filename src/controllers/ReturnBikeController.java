@@ -29,7 +29,7 @@ public class ReturnBikeController  extends BaseController {
 		this.listBikeParks = new BikeParkDataController().getAll();
 	}
 	
-	public boolean checkBikeCode(String bikeCode) {
+	public boolean checkBikeCodeAvailable(String bikeCode) {
 		for(Bike bike : this.listBikes) {
 			if (bike.getBikeCode().equals(bikeCode)) {
 			   if (bike.getStatus() == 1) {
@@ -70,7 +70,7 @@ public class ReturnBikeController  extends BaseController {
 		}
 	}
 	
-	public boolean checkBikePark (String parkName) {
+	public boolean checkBikeParkAvailable (String parkName) {
 		for(BikePark bikePark : this.listBikeParks) {
 			if (bikePark.getName().toString() == parkName) {
 				if (bikePark.getNumOfEmptyDocks() > 0) {

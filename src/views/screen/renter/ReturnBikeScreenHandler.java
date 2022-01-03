@@ -48,6 +48,7 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 	 private AnchorPane paymentSucessScreen;
 	
 	 private ReturnBikeController returnBikeController = new ReturnBikeController();
+	 private PaymentController paymentController = new PaymentController();
 	 
 	 private ChoiceBox<String> choiceBoxBikePark;
 	 
@@ -139,7 +140,7 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 	}
 		
 	public void confirmBikePark(String value) {
-		if (this.returnBikeController.checkBikePark(value)) {
+		if (this.returnBikeController.checkBikeParkAvailable(value)) {
 			this.initialBikeCodeFormScreen();
 		} else {
 			ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -151,7 +152,7 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 	
 	public void confirmBikeCode() {
 		String bikeCode = ((TextField) this.bikeCodeFormScreen.lookup("#inputBikeCode")).getText();
-		if (this.returnBikeController.checkBikeCode(bikeCode)) {
+		if (this.returnBikeController.checkBikeCodeAvailable(bikeCode)) {
 			this.initialInvoiceScreen();
 		} else {
 			ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -171,9 +172,8 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
         
         if(cardCode.isEmpty() || owner.isEmpty() || cvvCode.isEmpty() || dateExpired .isEmpty()){
             ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-            showAlert(Alert.AlertType.NONE, "Cảnh báo", "Hãy điền đầy đủ thông tin thanh toán trước!",buttonTypeCancel );
+            this.showAlert(Alert.AlertType.NONE, "Cảnh báo", "Hãy điền đầy đủ thông tin thanh toán trước!",buttonTypeCancel );
         } else {
-        	PaymentController paymentController = new PaymentController();
             Map<String, String> response = paymentController.pay(10,"payment",
                     cardCode, owner,dateExpired, cvvCode);
             
