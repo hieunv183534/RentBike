@@ -159,6 +159,7 @@ public class Bike {
                 ", type=" + type +
                 ", status=" + status +
                 ", parkCode='" + parkCode + '\'' +
+                ", startTime='" + startTime + '\'' +
                 '}';
     }
 

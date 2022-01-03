@@ -23,8 +23,7 @@
                         <Label text="5. Thông tin giao dịch" />
                     </children>
                 </VBox>
-                <Button layoutX="41.0" layoutY="322.0" mnemonicParsing="false" styleClass="primary-button" text="Hướng dẫn" />
-                <Button layoutX="208.0" layoutY="321.0" mnemonicParsing="false" prefWidth="80.0" styleClass="secondary-button" text="Hủy bỏ" />
+                <Button fx:id="btnCancel" layoutX="137.0" layoutY="324.0" mnemonicParsing="false" prefWidth="80.0" styleClass="secondary-button" text="Hủy bỏ" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="385.0" prefWidth="396.0" style="-fx-border-color: green;">

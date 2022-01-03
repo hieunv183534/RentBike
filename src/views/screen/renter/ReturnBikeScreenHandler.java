@@ -3,12 +3,12 @@ package views.screen.renter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
-import java.util.Optional;
+
 import java.util.ResourceBundle;
 
 import controllers.PaymentController;
 import controllers.ReturnBikeController;
-import entities.Bike;
+import entities.Invoice;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 
-public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initializable {
+public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initializable { 
 	 @FXML
 	 private AnchorPane mainContentPane;
 
@@ -40,28 +40,25 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 
 	 @FXML
 	 private Button menuItemReturnBike;
-	 
-	 private Alert alert;
 
-	 private AnchorPane returnBikeInputBikeParkScreenHandler;
-	 private AnchorPane returnBikeInputBikeCodeScreenHandler;
-	 private AnchorPane returnBikeInfoScreenHandler;
-	 private AnchorPane paymentScreenHandler;
-	 private AnchorPane paymentSucessScreenHandler;
+	 private AnchorPane selectBikeParkScreen;
+	 private AnchorPane bikeCodeFormScreen;
+	 private AnchorPane invoiceScreen;
+	 private AnchorPane paymentFormScreen;
+	 private AnchorPane paymentSucessScreen;
 	
 	 private ReturnBikeController returnBikeController = new ReturnBikeController();
 	 
-	 private ChoiceBox choiceBoxBikePark = new ChoiceBox(FXCollections.observableArrayList(this.returnBikeController.getListNameBikeParks()));
+	 private ChoiceBox<String> choiceBoxBikePark;
 	 
 	public ReturnBikeScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
-		this.returnBikeInputBikeParkScreenHandler = this.loadContentPane(Configs.RETURNBIKE_INPUT_BIKEPARK_PATH);
-		this.returnBikeInputBikeCodeScreenHandler = this.loadContentPane(Configs.RETURNBIKE_INPUT_BIKECODE_PATH);
-		this.returnBikeInfoScreenHandler = this.loadContentPane(Configs.RETURNBIKE_INFO_PATH);
-		this.paymentScreenHandler = this.loadContentPane(Configs.RETURNBIKE_PAYMENT_PATH);
-		this.paymentSucessScreenHandler = this.loadContentPane(Configs.RETURNBIKE_PAYMENT_SUCCESS_PATH);
-		this.insertContent(this.mainContentPane, this.returnBikeInputBikeParkScreenHandler);
-		this.initEventForContents();
+		this.selectBikeParkScreen = this.loadContentPane(Configs.SELECT_BIKEPARK_SCREEN_PATH);
+		this.bikeCodeFormScreen = this.loadContentPane(Configs.BIKECODE_FORM_SCREEN_PATH);
+		this.invoiceScreen= this.loadContentPane(Configs.INVOICE_SCREEN_PATH);
+		this.paymentFormScreen = this.loadContentPane(Configs.PAYMENT_FORM_SCREEN_PATH);
+		this.paymentSucessScreen = this.loadContentPane(Configs.PAYMENT_SUCCESS_SCREEN_PATH);
+		this.initialSelectBikeParkScreen();
 	}
 
 	@Override
@@ -71,111 +68,123 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
         menuItemRentBike.setTooltip(new Tooltip("Thuê xe"));
         menuItemReturnBike.setTooltip(new Tooltip("Trả xe"));
 
-        menuItemHome.setOnAction(e->{
-            getHomeScreen().returnToHome();
+        menuItemRentBike.setOnAction(e -> {
+        	getHomeScreen().show();
         });
-
-		menuItemRentBike.setOnAction(e->{
-			getHomeScreen().goToRentBike();
-		});
-	}
-
-	public RenterHomeScreenHandler getHomeScreen(){
-		return(RenterHomeScreenHandler) super.getHomeScreen();
+        menuItemHome.setOnAction(e->{
+            getHomeScreen().show();
+        });		
 	}
 	
-	public void showErrorAlert(String titleText, String contentText) {
-		this.alert = new Alert(Alert.AlertType.NONE);
-		this.alert.setTitle(titleText);
-		this.alert.setContentText(contentText);
-		ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-        this.alert.getButtonTypes().setAll(buttonTypeCancel);
-        this.alert.initOwner(this.stage);
-        this.alert.show();
-	}
 	
-	public void initEventForContents() {
-		//initial event for screen input bike park
-		AnchorPane choiceBoxContainer = ((AnchorPane) this.returnBikeInputBikeParkScreenHandler.lookup("#choicebox-container"));
+	public void initialSelectBikeParkScreen() {
+		this.insertContent(this.mainContentPane, this.selectBikeParkScreen);
+		this.choiceBoxBikePark = new ChoiceBox(FXCollections.observableArrayList(this.returnBikeController.getListNameBikeParks()));
+		
+		AnchorPane choiceBoxContainer = ((AnchorPane) this.selectBikeParkScreen.lookup("#choicebox-container"));
 		choiceBoxContainer.getChildren().add(this.choiceBoxBikePark);
 		
-		this.returnBikeInputBikeParkScreenHandler.lookup("#btnConfirmBikePark").setOnMouseClicked(e -> {
-			btnConfirmBikeParkOnclick(this.choiceBoxBikePark.getValue().toString());
+		this.selectBikeParkScreen.lookup("#btnConfirmBikePark").setOnMouseClicked(e -> {
+			this.confirmBikePark(this.choiceBoxBikePark.getValue().toString());
 		});
-		
-		// initial event for screen input bike code
-        this.returnBikeInputBikeCodeScreenHandler.lookup("#btnConfirmBikeCode").setOnMouseClicked(e->{
-            btnConfirmBikeCodeOnClick();
+		this.selectBikeParkScreen.lookup("#btnCancel").setOnMouseClicked(e->{
+        	getHomeScreen().show();
+        });        
+	}
+	
+	public void initialBikeCodeFormScreen() {
+		this.insertContent(this.mainContentPane, this.bikeCodeFormScreen);
+		this.bikeCodeFormScreen.lookup("#btnConfirmBikeCode").setOnMouseClicked(e->{
+            this.confirmBikeCode();
         });
-        this.returnBikeInputBikeCodeScreenHandler.lookup("#btnCancel").setOnMouseClicked(e->{
-            //btnCancelOnClick();
-        });
-        this.returnBikeInputBikeCodeScreenHandler.lookup("#btnGuide").setOnMouseClicked(e->{
-            //btnGuideOnClick();
-        });
-        
-//        this.returnBikeCodeContent.getChildren().add(this.cb);
-        
- 
-        //initial event for information of rent bike screen
-        this.returnBikeInfoScreenHandler.lookup("#btnConfirmPayment").setOnMouseClicked(e->{
-        	btnConfirmPaymentOnclick();
-        });
-        //initial event for payment screen
-        this.paymentScreenHandler.lookup("#btnPay").setOnMouseClicked(e->{
-        	btnPaymentOnclick();
-        });
-        
-        //initial event payment success screen
-        this.paymentSucessScreenHandler.lookup("#btnHome").setOnMouseClicked(e->{
-        	btnHomeOnclick();
+        this.bikeCodeFormScreen.lookup("#btnCancel").setOnMouseClicked(e->{
+        	getHomeScreen().show();
         });
 	}
 	
-	public void btnConfirmBikeParkOnclick(String value) {
+	
+	public void initialInvoiceScreen() {
+		this.insertContent(this.mainContentPane, this.invoiceScreen);
+		this.invoiceScreen.lookup("#btnConfirmPayment").setOnMouseClicked(e->{
+        	this.confirmGotoPayment();
+        });
+		Invoice invoice = returnBikeController.getInvoice();
+        ((Label)this.invoiceScreen.lookup("#labelBikeCode")).setText(invoice.getCurrentBike().getBikeCode());
+        ((Label)this.invoiceScreen.lookup("#labelBikeName")).setText(invoice.getCurrentBike().getName());
+        ((Label)this.invoiceScreen.lookup("#labelRentTime")).setText(String.valueOf(invoice.getRentTime()) + "phút");
+        ((Label)this.invoiceScreen.lookup("#labelRentCost")).setText(String.valueOf(invoice.getRentCost()) + "đ");
+	}
+	
+	public void initialPaymentFormScreen() {
+		this.insertContent(this.mainContentPane, this.paymentFormScreen);
+		this.paymentFormScreen.lookup("#btnPay").setOnMouseClicked(e->{
+        	this.confirmPayment();
+        });
+        this.paymentFormScreen.lookup("#btnCancel").setOnMouseClicked(e->{
+        	getHomeScreen().show();
+        });
+	}
+	
+	public void initialPaymentSuccessScreen() {
+		this.insertContent(this.mainContentPane, this.paymentSucessScreen);
+		this.paymentSucessScreen.lookup("#btnHome").setOnMouseClicked(e->{
+        	this.gotoHome();
+        });
+		Invoice invoice = returnBikeController.getInvoice();
+        ((Label)this.paymentSucessScreen.lookup("#labelBikeCode")).setText(invoice.getCurrentBike().getBikeCode());
+        ((Label)this.paymentSucessScreen.lookup("#labelBikeName")).setText(invoice.getCurrentBike().getName());
+        ((Label)this.paymentSucessScreen.lookup("#labelRentTime")).setText(String.valueOf(invoice.getRentTime()) + "phút");
+        ((Label)this.paymentSucessScreen.lookup("#labelRentCost")).setText(String.valueOf(invoice.getRentCost()) + "đ");
+	}
+		
+	public void confirmBikePark(String value) {
 		if (this.returnBikeController.checkBikePark(value)) {
-			this.insertContent(this.mainContentPane, this.returnBikeInputBikeCodeScreenHandler);
+			this.initialBikeCodeFormScreen();
 		} else {
-			this.showErrorAlert("Lỗi", "Bãi xe đã đầy!");
+			ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+	        this.showAlert(Alert.AlertType.NONE, "Lỗi", "Bãi xe đã đầy!", buttonTypeCancel);
 		}
 		
 	}
 	
 	
-	public void btnConfirmBikeCodeOnClick() {
-		String bikeCode = ((TextField) this.returnBikeInputBikeCodeScreenHandler.lookup("#inputBikeCode")).getText();
+	public void confirmBikeCode() {
+		String bikeCode = ((TextField) this.bikeCodeFormScreen.lookup("#inputBikeCode")).getText();
 		if (this.returnBikeController.checkBikeCode(bikeCode)) {
-			this.insertContent(this.mainContentPane, this.returnBikeInfoScreenHandler);
-			Bike bike = this.returnBikeController.getCurrentBike();
-	        ((Label)this.returnBikeInfoScreenHandler.lookup("#labelBikeCode")).setText(bike.getBikeCode());
-	        ((Label)this.returnBikeInfoScreenHandler.lookup("#labelBikeName")).setText(bike.getName());
-	        ((Label)this.returnBikeInfoScreenHandler.lookup("#labelRentTime")).setText(String.valueOf(this.returnBikeController.getRentTime()) + "phút");
-	        ((Label)this.returnBikeInfoScreenHandler.lookup("#labelRentCost")).setText(String.valueOf(this.returnBikeController.getRentCost()) + "đ");
+			this.initialInvoiceScreen();
 		} else {
-			this.showErrorAlert("Lỗi", "Xe không được sử dụng hoặc không tồn tại !");
+			ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+	        this.showAlert(Alert.AlertType.NONE, "Lỗi", "Xe không được sử dụng hoặc không tồn tại !", buttonTypeCancel);
 		}
 		
 	}
-	public void btnConfirmPaymentOnclick() {
-		this.insertContent(this.mainContentPane, this.paymentScreenHandler);
+	public void confirmGotoPayment() {
+		this.initialPaymentFormScreen();
 	}
 	
-	public void btnPaymentOnclick() {
-		String cardCode = ((TextField)this.paymentScreenHandler.lookup("#inputCardCode")).getText();
-        String owner = ((TextField)this.paymentScreenHandler.lookup("#inputOwner")).getText();
-        String cvvCode = ((TextField)this.paymentScreenHandler.lookup("#inputCvvCode")).getText();
-        String dateExpired = ((TextField)this.paymentScreenHandler.lookup("#inputDateExpired")).getText();
-        PaymentController paymentController = new PaymentController();
-        Map<String, String> response = paymentController.pay(10,"payment",
-                cardCode, owner,dateExpired, cvvCode);
+	public void confirmPayment() {
+		String cardCode = ((TextField)this.paymentFormScreen.lookup("#inputCardCode")).getText();
+        String owner = ((TextField)this.paymentFormScreen.lookup("#inputOwner")).getText();
+        String cvvCode = ((TextField)this.paymentFormScreen.lookup("#inputCvvCode")).getText();
+        String dateExpired = ((TextField)this.paymentFormScreen.lookup("#inputDateExpired")).getText();
         
-        this.showErrorAlert(response.get("RESULT"), response.get("MESSAGE"));
-    
-        if(response.get("RESULT").equals("PAYMENT SUCCESSFUL!")){
-        	this.insertContent(this.mainContentPane, this.paymentSucessScreenHandler);
+        if(cardCode.isEmpty() || owner.isEmpty() || cvvCode.isEmpty() || dateExpired .isEmpty()){
+            ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+            showAlert(Alert.AlertType.NONE, "Cảnh báo", "Hãy điền đầy đủ thông tin thanh toán trước!",buttonTypeCancel );
+        } else {
+        	PaymentController paymentController = new PaymentController();
+            Map<String, String> response = paymentController.pay(10,"payment",
+                    cardCode, owner,dateExpired, cvvCode);
+            
+            ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
+            this.showAlert(Alert.AlertType.NONE, response.get("RESULT"),response.get("MESSAGE"), buttonTypeCancel);
+            if(response.get("RESULT").equals("PAYMENT SUCCESSFUL!")){
+            	this.initialPaymentSuccessScreen();
+            }
         }
+        
 	}
-	public void btnHomeOnclick() {
+	public void gotoHome() {
 		this.getHomeScreen().show();
 	}
 }

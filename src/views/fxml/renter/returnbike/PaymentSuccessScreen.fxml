@@ -34,8 +34,6 @@
                         <Label text="5. Thông tin giao dịch" />
                     </children>
                 </VBox>
-                <Button fx:id="btnGuide" layoutX="41.0" layoutY="322.0" mnemonicParsing="false" styleClass="primary-button" text="Hướng dẫn" />
-                <Button fx:id="btnCancel" layoutX="208.0" layoutY="321.0" mnemonicParsing="false" prefWidth="80.0" styleClass="secondary-button" text="Hủy bỏ" />
             <ImageView fitHeight="21.0" fitWidth="23.0" layoutX="246.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../assets/icon/checked.png" />
@@ -71,8 +69,8 @@
                   <Label text="Trạng thái giao dịch:" GridPane.rowIndex="4" />
                   <Label fx:id="labelBikeCode" text="wwwwwwwwwwwwwwwwwwwwww" GridPane.columnIndex="1" />
                   <Label fx:id="labelBikeName" text="Đạp điện đơn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="labelRentedTime" text="1h20p" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="labelTotalRent" text="50.000đ" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="labelRentTime" text="1h20p" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="labelRentCost" text="50.000đ" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Thành công" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>

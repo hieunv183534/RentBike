@@ -51,7 +51,6 @@ public class BaseScreenHandler extends FXMLScreenHandler{
             this.scene = new Scene(this.content);
         }
         this.stage.setScene(this.scene);
-        this.stage.centerOnScreen();
         this.stage.show();
     }
 
@@ -91,11 +90,10 @@ public class BaseScreenHandler extends FXMLScreenHandler{
     }
 
     public Optional<ButtonType> showAlert(Alert.AlertType alertType, String title, String content,ButtonType... buttonTypes){
-        if(this.alert == null)
-            this.alert = new Alert(alertType);
-        else this.alert.setAlertType(alertType);
+    	this.alert = new Alert(alertType);
         this.alert.setTitle(title);
         this.alert.setContentText(content);
+        this.alert.initOwner(this.stage);
         this.alert.getButtonTypes().setAll(buttonTypes);
         Optional<ButtonType> result = this.alert.showAndWait();
         return result;
