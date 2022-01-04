@@ -13,6 +13,7 @@ public class Invoice {
 	private long rentTime;
 	private long rentCost;
 	private long deposit;
+	private String bikePark;
 	
 	public Invoice(int typeOfRent) {
 		this.typeOfRent = typeOfRent;
@@ -22,6 +23,14 @@ public class Invoice {
 	}
 	public Invoice() {
 		this(0);
+	}
+	
+	public String getBikePark() {
+		return this.bikePark;
+	}
+	
+	public void setBikePark(String bikePark) {
+		this.bikePark = bikePark;
 	}
 	
 	public Bike getCurrentBike() {

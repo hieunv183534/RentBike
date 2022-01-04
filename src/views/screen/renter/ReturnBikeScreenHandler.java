@@ -180,6 +180,7 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
             ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
             this.showAlert(Alert.AlertType.NONE, response.get("RESULT"),response.get("MESSAGE"), buttonTypeCancel);
             if(response.get("RESULT").equals("PAYMENT SUCCESSFUL!")){
+            	this.returnBikeController.saveDataState();
             	boolean res = this.paymentController.refund(this.returnBikeController.getInvoice().getDeposit(),"refund deposit",
                     cardCode, owner,dateExpired, cvvCode);
             	this.initialPaymentSuccessScreen();

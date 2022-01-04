@@ -18,6 +18,8 @@ public class ReturnBikeController  extends BaseController {
 	
 	private List<BikePark> listBikeParks;
 	private List<Bike> listBikes;
+	private BikeDataController bikeDAO = new BikeDataController();
+	private BikeParkDataController bikeParkDAO = new BikeParkDataController();
 	private Invoice invoice = new Invoice();
 	
 	public Invoice getInvoice() {
@@ -25,8 +27,8 @@ public class ReturnBikeController  extends BaseController {
 	}
 	
 	public ReturnBikeController() {
-		this.listBikes = new BikeDataController().getAll();
-		this.listBikeParks = new BikeParkDataController().getAll();
+		this.listBikes = this.bikeDAO.getAll();
+		this.listBikeParks = this.bikeParkDAO.getAll();
 	}
 	
 	public boolean checkBikeCodeAvailable(String bikeCode) {
@@ -56,6 +58,7 @@ public class ReturnBikeController  extends BaseController {
 		for(BikePark bikePark : this.listBikeParks) {
 			if (bikePark.getName().toString() == parkName) {
 				if (bikePark.getNumOfEmptyDocks() > 0) {
+					this.getInvoice().setBikePark(bikePark.getName());
 					return true;
 				} else {
 					return false;
@@ -70,6 +73,26 @@ public class ReturnBikeController  extends BaseController {
 			listNameBikeParks.add(i.getName());
 		}
 		return listNameBikeParks;
+	}
+	
+	public void saveDataState() {
+		String currentBikeCode = this.getInvoice().getCurrentBike().getBikeCode();
+		for(int i = 0; i < this.listBikes.size(); i++) {
+			if (this.listBikes.get(i).getBikeCode().equals(currentBikeCode)) {
+				this.listBikes.get(i).setStatus(0);
+				break;
+			}
+		}
+		this.bikeDAO.save(this.listBikes);
+		String currentBikePark = this.getInvoice().getBikePark();
+		for(int i = 0; i < this.listBikeParks.size(); i++) {
+			if (this.listBikeParks.get(i).getName().equals(currentBikePark)) {
+				int numberOfEmptyDocks = this.listBikeParks.get(i).getNumOfEmptyDocks();
+				this.listBikeParks.get(i).setNumOfEmptyDocks(numberOfEmptyDocks - 1);
+				break;
+			}
+		}
+		this.bikeParkDAO.save(this.listBikeParks);
 	}
 
 }
