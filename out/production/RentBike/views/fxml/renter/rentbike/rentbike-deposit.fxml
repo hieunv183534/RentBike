@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="415.0" prefWidth="805.0" stylesheets="@../../../style/common.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane layoutX="445.0" layoutY="15.0" prefHeight="385.0" prefWidth="319.0" style="-fx-border-color: green;">
+            <children>
+                <Label layoutX="122.0" layoutY="22.0" text="Tiến trình thuê xe">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <ProgressBar layoutX="169.0" layoutY="155.0" prefWidth="174.0" progress="0.72" style="-fx-rotate: 90;" />
+                <VBox layoutX="41.0" layoutY="69.0" prefHeight="209.0" prefWidth="193.0" spacing="40.0">
+                    <children>
+                        <Label text="1. Nhập mã xe cần thuê" />
+                        <Label text="2. Thông tin chi tiết " />
+                        <Label text="3. Thanh toán đăt cọc " />
+                        <Label text="4. Thuê xe thành công" />
+                    </children>
+                </VBox>
+                <Button fx:id="btnGuide" layoutX="41.0" layoutY="322.0" mnemonicParsing="false" styleClass="primary-button" text="Hướng dẫn" />
+                <Button fx:id="btnCancel" layoutX="208.0" layoutY="321.0" mnemonicParsing="false" prefWidth="80.0" styleClass="secondary-button" text="Hủy bỏ" />
+            <ImageView fitHeight="21.0" fitWidth="23.0" layoutX="246.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../assets/icon/tick.png" />
+               </image>
+            </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="385.0" prefWidth="396.0" style="-fx-border-color: green;">
+            <children>
+                <Label layoutX="85.0" layoutY="26.0" text="Bước 3. Thanh toán đặt cọc">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnPay" layoutX="46.0" layoutY="328.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" styleClass="primary-button" text="Thanh toán" />
+                <Button fx:id="btnRentOther" layoutX="244.0" layoutY="327.0" mnemonicParsing="false" styleClass="secondary-button" text="Thuê xe khác" />
+            <GridPane layoutX="46.0" layoutY="82.0" prefHeight="209.0" prefWidth="313.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.33331298828125" minWidth="10.0" prefWidth="85.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.33334350585938" minWidth="10.0" prefWidth="228.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="53.333343505859375" minHeight="10.0" prefHeight="51.333343505859375" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="80.66665649414062" minHeight="10.0" prefHeight="58.666656494140625" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="62.66668701171875" minHeight="10.0" prefHeight="62.66668701171875" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="62.66668701171875" minHeight="10.0" prefHeight="62.66668701171875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="62.66668701171875" minHeight="10.0" prefHeight="62.66668701171875" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Số tiền:" />
+                  <Label text="Mã thẻ:" GridPane.rowIndex="1" />
+                  <Label text="DateExpired:" GridPane.rowIndex="4" />
+                  <Label fx:id="labelAmount" text="700.000đ" GridPane.columnIndex="1" />
+                  <TextField fx:id="inputCardCode" text="kscq2_group1_2021" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Chủ thẻ:" GridPane.rowIndex="2" />
+                  <Label text="Mã CVV:" GridPane.rowIndex="3" />
+                  <TextField fx:id="inputOwner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="inputCvvCode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="inputDateExpired" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

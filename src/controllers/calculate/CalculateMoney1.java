@@ -20,11 +20,15 @@ public class CalculateMoney1 implements CalculateMoneyInterface{
     }
 
     @Override
-    public long calculateMoney(long time) {
-        if(time <= baseTime){
-            return baseCost;
+    public long calculateMoney(long time) throws InvalidCalculateInputException {
+        if(time <=0){
+            throw new InvalidCalculateInputException();
         }else{
-            return baseCost + ((time - baseTime)/progressiveTime)*progressiveCost + progressiveCost;
+            if(time <= baseTime){
+                return baseCost;
+            }else{
+                return baseCost + ((time - baseTime)/progressiveTime)*progressiveCost + progressiveCost;
+            }
         }
     }
 }

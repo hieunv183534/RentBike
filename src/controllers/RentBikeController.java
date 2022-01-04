@@ -165,15 +165,15 @@ public class RentBikeController extends BaseController {
     /**
      * hàm tính số tiền thuê từ số phút đã thuê
      *
-     * @param numOfMinutes
+     * @param time
      * @return
      * @author HieuNV
      */
-    public long calculateMoney(long numOfMinutes) throws InvalidCalculateInputException {
+    public long calculateMoney(long time) throws InvalidCalculateInputException {
         if (this.myBike.getType() == 1) {
-            return new CalculateMoney1(10000,30,3000,15).calculateMoney(numOfMinutes);
+            return new CalculateMoney1(10000,30,3000,15).calculateMoney(time);
         } else {
-            return new CalculateMoney1(15000,30,4500,15).calculateMoney(numOfMinutes);
+            return new CalculateMoney1(15000,30,4500,15).calculateMoney(time);
         }
     }
 
