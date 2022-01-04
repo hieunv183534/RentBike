@@ -37,9 +37,9 @@ public class ReturnBikeController  extends BaseController {
 				   	Date date1 = new Date("Jan 4, 2022, 12:00:00");
 					Date date2 = new Date();
 					this.getInvoice().setRentTime(Utils.getDateDiff(date1, date2, TimeUnit.MINUTES));
-					this.setDepositOfInvoice(bike.getType());
+					this.getInvoice().setDepositOfInvoice(bike.getType());
 				   try {
-					   this.calculatePostPaid(this.getInvoice().getRentTime());
+					   this.getInvoice().calculateMoney(this.getInvoice().getRentTime());
 				   } catch (InvalidCalculateInputException e) {
 					   e.printStackTrace();
 				   }
@@ -51,24 +51,6 @@ public class ReturnBikeController  extends BaseController {
 		return false;
 	}
 	
-	public void setDepositOfInvoice(int typeOfBike) {
-		switch (typeOfBike) {
-			case 1: {
-				this.getInvoice().setDeposit(400000);
-				break;
-			}
-			case 2: {
-				this.getInvoice().setDeposit(700000);
-				break;
-			}
-			case 3: {
-				this.getInvoice().setDeposit(550000);
-				break;
-			}
-			default: 
-				break;
-		}
-	}
 	
 	public boolean checkBikeParkAvailable (String parkName) {
 		for(BikePark bikePark : this.listBikeParks) {
@@ -89,35 +71,5 @@ public class ReturnBikeController  extends BaseController {
 		}
 		return listNameBikeParks;
 	}
-	/*
-	 * Calculate post rent cost
-	 */
-	
-	public void calculatePostPaid(long time) throws InvalidCalculateInputException {
-		long rentCost = 0;
-		if (this.getInvoice().getCurrentBike().getType() == 1) {
-			rentCost = new CalculateMoney1(10000,30,3000,15).calculateMoney(time);
-			this.getInvoice().setRentCost(rentCost);
-		} else {
-			rentCost = new CalculateMoney1(15000,30,4500,15).calculateMoney(time);
-			this.getInvoice().setRentCost(rentCost);
-		}
-	}
-	/*
-	 * Calculate prepay rent cost
-	 */
-	public void calculatePrePaid(long time) {
-		if (time < 12 * 60) {
-			long earlyPayHours = Math.floorDiv(time, 60);
-			long earlyCost = 200000 - earlyPayHours*10000;
-			this.getInvoice().setRentCost(earlyCost);			
-		} else if (12 * 60 <= time && time <= 24 * 60) {
-			this.getInvoice().setRentCost(200000);
-		} else if (time > 24 * 60) {
-			long progressiveLatePayTime = Math.floorDiv(time - 24 * 60, 15);
-			long lateCost = 200000 + progressiveLatePayTime * 2000;
-			this.getInvoice().setRentCost(lateCost);
-		}
-		
-	}
+
 }

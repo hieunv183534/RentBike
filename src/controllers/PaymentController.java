@@ -96,10 +96,15 @@ public class PaymentController extends BaseController{
     }
     public boolean refund(long amount, String contents, String cardNumber, String cardHolderName,
             							String expirationDate, String securityCode) {
-    	System.out.print(amount);
-    	System.out.print(contents);
-    	System.out.print(cardNumber);
-    	System.out.print(cardHolderName);
+    	String result = "{" +
+                " cardNumber='" + cardNumber + '\'' +
+                ", cardHolderName='" + cardHolderName + '\'' +
+                ", expirationDate=" + expirationDate +
+                ", securityCode=" + securityCode +
+                ", content='" + contents + '\'' +
+                ", amount='" + amount + '\'' +
+                '}';
+    	System.out.print(result);
     	return true;
     }
 }
