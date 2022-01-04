@@ -41,7 +41,7 @@ public class ReturnBikeController  extends BaseController {
 					this.getInvoice().calculateRentTime(date1);
 					this.getInvoice().setDepositOfInvoice(bike.getType());
 				   try {
-					   this.getInvoice().calculateMoney(this.getInvoice().getRentTime());
+					   this.getInvoice().calculateCost(this.getInvoice().getRentTime());
 				   } catch (InvalidCalculateInputException e) {
 					   e.printStackTrace();
 				   }
