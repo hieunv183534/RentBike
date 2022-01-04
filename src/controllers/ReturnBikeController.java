@@ -34,9 +34,9 @@ public class ReturnBikeController  extends BaseController {
 			if (bike.getBikeCode().equals(bikeCode)) {
 			   if (bike.getStatus() == 1) {
 				   this.getInvoice().setCurrentBike(bike);
+				   this.getInvoice().setTypeOfRent(bike.getRentType());
 				   	Date date1 = new Date("Jan 4, 2022, 12:00:00");
-					Date date2 = new Date();
-					this.getInvoice().setRentTime(Utils.getDateDiff(date1, date2, TimeUnit.MINUTES));
+					this.getInvoice().calculateRentTime(date1);
 					this.getInvoice().setDepositOfInvoice(bike.getType());
 				   try {
 					   this.getInvoice().calculateMoney(this.getInvoice().getRentTime());

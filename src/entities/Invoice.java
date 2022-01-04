@@ -1,7 +1,11 @@
 package entities;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import controllers.calculate.CalculateMoney1;
 import exception.InvalidCalculateInputException;
+import utils.Utils;
 
 public class Invoice {
 	private Bike currentBike;
@@ -29,6 +33,9 @@ public class Invoice {
 	
 	public int getTypeOfRent() {
 		return this.typeOfRent;
+	}
+	public void setTypeOfRent(int type) {
+		this.typeOfRent = type;
 	}
 	
 	public long getRentTime() {
@@ -70,6 +77,12 @@ public class Invoice {
 			default: 
 				break;
 		}
+	}
+	
+	public void calculateRentTime(Date date) {
+		Date current = new Date();
+		long time = Utils.getDateDiff(date, current, TimeUnit.MINUTES);
+		this.setRentTime(time);
 	}
 	
 	/*
