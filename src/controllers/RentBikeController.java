@@ -3,8 +3,8 @@ package controllers;
 import controllers.calculate.CalculateMoney1;
 import entities.Bike;
 import entities.BikePark;
-import entities.data.BikeDataController;
-import entities.data.BikeParkDataController;
+import entities.data.BikeRepository;
+import entities.data.BikeParkRepository;
 import exception.InvalidCalculateInputException;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -51,8 +51,8 @@ public class RentBikeController extends BaseController {
     }
 
     public RentBikeController() {
-        bikeParks = new BikeParkDataController().getAll();
-        bikes = new BikeDataController().getAll();
+        bikeParks = new BikeParkRepository().getAll();
+        bikes = new BikeRepository().getAll();
         //   kscq2_group1_2021
         this.totalTime = new SimpleStringProperty();
         this.totalRent = new SimpleStringProperty();
@@ -123,8 +123,8 @@ public class RentBikeController extends BaseController {
     public void rent() {
         this.myBike.rentBike();
         this.park.rentBike(this.myBike.getType());
-        new BikeDataController().save(this.bikes);
-        new BikeParkDataController().save(this.bikeParks);
+        new BikeRepository().save(this.bikes);
+        new BikeParkRepository().save(this.bikeParks);
 
         if (this.myBike.getType() == 1) {
             this.totalRent.setValue("10000 đồng");
