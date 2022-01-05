@@ -26,5 +26,8 @@ public interface InterbankInterface {
 	 */
 	public abstract PaymentTransaction pay(CreditCard card, int amount, String contents)
 			throws PaymentException, UnrecognizedException;
+	
+	public abstract boolean refund(CreditCard card, long amount, String contents) 
+			throws PaymentException, UnrecognizedException;
 
 }

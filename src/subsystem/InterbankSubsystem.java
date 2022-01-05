@@ -32,4 +32,9 @@ public class InterbankSubsystem implements InterbankInterface {
 		PaymentTransaction transaction = ctrl.pay(card, amount, contents);
 		return transaction;
 	}
+	
+	public boolean refund(CreditCard card, long amount, String contents) {
+		boolean transaction = ctrl.refund(card, amount, contents);
+		return transaction;
+	}
 }

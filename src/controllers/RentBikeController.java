@@ -28,7 +28,7 @@ public class RentBikeController extends BaseController {
     private StringProperty totalRent;
 
     private List<BikePark> bikeParks;
-    private List<Bike> bikes;
+    private List<Bike> bikes;	
 
     public StringProperty totalTimeProperty() {
         return totalTime;

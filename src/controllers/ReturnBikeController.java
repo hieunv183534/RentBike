@@ -18,6 +18,8 @@ public class ReturnBikeController  extends BaseController {
 	
 	private List<BikePark> listBikeParks;
 	private List<Bike> listBikes;
+	private BikeDataController bikeDAO = new BikeDataController();
+	private BikeParkDataController bikeParkDAO = new BikeParkDataController();
 	private Invoice invoice = new Invoice();
 	
 	public Invoice getInvoice() {
@@ -25,8 +27,8 @@ public class ReturnBikeController  extends BaseController {
 	}
 	
 	public ReturnBikeController() {
-		this.listBikes = new BikeDataController().getAll();
-		this.listBikeParks = new BikeParkDataController().getAll();
+		this.listBikes = this.bikeDAO.getAll();
+		this.listBikeParks = this.bikeParkDAO.getAll();
 	}
 	
 	public boolean checkBikeCodeAvailable(String bikeCode) {
@@ -34,12 +36,12 @@ public class ReturnBikeController  extends BaseController {
 			if (bike.getBikeCode().equals(bikeCode)) {
 			   if (bike.getStatus() == 1) {
 				   this.getInvoice().setCurrentBike(bike);
-				   	Date date1 = new Date("Jan 3, 2021, 12:00:00");
-					Date date2 = new Date();
-					this.getInvoice().setRentTime(Utils.getDateDiff(date1, date2, TimeUnit.MINUTES));
-					this.setDepositOfInvoice(bike.getType());
+				   this.getInvoice().setTypeOfRent(bike.getRentType());
+				   	Date date1 = new Date("Jan 4, 2022, 12:00:00");
+					this.getInvoice().calculateRentTime(date1);
+					this.getInvoice().setDepositOfInvoice(bike.getType());
 				   try {
-					   this.calculatePostPaid(this.getInvoice().getRentTime());
+					   this.getInvoice().calculateCost(this.getInvoice().getRentTime());
 				   } catch (InvalidCalculateInputException e) {
 					   e.printStackTrace();
 				   }
@@ -51,29 +53,12 @@ public class ReturnBikeController  extends BaseController {
 		return false;
 	}
 	
-	public void setDepositOfInvoice(int typeOfBike) {
-		switch (typeOfBike) {
-			case 1: {
-				this.getInvoice().setDeposit(400000);
-				break;
-			}
-			case 2: {
-				this.getInvoice().setDeposit(700000);
-				break;
-			}
-			case 3: {
-				this.getInvoice().setDeposit(550000);
-				break;
-			}
-			default: 
-				break;
-		}
-	}
 	
 	public boolean checkBikeParkAvailable (String parkName) {
 		for(BikePark bikePark : this.listBikeParks) {
 			if (bikePark.getName().toString() == parkName) {
 				if (bikePark.getNumOfEmptyDocks() > 0) {
+					this.getInvoice().setBikePark(bikePark.getName());
 					return true;
 				} else {
 					return false;
@@ -89,35 +74,25 @@ public class ReturnBikeController  extends BaseController {
 		}
 		return listNameBikeParks;
 	}
-	/*
-	 * Calculate post rent cost
-	 */
 	
-	public void calculatePostPaid(long time) throws InvalidCalculateInputException {
-		long rentCost = 0;
-		if (this.getInvoice().getCurrentBike().getType() == 1) {
-			rentCost = new CalculateMoney1(10000,30,3000,15).calculateMoney(time);
-			this.getInvoice().setRentCost(rentCost);
-		} else {
-			rentCost = new CalculateMoney1(15000,30,4500,15).calculateMoney(time);
-			this.getInvoice().setRentCost(rentCost);
+	public void saveDataState() {
+		String currentBikeCode = this.getInvoice().getCurrentBike().getBikeCode();
+		for(int i = 0; i < this.listBikes.size(); i++) {
+			if (this.listBikes.get(i).getBikeCode().equals(currentBikeCode)) {
+				this.listBikes.get(i).setStatus(0);
+				break;
+			}
 		}
-	}
-	/*
-	 * Calculate prepay rent cost
-	 */
-	public void calculatePrePaid(long time) {
-		if (time < 12 * 60) {
-			long earlyPayHours = Math.floorDiv(time, 60);
-			long earlyCost = 200000 - earlyPayHours*10000;
-			this.getInvoice().setRentCost(earlyCost);			
-		} else if (12 * 60 <= time && time <= 24 * 60) {
-			this.getInvoice().setRentCost(200000);
-		} else if (time > 24 * 60) {
-			long progressiveLatePayTime = Math.floorDiv(time - 24 * 60, 15);
-			long lateCost = 200000 + progressiveLatePayTime * 2000;
-			this.getInvoice().setRentCost(lateCost);
+		this.bikeDAO.save(this.listBikes);
+		String currentBikePark = this.getInvoice().getBikePark();
+		for(int i = 0; i < this.listBikeParks.size(); i++) {
+			if (this.listBikeParks.get(i).getName().equals(currentBikePark)) {
+				int numberOfEmptyDocks = this.listBikeParks.get(i).getNumOfEmptyDocks();
+				this.listBikeParks.get(i).setNumOfEmptyDocks(numberOfEmptyDocks - 1);
+				break;
+			}
 		}
-		
+		this.bikeParkDAO.save(this.listBikeParks);
 	}
+
 }
