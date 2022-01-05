@@ -83,7 +83,7 @@ public class RenterHomeScreenHandler extends BaseScreenHandler implements Initia
             if(this.rentBikeScreen == null){
                 RentBikeScreenHandler rentBikeScreen = new RentBikeScreenHandler(this.stage, Configs.RENTBIKE_LAYOUT_SCREEN_PATH);
                 rentBikeScreen.setScreenTitle("Rent Bike Screen");
-                rentBikeScreen.setBController(new RentBikeController(this.getBController()));
+                rentBikeScreen.setBController(new RentBikeController());
                 rentBikeScreen.setHomeScreen(this);
                 this.rentBikeScreen = rentBikeScreen;
                 rentBikeScreen.show();

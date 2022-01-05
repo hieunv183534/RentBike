@@ -51,6 +51,7 @@ public class BaseScreenHandler extends FXMLScreenHandler{
             this.scene = new Scene(this.content);
         }
         this.stage.setScene(this.scene);
+        this.stage.centerOnScreen();
         this.stage.show();
     }
 
