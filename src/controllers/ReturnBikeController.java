@@ -3,23 +3,20 @@ package controllers;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import controllers.calculate.CalculateMoney1;
 import entities.Bike;
 import entities.BikePark;
 import entities.Invoice;
-import entities.data.BikeDataController;
-import entities.data.BikeParkDataController;
+import entities.data.BikeRepository;
+import entities.data.BikeParkRepository;
 import exception.InvalidCalculateInputException;
-import utils.Utils;
 
 public class ReturnBikeController  extends BaseController {
 	
 	private List<BikePark> listBikeParks;
 	private List<Bike> listBikes;
-	private BikeDataController bikeDAO = new BikeDataController();
-	private BikeParkDataController bikeParkDAO = new BikeParkDataController();
+	private BikeRepository bikeDAO = new BikeRepository();
+	private BikeParkRepository bikeParkDAO = new BikeParkRepository();
 	private Invoice invoice = new Invoice();
 	
 	public Invoice getInvoice() {
@@ -41,7 +38,7 @@ public class ReturnBikeController  extends BaseController {
 					this.getInvoice().calculateRentTime(date1);
 					this.getInvoice().setDepositOfInvoice(bike.getType());
 				   try {
-					   this.getInvoice().calculateMoney(this.getInvoice().getRentTime());
+					   this.getInvoice().calculateCost(this.getInvoice().getRentTime());
 				   } catch (InvalidCalculateInputException e) {
 					   e.printStackTrace();
 				   }

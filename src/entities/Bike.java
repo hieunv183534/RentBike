@@ -123,33 +123,6 @@ public class Bike {
         this.parkCode = parkCode;
     }
 
-    public List<Bike> getAllBikes(){
-        Type type = new TypeToken<List<Bike>>() {
-        }.getType();
-        Gson gson = new Gson();
-        try {
-            List<Bike> bikes = gson.fromJson(new FileReader("src/entities/data/bikes.json"), type);
-            return bikes;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void save(List<Bike> bikes){
-        Gson gson = new Gson();
-        try {
-            gson.toJson(bikes, new FileWriter("src/entities/data/bikes.json"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void rentBike() {
-        this.status = 1;
-        this.startTime = new Date();
-        this.parkCode = null;
-    }
 
     @Override
     public String toString() {
@@ -169,5 +142,11 @@ public class Bike {
 	public int getRentType() {
 		return this.rentType;
 	}
+
+    public void rentBike(){
+        this.startTime = new Date();
+        this.parkCode = null;
+        this.status = 1;
+    }
 }
 

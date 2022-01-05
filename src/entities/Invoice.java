@@ -130,7 +130,7 @@ public class Invoice {
 	 * 
 	 */
 	
-	public void calculateMoney(long time) throws InvalidCalculateInputException {
+	public void calculateCost(long time) throws InvalidCalculateInputException {
 		if (this.getTypeOfRent() == 0) {
 			this.calculatePostPaid(time);
 		} else {

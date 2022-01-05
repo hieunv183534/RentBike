@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class BikeParkDataController implements DataControllerInterface<BikePark>{
+public class BikeParkRepository implements RepositoryInterface<BikePark> {
     @Override
     public List<BikePark> getAll() {
         Type type = new TypeToken<List<BikePark>>() {

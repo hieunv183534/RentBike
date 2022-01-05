@@ -3,12 +3,10 @@ package controllers;
 import controllers.calculate.CalculateMoney1;
 import entities.Bike;
 import entities.BikePark;
-import entities.data.BikeDataController;
-import entities.data.BikeParkDataController;
+import entities.data.BikeRepository;
+import entities.data.BikeParkRepository;
 import exception.InvalidCalculateInputException;
 import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -25,7 +23,6 @@ public class RentBikeController extends BaseController {
     private BikePark park;
     private int DepositAmount;
     private String DepositTransactionContent;
-    private RenterHomeController homeController;
 
     private StringProperty totalTime;
     private StringProperty totalRent;
@@ -53,11 +50,9 @@ public class RentBikeController extends BaseController {
         return DepositTransactionContent;
     }
 
-
-    public RentBikeController(RenterHomeController renterHomeController) {
-        bikeParks = new BikeParkDataController().getAll();
-        bikes = new BikeDataController().getAll();
-        this.homeController = renterHomeController;
+    public RentBikeController() {
+        bikeParks = new BikeParkRepository().getAll();
+        bikes = new BikeRepository().getAll();
         //   kscq2_group1_2021
         this.totalTime = new SimpleStringProperty();
         this.totalRent = new SimpleStringProperty();
@@ -128,10 +123,8 @@ public class RentBikeController extends BaseController {
     public void rent() {
         this.myBike.rentBike();
         this.park.rentBike(this.myBike.getType());
-        new BikeDataController().save(this.bikes);
-        new BikeParkDataController().save(this.bikeParks);
-
-        homeController.setMyBike(this.myBike);
+        new BikeRepository().save(this.bikes);
+        new BikeParkRepository().save(this.bikeParks);
 
         if (this.myBike.getType() == 1) {
             this.totalRent.setValue("10000 đồng");
