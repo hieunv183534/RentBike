@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="415.0" prefWidth="805.0" stylesheets="@../../../style/common.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane layoutX="445.0" layoutY="15.0" prefHeight="385.0" prefWidth="319.0" style="-fx-border-color: green;">
+            <children>
+                <Label layoutX="122.0" layoutY="22.0" text="Tiến trình trả xe">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <ProgressBar layoutX="171.0" layoutY="146.0" prefWidth="174.0" progress="0.25" style="-fx-rotate: 90;" />
+                <VBox layoutX="41.0" layoutY="69.0" prefHeight="209.0" prefWidth="193.0" spacing="20.0">
+                    <children>
+                        <Label text="1. Chọn bãi xe" />
+                        <Label text="2. Nhập mã xe " />
+                        <Label text="3. Thông tin hóa đơn" />
+                        <Label text="4. Thanh toán" />
+                        <Label text="5. Thông tin giao dịch" />
+                    </children>
+                </VBox>
+                <Button fx:id="btnCancel" layoutX="137.0" layoutY="324.0" mnemonicParsing="false" prefWidth="80.0" styleClass="secondary-button" text="Hủy bỏ" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="385.0" prefWidth="396.0" style="-fx-border-color: green;">
+            <children>
+                <Label layoutX="128.0" layoutY="27.0" text="Nhập mã xe cần trả">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label layoutX="43.0" layoutY="149.0" text="Mã xe được in trên khóa của chiếc xe bạn muốn trả">
+                    <font>
+                        <Font name="System Italic" size="12.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="inputBikeCode" layoutX="33.0" layoutY="180.0" prefWidth="334.0" />
+                <Button fx:id="btnConfirmBikeCode" layoutX="160.0" layoutY="328.0" mnemonicParsing="false" styleClass="primary-button" text="Xác nhận" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
