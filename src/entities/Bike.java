@@ -142,5 +142,11 @@ public class Bike {
 	public int getRentType() {
 		return this.rentType;
 	}
+
+    public void rentBike(){
+        this.startTime = new Date();
+        this.parkCode = null;
+        this.status = 1;
+    }
 }
 
