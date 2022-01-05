@@ -52,7 +52,6 @@ public class BikeParkManageScreenHandler extends BaseScreenHandler implements In
             List<BikePark> bikeParks = getBController().getAllBikeParks();
             this.bikeParkObjects = bikeParks;
             this.bikeParks = new ArrayList();
-
             for (BikePark item : bikeParks) {
                 BikeParkInGridHandler bikeParkInGridHandler = new BikeParkInGridHandler(Configs.BIKE_PARK_IN_GRID, item, this);
                 this.bikeParks.add(bikeParkInGridHandler);
@@ -62,13 +61,7 @@ public class BikeParkManageScreenHandler extends BaseScreenHandler implements In
         }
         addBikeParksToGrid(this.bikeParks);
         btnAddBikePark.setOnMouseClicked(e -> {
-            try{
-                BikeParkInfoScreenHandler bikeParkInfoScreenHandler = new BikeParkInfoScreenHandler(this.stage, Configs.BIKE_PARK_INFO,
-                        null, bikeParkObjects, "add");
-                bikeParkInfoScreenHandler.show();
-            } catch (Exception exception){
-                exception.printStackTrace();
-            }
+            btnAddBikeParkOnClick();
         });
     }
     public void addBikeParksToGrid(List list){
@@ -104,5 +97,14 @@ public class BikeParkManageScreenHandler extends BaseScreenHandler implements In
         gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
         gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
         gridPane.setMaxHeight(Region.USE_PREF_SIZE);
+    }
+
+    private void btnAddBikeParkOnClick(){
+        try{
+            BikeParkInfoScreenHandler bikeParkInfoScreenHandler = new BikeParkInfoScreenHandler(this.stage, Configs.BIKE_PARK_INFO, null, bikeParkObjects, "add");
+            bikeParkInfoScreenHandler.show();
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
     }
 }

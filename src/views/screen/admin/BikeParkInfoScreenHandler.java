@@ -1,6 +1,8 @@
 package views.screen.admin;
 
-import com.google.gson.Gson;
+import controllers.BaseController;
+import controllers.BikeParkController;
+import entities.Bike;
 import entities.BikePark;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -8,7 +10,6 @@ import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -41,25 +42,26 @@ public class BikeParkInfoScreenHandler extends BaseScreenHandler {
     @FXML
     private Button btnDeleteBikePark;
 
-    private BikePark bikePark;
+    private String method;
 
-    private List<BikePark> bikeParks;
+    public BikeParkController getBController(){
+        return (BikeParkController) super.getBController();
+    }
 
-    public BikeParkInfoScreenHandler(Stage stage,String screenPath, BikePark bikePark , List<BikePark> bikeParks, String method) throws IOException {
+    public BikeParkInfoScreenHandler(Stage stage, String screenPath, BikePark bikePark, List<BikePark> bikeParks, String method) throws IOException {
         super(stage,screenPath);
-        this.bikePark = bikePark;
-        this.bikeParks = bikeParks;
-        if (method == "edit") {
-            int index = bikeParks.indexOf(bikePark);
-            editHandler(index);
-        } else if (method == "add"){
-            addHandler();
-        } else {
-            infoHandler();
-        }
+        this.method = method;
+        setBController(new BikeParkController());
         btnDeleteBikePark.setOnMouseClicked(event -> {
-            deleteBikePark();
+            deleteBikePark(bikeParks,bikePark);
         });
+        if (method == "edit") {
+            editSaveHandler(bikeParks,bikePark);
+        } else if (method == "add"){
+            addSaveHandler(bikeParks);
+        } else {
+            infoHandler(bikePark);
+        }
         btnCancel.setOnMouseClicked(event -> {
             try {
                 BikeParkManageScreenHandler bikeParkManageScreenHandler = new BikeParkManageScreenHandler(stage, Configs.ADMIN_SCREEN_PATH);
@@ -77,7 +79,7 @@ public class BikeParkInfoScreenHandler extends BaseScreenHandler {
         textBikes.setEditable(b);
         textEmptyDocks.setEditable(b);
     }
-    private void setInfo(){
+    private void setInfo(BikePark bikePark){
         codeBikePark.setText(bikePark.getCode());
         textAddress.setText(bikePark.getAddress());
         textName.setText(bikePark.getName());
@@ -86,59 +88,19 @@ public class BikeParkInfoScreenHandler extends BaseScreenHandler {
         textEmptyDocks.setText(String.valueOf(bikePark.getNumOfEmptyDocks()));
     }
 
-    private void saveBikeParks(){
-        Gson gson = new Gson();
-        try {
-            FileWriter fileWriter = new FileWriter("src/entities/data/bikeparks.json");
-            gson.toJson(bikeParks, fileWriter);
-            fileWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void updateInfoBikePark(int index){
-        bikeParks.get(index).setAddress(textAddress.getText());
-        bikeParks.get(index).setName(textName.getText());
-        bikeParks.get(index).setNumOfEBikes(Integer.parseInt(textEbikes.getText()));
-        bikeParks.get(index).setNumOfBikes(Integer.parseInt(textBikes.getText()));
-        bikeParks.get(index).setNumOfEmptyDocks(Integer.parseInt(textEmptyDocks.getText()));
-    }
-
-    private void addBikePark(String newCode){
-        BikePark bikePark = new BikePark();
-        bikePark.setCode(newCode);
-        bikePark.setName(textName.getText());
-        bikePark.setNumOfBikes(Integer.parseInt(textEbikes.getText()));
-        bikePark.setAddress(textAddress.getText());
-        bikePark.setNumOfEBikes(Integer.parseInt(textEbikes.getText()));
-        bikePark.setNumOfEmptyDocks(Integer.parseInt(textEmptyDocks.getText()));
-        bikeParks.add(bikePark);
-        saveBikeParks();
-    }
-
     private void showPopup(String title, String content){
         ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
         showAlert(Alert.AlertType.NONE, title, content,buttonTypeCancel );
     }
 
-    private boolean validateNewBike(String newCode){
-        BikePark bk = bikeParks.stream().filter(t -> t.getCode().equals(newCode)).findFirst().orElse(null);
-        if (bk != null){
-            showPopup("Fail","Bãi xe code " + newCode + " đã tồn tại");
-            return false;
-        }
-        return true;
-    }
-
-    private void editHandler(int index){
-        setInfo();
+    private void editSaveHandler(List<BikePark> bikeParks,BikePark bikePark){
+        setInfo(bikePark);
         setEditable(true);
         codeBikePark.setEditable(false);
         btnAddBikePark.setText("Lưu");
         btnAddBikePark.setOnMouseClicked(e -> {
-            updateInfoBikePark(index);
-            saveBikeParks();
+            getBController().editBikePark(bikeParks, bikePark, textAddress.getText(), textName.getText(), Integer.parseInt(textEbikes.getText()),
+                    Integer.parseInt(textBikes.getText()), Integer.parseInt(textEmptyDocks.getText()));
             try {
                 BikeParkManageScreenHandler bikeParkManageScreenHandler = new BikeParkManageScreenHandler(stage, Configs.ADMIN_SCREEN_PATH);
                 bikeParkManageScreenHandler.show();
@@ -149,7 +111,7 @@ public class BikeParkInfoScreenHandler extends BaseScreenHandler {
         });
     }
 
-    private void addHandler(){
+    private void addSaveHandler(List<BikePark> bikeParks){
         setEditable(true);
         codeBikePark.setEditable(true);
         btnAddBikePark.setText("Thêm bãi xe");
@@ -157,8 +119,12 @@ public class BikeParkInfoScreenHandler extends BaseScreenHandler {
         btnAddBikePark.setOnMouseClicked(e -> {
             try{
                 String newCode = codeBikePark.getText();
-                if (!validateNewBike(newCode)) return;
-                addBikePark(newCode);
+                if (!getBController().validateNewCode(bikeParks,newCode)){
+                    showPopup("Fail","Bãi xe code " + newCode + " đã tồn tại");
+                    return;
+                }
+                getBController().addBikePark(bikeParks,newCode,textAddress.getText(), textName.getText(), Integer.parseInt(textEbikes.getText()),
+                        Integer.parseInt(textBikes.getText()), Integer.parseInt(textEmptyDocks.getText()));
                 BikeParkManageScreenHandler bikeParkManageScreenHandler = new BikeParkManageScreenHandler(stage, Configs.ADMIN_SCREEN_PATH);
                 bikeParkManageScreenHandler.show();
                 showPopup("Success","Bãi xe đã được thêm");
@@ -168,21 +134,24 @@ public class BikeParkInfoScreenHandler extends BaseScreenHandler {
         });
     }
 
-    private void infoHandler(){
-        setInfo();
+    private void infoHandler(BikePark bikePark){
+        setInfo(bikePark);
         setEditable(false);
         codeBikePark.setEditable(false);
         btnAddBikePark.setVisible(false);
     }
 
-    private void deleteBikePark(){
-        bikeParks.remove(bikePark);
-        saveBikeParks();
-        try {
-            BikeParkManageScreenHandler bikeParkManageScreenHandler = new BikeParkManageScreenHandler(stage, Configs.ADMIN_SCREEN_PATH);
+    private void deleteBikePark(List<BikePark> bikeParks,BikePark bikePark){
+        if (getBController().deleteBikePark(bikeParks,bikePark)) {
+            BikeParkManageScreenHandler bikeParkManageScreenHandler = null;
+            try {
+                bikeParkManageScreenHandler = new BikeParkManageScreenHandler(stage, Configs.ADMIN_SCREEN_PATH);
+            } catch (IOException e) {
+                showPopup("Fail", "Unknown error");
+            }
             bikeParkManageScreenHandler.show();
             showPopup("Success", "Bãi xe đã được xóa");
-        } catch (Exception exception){
+        } else {
             showPopup("Fail", "Unknown error");
         }
     }

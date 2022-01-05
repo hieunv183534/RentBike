@@ -1,5 +1,6 @@
 package views.screen.admin;
 
+import controllers.BikeParkController;
 import entities.BikePark;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,8 +40,8 @@ public class BikeParkInGridHandler extends FXMLScreenHandler {
         this.bikeParkManageScreenHandler = bikeParkManageScreenHandler;
         infoBikePark.setOnMouseClicked(e -> {
             try{
-                BikeParkInfoScreenHandler bikeParkInfoScreenHandler = new BikeParkInfoScreenHandler(this.bikeParkManageScreenHandler.getStage(), Configs.BIKE_PARK_INFO,
-                        bikePark, bikeParkManageScreenHandler.getBikeParkObjects(), "info");
+                BikeParkInfoScreenHandler bikeParkInfoScreenHandler = new BikeParkInfoScreenHandler(this.bikeParkManageScreenHandler.getStage(),
+                        Configs.BIKE_PARK_INFO, bikePark, bikeParkManageScreenHandler.getBikeParkObjects(), "info");
                 bikeParkInfoScreenHandler.show();
             } catch (Exception exception){
                 exception.printStackTrace();
@@ -48,10 +49,9 @@ public class BikeParkInGridHandler extends FXMLScreenHandler {
         });
         editBikePark.setOnMouseClicked(e -> {
             try{
-                BikeParkInfoScreenHandler bikeParkInfoScreenHandler = new BikeParkInfoScreenHandler(this.bikeParkManageScreenHandler.getStage(), Configs.BIKE_PARK_INFO,
-                        bikePark, bikeParkManageScreenHandler.getBikeParkObjects(), "edit");
+                BikeParkInfoScreenHandler bikeParkInfoScreenHandler = new BikeParkInfoScreenHandler(this.bikeParkManageScreenHandler.getStage(),
+                        Configs.BIKE_PARK_INFO, bikePark, bikeParkManageScreenHandler.getBikeParkObjects(),"edit");
                 bikeParkInfoScreenHandler.show();
-
             } catch (Exception exception){
                 exception.printStackTrace();
             }
