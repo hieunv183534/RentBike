@@ -99,8 +99,13 @@ public class BikeParkInfoScreenHandler extends BaseScreenHandler {
         codeBikePark.setEditable(false);
         btnAddBikePark.setText("Lưu");
         btnAddBikePark.setOnMouseClicked(e -> {
-            getBController().editBikePark(bikeParks, bikePark, textAddress.getText(), textName.getText(), Integer.parseInt(textEbikes.getText()),
-                    Integer.parseInt(textBikes.getText()), Integer.parseInt(textEmptyDocks.getText()));
+            if (!getBController().validateInfoBikePark(textEbikes.getText(),
+                    textBikes.getText(), textEmptyDocks.getText())){
+                showPopup("Fail","Thông tin nhập vào không hợp lệ");
+                return;
+            }
+            getBController().editBikePark(bikeParks, bikePark, textAddress.getText(), textName.getText(), textEbikes.getText(),
+                    textBikes.getText(), textEmptyDocks.getText());
             try {
                 BikeParkManageScreenHandler bikeParkManageScreenHandler = new BikeParkManageScreenHandler(stage, Configs.ADMIN_SCREEN_PATH);
                 bikeParkManageScreenHandler.show();
@@ -123,8 +128,13 @@ public class BikeParkInfoScreenHandler extends BaseScreenHandler {
                     showPopup("Fail","Bãi xe code " + newCode + " đã tồn tại");
                     return;
                 }
-                getBController().addBikePark(bikeParks,newCode,textAddress.getText(), textName.getText(), Integer.parseInt(textEbikes.getText()),
-                        Integer.parseInt(textBikes.getText()), Integer.parseInt(textEmptyDocks.getText()));
+                if (!getBController().validateInfoBikePark(textEbikes.getText(),
+                        textBikes.getText(), textEmptyDocks.getText())){
+                    showPopup("Fail","Thông tin nhập vào không hợp lệ");
+                    return;
+                }
+                getBController().addBikePark(bikeParks,newCode,textAddress.getText(), textName.getText(), textEbikes.getText(),
+                       textBikes.getText(), textEmptyDocks.getText());
                 BikeParkManageScreenHandler bikeParkManageScreenHandler = new BikeParkManageScreenHandler(stage, Configs.ADMIN_SCREEN_PATH);
                 bikeParkManageScreenHandler.show();
                 showPopup("Success","Bãi xe đã được thêm");
