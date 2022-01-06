@@ -21,10 +21,10 @@
     "name": "Xe đạp điện",
     "bikeCode": "XDD-03",
     "type": 2,
-    "status": 0,
+    "status": 1,
     "weight": 0.0,
     "cost": 0.0,
-    "parkCode": "BX-01"
+    "startTime": "Dec 31, 2021, 2:10:57 PM"
   },
   {
     "name": "Xe đạp điện",

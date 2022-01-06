@@ -3,7 +3,7 @@
     "name": "Bike Park 1",
     "address": "Ngõ 84 Đại Cồ Việt",
     "numOfBikes": 2,
-    "numOfEBikes": 1,
+    "numOfEBikes": 0,
     "numOfEmptyDocks": 7,
     "code": "BX-01"
   },
@@ -16,4 +16,3 @@
     "code": "BX-02"
   }
 ]
-

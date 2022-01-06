@@ -4,6 +4,7 @@ import controllers.PaymentController;
 import controllers.RentBikeController;
 import controllers.RenterHomeController;
 import entities.Bike;
+import exception.InvalidCalculateInputException;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -150,6 +151,8 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
                     btnPayOnClick();
                 } catch (IOException ex) {
                     ex.printStackTrace();
+                } catch (InvalidCalculateInputException ex) {
+                    ex.printStackTrace();
                 }
             });
             this.depositContent.lookup("#btnRentOther").setOnMouseClicked(e->{
@@ -252,7 +255,7 @@ public class RentBikeScreenHandler extends BaseScreenHandler implements Initiali
         this.viewDeposit(getBController().getDepositAmount());
     }
 
-    public void btnPayOnClick() throws IOException {
+    public void btnPayOnClick() throws IOException, InvalidCalculateInputException {
         String cardCode = ((TextField)this.depositContent.lookup("#inputCardCode")).getText();
         String owner = ((TextField)this.depositContent.lookup("#inputOwner")).getText();
         String cvvCode = ((TextField)this.depositContent.lookup("#inputCvvCode")).getText();

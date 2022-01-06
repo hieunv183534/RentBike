@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.calculate.CalculateMoney1;
+import controllers.calculate.CalculateMoneyInterface;
 import entities.Bike;
 import entities.BikePark;
 import entities.repository.BikeRepository;
@@ -28,7 +29,9 @@ public class RentBikeController extends BaseController {
     private StringProperty totalRent;
 
     private List<BikePark> bikeParks;
-    private List<Bike> bikes;	
+    private List<Bike> bikes;
+
+    private CalculateMoneyInterface moneyCalculator;
 
     public StringProperty totalTimeProperty() {
         return totalTime;
@@ -68,12 +71,12 @@ public class RentBikeController extends BaseController {
     public int checkBikeCode(String bikeCode) {
         for (int i = 0; i < this.bikes.size(); i++) {
             Bike bike = this.bikes.get(i);
-            if(bike.getBikeCode().equals(bikeCode)){
-                if(bike.getStatus()==0){
+            if (bike.getBikeCode().equals(bikeCode)) {
+                if (bike.getStatus() == 0) {
                     this.myBike = bike;
                     setMyData();
                     return 1;
-                }else{
+                } else {
                     return 2;
                 }
             }
@@ -84,23 +87,24 @@ public class RentBikeController extends BaseController {
     /**
      * set up các data cho controller để sử dụng;
      */
-    public void setMyData(){
-        for(BikePark bikePark: this.bikeParks) {
-            if(bikePark.getCode().equals(this.myBike.getParkCode())){
+    public void setMyData() {
+        for (BikePark bikePark : this.bikeParks) {
+            if (bikePark.getCode().equals(this.myBike.getParkCode())) {
                 this.park = bikePark;
                 break;
             }
         }
-        this.depositTransactionContent = "renbike "+ this.myBike.getBikeCode();
-        if(this.myBike.getType()==1){
+        this.depositTransactionContent = "renbike " + this.myBike.getBikeCode();
+        if (this.myBike.getType() == 1) {
             this.depositAmount = 400;
-        }else{
+        } else {
             this.depositAmount = 700;
         }
     }
 
     /**
      * Lấy thông tin tiền thuê xe theo chiếc xe đang được chọn
+     *
      * @return
      */
     public String getBikeRentalInfo() {
@@ -124,7 +128,7 @@ public class RentBikeController extends BaseController {
      *
      * @author HieuNV
      */
-    public void rent() {
+    public void rent() throws InvalidCalculateInputException {
         this.myBike.rentBike();
         this.park.rentBike(this.myBike.getType());
         new BikeRepository().save(this.bikes);
@@ -133,9 +137,11 @@ public class RentBikeController extends BaseController {
         if (this.myBike.getType() == 1) {
             this.totalRent.setValue("10000 đồng");
             this.totalTime.setValue("0 phút");
+            this.moneyCalculator = new CalculateMoney1(10000, 30, 3000, 15);
         } else {
             this.totalRent.setValue("15000 đồng");
             this.totalTime.setValue("0 phút");
+            this.moneyCalculator = new CalculateMoney1(15000, 30, 4500, 15);
         }
         Timer mTimer = new Timer();
         mTimer.schedule(new TimerTask() {
@@ -149,7 +155,7 @@ public class RentBikeController extends BaseController {
                         Duration timeElapsed = Duration.between(start, end);
                         totalTime.setValue(timeElapsed.getSeconds() + " phút");
                         try {
-                            totalRent.setValue(calculateMoney( timeElapsed.getSeconds()) + " đồng");
+                            totalRent.setValue(calculateMoney(timeElapsed.getSeconds()) + " đồng");
                         } catch (InvalidCalculateInputException e) {
                             e.printStackTrace();
                         }
@@ -161,17 +167,12 @@ public class RentBikeController extends BaseController {
 
     /**
      * hàm tính số tiền thuê từ số phút đã thuê
-     *
      * @param time
      * @return
      * @author HieuNV
      */
     public long calculateMoney(long time) throws InvalidCalculateInputException {
-        if (this.myBike.getType() == 1) {
-            return new CalculateMoney1(10000,30,3000,15).calculateMoney(time);
-        } else {
-            return new CalculateMoney1(15000,30,4500,15).calculateMoney(time);
-        }
+        return this.moneyCalculator.calculateMoney(time);
     }
 
 }

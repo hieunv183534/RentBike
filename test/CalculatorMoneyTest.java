@@ -2,6 +2,8 @@ import controllers.calculate.CalculateMoney1;
 import exception.InvalidCalculateInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 //import org.junit.jupiter.params.ParameterizedTest;
 //import org.junit.jupiter.params.provider.CsvSource;
 
@@ -18,17 +20,17 @@ public class CalculatorMoneyTest {
     }
 
 
-//    @ParameterizedTest
-//    @CsvSource({
-//            "-10000, 30, 3000, 15, 20, -100 ",
-//            "10000, -30, 3000, 15, 20, -100 ",
-//            "10000, 30, -3000, 15, 20, -100 ",
-//            "10000, 30, 3000, -15, 20, -100 ",
-//            "10000, 30, 3000, 15, -20, -100 ",
-//            "10000, 30, 3000, 15, 20, 10000 ",
-//            "10000, 30, 3000, 15, 35, 13000 ",
-//            "10000, 30, 3000, 15, 55, 16000",
-//    })
+    @ParameterizedTest
+    @CsvSource({
+            "-10000, 30, 3000, 15, 20, -100 ",
+            "10000, -30, 3000, 15, 20, -100 ",
+            "10000, 30, -3000, 15, 20, -100 ",
+            "10000, 30, 3000, -15, 20, -100 ",
+            "10000, 30, 3000, 15, -20, -100 ",
+            "10000, 30, 3000, 15, 20, 10000 ",
+            "10000, 30, 3000, 15, 35, 13000 ",
+            "10000, 30, 3000, 15, 55, 16000",
+    })
 
 
     /**
