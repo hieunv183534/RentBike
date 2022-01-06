@@ -2,6 +2,7 @@ package views.screen.renter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Hashtable;
 import java.util.Map;
 
 import java.util.ResourceBundle;
@@ -77,6 +78,9 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
         });		
 	}
 	
+	public String selectBikeParkHandler() {
+		return this.choiceBoxBikePark.getValue().toString();
+	}
 	
 	public void initialSelectBikeParkScreen() {
 		this.insertContent(this.mainContentPane, this.selectBikeParkScreen);
@@ -86,7 +90,7 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 		choiceBoxContainer.getChildren().add(this.choiceBoxBikePark);
 		
 		this.selectBikeParkScreen.lookup("#btnConfirmBikePark").setOnMouseClicked(e -> {
-			this.confirmBikePark(this.choiceBoxBikePark.getValue().toString());
+			this.confirmBikePark(this.selectBikeParkHandler());
 		});
 		this.selectBikeParkScreen.lookup("#btnCancel").setOnMouseClicked(e->{
         	getHomeScreen().show();
@@ -148,11 +152,14 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 		}
 		
 	}
-	
+
+	public String inputBikeCodeHandler() {
+		String bikeCode = ((TextField) this.bikeCodeFormScreen.lookup("#inputBikeCode")).getText();
+		return bikeCode;
+	}
 	
 	public void confirmBikeCode() {
-		String bikeCode = ((TextField) this.bikeCodeFormScreen.lookup("#inputBikeCode")).getText();
-		if (this.returnBikeController.checkBikeCodeAvailable(bikeCode)) {
+		if (this.returnBikeController.checkBikeCodeAvailable(this.inputBikeCodeHandler())) {
 			this.initialInvoiceScreen();
 		} else {
 			ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -164,29 +171,37 @@ public class ReturnBikeScreenHandler extends BaseScreenHandler implements Initia
 		this.initialPaymentFormScreen();
 	}
 	
-	public void confirmPayment() {
+	public Map<String, String> inputPaymentForm() {
+		Map<String, String> creditCardInput = new Hashtable<String, String>();
 		String cardCode = ((TextField)this.paymentFormScreen.lookup("#inputCardCode")).getText();
         String owner = ((TextField)this.paymentFormScreen.lookup("#inputOwner")).getText();
         String cvvCode = ((TextField)this.paymentFormScreen.lookup("#inputCvvCode")).getText();
         String dateExpired = ((TextField)this.paymentFormScreen.lookup("#inputDateExpired")).getText();
-        
-        if(cardCode.isEmpty() || owner.isEmpty() || cvvCode.isEmpty() || dateExpired .isEmpty()){
+        creditCardInput.put("cardCode", cardCode);
+        creditCardInput.put("owner", owner);
+        creditCardInput.put("cvvCode", cvvCode);
+        creditCardInput.put("dateExpired", dateExpired);
+		return creditCardInput;
+	}
+	
+	public void confirmPayment() {
+		Map<String, String> input = this.inputPaymentForm();
+        if(!this.returnBikeController.validatePaymentForm(input)){
             ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
-            this.showAlert(Alert.AlertType.NONE, "Cảnh báo", "Hãy điền đầy đủ thông tin thanh toán trước!",buttonTypeCancel );
+            this.showAlert(Alert.AlertType.NONE, "Cảnh báo", "Hãy điền đầy đủ thông tin thanh toán trước!",buttonTypeCancel);
         } else {
             Map<String, String> response = paymentController.pay(10,"payment",
-                    cardCode, owner,dateExpired, cvvCode);
+                    input.get("cardCode"), input.get("owner"), input.get("dateExpired"), input.get("cvvCode"));
             
             ButtonType buttonTypeCancel = new ButtonType("Đóng", ButtonBar.ButtonData.CANCEL_CLOSE);
             this.showAlert(Alert.AlertType.NONE, response.get("RESULT"),response.get("MESSAGE"), buttonTypeCancel);
             if(response.get("RESULT").equals("PAYMENT SUCCESSFUL!")){
             	this.returnBikeController.saveDataState();
-            	boolean res = this.paymentController.refund(this.returnBikeController.getInvoice().getDeposit(),"refund deposit",
-                    cardCode, owner,dateExpired, cvvCode);
+            	Map<String, String> res = this.paymentController.refund(this.returnBikeController.getInvoice().getDeposit(),"refund deposit",
+            		input.get("cardCode"), input.get("owner"), input.get("dateExpired"), input.get("cvvCode"));
             	this.initialPaymentSuccessScreen();
             }
         }
-        
 	}
 	public void gotoHome() {
 		this.getHomeScreen().show();

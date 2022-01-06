@@ -54,8 +54,8 @@ public class InterbankSubsystemController {
 		return makePaymentTransaction(response);
 	}
 	
-	public boolean refund(CreditCard card, long amount, String contents) {
-		return true;
+	public PaymentTransaction refund(CreditCard card, long amount, String contents) {
+		return null;
 	}
 
 	private PaymentTransaction makePaymentTransaction(MyMap response) {
