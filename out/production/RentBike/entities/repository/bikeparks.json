@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
   {
     "name": "Bike Park 1",
@@ -16,3 +17,6 @@
     "code": "BX-02"
   }
 ]
+=======
+[{"name":"Bãi xe 1","address":"98 Trần Xuận Soạn","numOfBikes":6,"numOfEBikes":7,"numOfEmptyDocks":0,"code":"BX-01"}]
+>>>>>>> c955837117b2e82d04c2af7095154fe7401e2d7d

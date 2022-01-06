@@ -94,9 +94,9 @@ public class PaymentController extends BaseController{
         }
         return result;
     }
-    public boolean refund(long amount, String contents, String cardNumber, String cardHolderName,
+    public Map<String, String> refund(long amount, String contents, String cardNumber, String cardHolderName,
             							String expirationDate, String securityCode) {
-    	String result = "{" +
+    	String strResult = "{" +
                 " cardNumber='" + cardNumber + '\'' +
                 ", cardHolderName='" + cardHolderName + '\'' +
                 ", expirationDate=" + expirationDate +
@@ -104,7 +104,9 @@ public class PaymentController extends BaseController{
                 ", content='" + contents + '\'' +
                 ", amount='" + amount + '\'' +
                 '}';
-    	System.out.print(result);
-    	return true;
+    	System.out.print(strResult);
+    	Map<String, String> result = new Hashtable<String, String>();
+    	result.put("RESULT", "PAYMENT SUCCESS");
+    	return result;
     }
 }
