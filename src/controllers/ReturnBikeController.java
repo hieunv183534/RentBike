@@ -3,6 +3,7 @@ package controllers;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import entities.Bike;
 import entities.BikePark;
@@ -29,6 +30,9 @@ public class ReturnBikeController  extends BaseController {
 	}
 	
 	public boolean checkBikeCodeAvailable(String bikeCode) {
+		if (bikeCode.isEmpty()) {
+			return false;
+		}
 		for(Bike bike : this.listBikes) {
 			if (bike.getBikeCode().equals(bikeCode)) {
 			   if (bike.getStatus() == 1) {
@@ -91,5 +95,15 @@ public class ReturnBikeController  extends BaseController {
 		}
 		this.bikeParkDAO.save(this.listBikeParks);
 	}
-
+	public boolean validatePaymentForm (Map<String, String> input) {
+		String cardCode = input.get("cardCode");
+		String owner = input.get("owner");
+		String cvvCode = input.get("cvvCode");
+		String dateExpired = input.get("dateExpired");
+		
+		if (cardCode.isEmpty() || owner.isEmpty() || cvvCode.isEmpty() || dateExpired.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 }
