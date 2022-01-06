@@ -59,6 +59,9 @@ public class BikeParkController extends BaseController{
     }
 
     public boolean deleteBikePark(List<BikePark> bikeParks,BikePark bikePark){
-        return bikeParks.remove(bikePark);
+        if (bikeParks.remove(bikePark)) {
+            new BikeParkRepository().save(bikeParks);
+            return true;
+        } else return false;
     }
 }
