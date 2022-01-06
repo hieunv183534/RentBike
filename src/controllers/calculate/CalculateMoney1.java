@@ -2,6 +2,9 @@ package controllers.calculate;
 
 import exception.InvalidCalculateInputException;
 
+/**
+ * @author HieuNV
+ */
 public class CalculateMoney1 implements CalculateMoneyInterface{
     private long baseCost;
     private long baseTime;
@@ -19,6 +22,12 @@ public class CalculateMoney1 implements CalculateMoneyInterface{
         }
     }
 
+    /**
+     * Tính tiền thuê từ thời gian
+     * @param time thời gian đã thuê
+     * @return
+     * @throws InvalidCalculateInputException
+     */
     @Override
     public long calculateMoney(long time) throws InvalidCalculateInputException {
         if(time <=0){

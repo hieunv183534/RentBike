@@ -175,4 +175,6 @@ public class RentBikeController extends BaseController {
         return this.moneyCalculator.calculateMoney(time);
     }
 
+
+
 }
