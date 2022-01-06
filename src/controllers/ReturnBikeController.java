@@ -7,8 +7,8 @@ import java.util.List;
 import entities.Bike;
 import entities.BikePark;
 import entities.Invoice;
-import entities.data.BikeRepository;
-import entities.data.BikeParkRepository;
+import entities.repository.BikeRepository;
+import entities.repository.BikeParkRepository;
 import exception.InvalidCalculateInputException;
 
 public class ReturnBikeController  extends BaseController {

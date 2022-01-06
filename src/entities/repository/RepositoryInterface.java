@@ -1,4 +1,4 @@
-package entities.data;
+package entities.repository;
 
 import java.util.List;
 

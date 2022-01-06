@@ -3,11 +3,10 @@
     "name": "Xe đạp thường",
     "bikeCode": "XDT-01",
     "type": 1,
+    "parkCode": "BX-01",
     "status": 0,
     "weight": 0.0,
-    "cost": 0.0,
-    "startTime": "Jan 5, 2022, 2:12:54 PM",
-    "rentType": 0
+    "cost": 0.0
   },
   {
     "name": "Xe đạp thường",
@@ -16,18 +15,16 @@
     "parkCode": "BX-01",
     "status": 0,
     "weight": 0.0,
-    "cost": 0.0,
-    "rentType": 0
+    "cost": 0.0
   },
   {
     "name": "Xe đạp điện",
     "bikeCode": "XDD-03",
     "type": 2,
-    "parkCode": "BX-01",
     "status": 0,
     "weight": 0.0,
     "cost": 0.0,
-    "rentType": 0
+    "parkCode": "BX-01"
   },
   {
     "name": "Xe đạp điện",
@@ -36,8 +33,7 @@
     "status": 1,
     "weight": 0.0,
     "cost": 0.0,
-    "startTime": "Dec 30, 2021, 10:46:27 AM",
-    "rentType": 0
+    "startTime": "Dec 30, 2021, 10:46:27 AM"
   },
   {
     "name": "Xe đạp thường",
@@ -46,8 +42,7 @@
     "status": 1,
     "weight": 0.0,
     "cost": 0.0,
-    "startTime": "Dec 30, 2021, 10:46:27 AM",
-    "rentType": 0
+    "startTime": "Dec 30, 2021, 10:46:27 AM"
   },
   {
     "name": "Xe đạp thường",
@@ -56,8 +51,7 @@
     "parkCode": "BX-02",
     "status": 0,
     "weight": 0.0,
-    "cost": 0.0,
-    "rentType": 0
+    "cost": 0.0
   },
   {
     "name": "Xe đạp điện",
@@ -66,8 +60,7 @@
     "parkCode": "BX-02",
     "status": 0,
     "weight": 0.0,
-    "cost": 0.0,
-    "rentType": 0
+    "cost": 0.0
   },
   {
     "name": "Xe đạp điện",
@@ -76,7 +69,6 @@
     "parkCode": "BX-02",
     "status": 0,
     "weight": 0.0,
-    "cost": 0.0,
-    "rentType": 0
+    "cost": 0.0
   }
 ]

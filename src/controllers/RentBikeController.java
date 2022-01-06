@@ -3,8 +3,8 @@ package controllers;
 import controllers.calculate.CalculateMoney1;
 import entities.Bike;
 import entities.BikePark;
-import entities.data.BikeRepository;
-import entities.data.BikeParkRepository;
+import entities.repository.BikeRepository;
+import entities.repository.BikeParkRepository;
 import exception.InvalidCalculateInputException;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -99,6 +99,10 @@ public class RentBikeController extends BaseController {
         }
     }
 
+    /**
+     * Lấy thông tin tiền thuê xe theo chiếc xe đang được chọn
+     * @return
+     */
     public String getBikeRentalInfo() {
         if (this.myBike.getType() == 1) {
             return "Tiền thuê xe: nếu khách hàng dùng xe hơn 10 phút," +

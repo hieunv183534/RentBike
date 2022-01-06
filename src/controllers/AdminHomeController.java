@@ -1,6 +1,6 @@
 package controllers;
 
-import entities.data.BikeParkRepository;
+import entities.repository.BikeParkRepository;
 
 import java.util.List;
 

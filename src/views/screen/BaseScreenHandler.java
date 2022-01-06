@@ -90,6 +90,14 @@ public class BaseScreenHandler extends FXMLScreenHandler{
         this.homeScreen = homeScreen;
     }
 
+    /**
+     * gọi và hiển thị alert theo tùy chỉnh đầu vào
+     * @param alertType
+     * @param title
+     * @param content
+     * @param buttonTypes
+     * @return
+     */
     public Optional<ButtonType> showAlert(Alert.AlertType alertType, String title, String content,ButtonType... buttonTypes){
     	this.alert = new Alert(alertType);
         this.alert.setTitle(title);

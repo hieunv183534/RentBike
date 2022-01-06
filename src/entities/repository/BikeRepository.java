@@ -1,4 +1,4 @@
-package entities.data;
+package entities.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,7 +16,7 @@ public class BikeRepository implements RepositoryInterface<Bike> {
         }.getType();
         Gson gson = new Gson();
         try {
-            List<Bike> bikes = gson.fromJson(new FileReader("src/entities/data/bikes.json"), type);
+            List<Bike> bikes = gson.fromJson(new FileReader("src/entities/repository/bikes.json"), type);
             return bikes;
         } catch (Exception e) {
             e.printStackTrace();
@@ -28,7 +28,7 @@ public class BikeRepository implements RepositoryInterface<Bike> {
     public void save(List<Bike> bikes) {
         Gson gson = new Gson();
         try {
-            FileWriter fileWriter = new FileWriter("src/entities/data/bikes.json");
+            FileWriter fileWriter = new FileWriter("src/entities/repository/bikes.json");
             gson.toJson(bikes, fileWriter);
             fileWriter.close();
         } catch (Exception e) {
