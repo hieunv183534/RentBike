@@ -6,7 +6,7 @@
     "status": 0,
     "weight": 0.0,
     "cost": 0.0,
-    "parkCode": "BX-01",
+    "startTime": "Jan 5, 2022, 2:12:54 PM",
     "rentType": 0
   },
   {
@@ -80,4 +80,3 @@
     "rentType": 0
   }
 ]
-

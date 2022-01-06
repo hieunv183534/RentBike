@@ -21,8 +21,8 @@ public class RentBikeController extends BaseController {
 
     private Bike myBike;
     private BikePark park;
-    private int DepositAmount;
-    private String DepositTransactionContent;
+    private int depositAmount;
+    private String depositTransactionContent;
 
     private StringProperty totalTime;
     private StringProperty totalRent;
@@ -43,11 +43,11 @@ public class RentBikeController extends BaseController {
     }
 
     public int getDepositAmount() {
-        return DepositAmount;
+        return depositAmount;
     }
 
     public String getDepositTransactionContent() {
-        return DepositTransactionContent;
+        return depositTransactionContent;
     }
 
     public RentBikeController() {
@@ -91,11 +91,11 @@ public class RentBikeController extends BaseController {
                 break;
             }
         }
-        this.DepositTransactionContent = "renbike "+ this.myBike.getBikeCode();
+        this.depositTransactionContent = "renbike "+ this.myBike.getBikeCode();
         if(this.myBike.getType()==1){
-            this.DepositAmount = 400;
+            this.depositAmount = 400;
         }else{
-            this.DepositAmount = 700;
+            this.depositAmount = 700;
         }
     }
 
